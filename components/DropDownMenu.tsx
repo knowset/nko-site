@@ -29,7 +29,7 @@ const menuVariants = {
 
 export const DropDownMenu: FC<DropDownMenuProps> = ({ title, itemsArray }) => {
     const { ref, isComponentVisible, setIsComponentVisible } =
-        useComponentVisible(true);
+        useComponentVisible(false);
 
     const toggleMenu = useCallback(() => {
         setIsComponentVisible((current: boolean) => !current);

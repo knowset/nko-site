@@ -2,6 +2,7 @@ import { Header } from "@/components/Header";
 import { Layout } from "@/components/Layout";
 import "./globals.css";
 import { AuthProvider } from "@/components/AuthProvider";
+import { SessionComp } from "@/components/TestSessionComp";
 
 export const metadata = {
     title: "Ресурсный центр НКО ВоГУ 'Инициатива'",
@@ -17,7 +18,7 @@ export default function RootLayout({
         <html lang="en">
             <body className="bg-white">
                 <AuthProvider>
-
+                <SessionComp />
                 <Header />
                 <div className="pt-24">
 
