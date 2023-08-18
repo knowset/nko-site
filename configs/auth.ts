@@ -1,4 +1,5 @@
 import { getUserByEmail } from "@/faunadb/functions";
+import { Role } from "@/nextauth";
 import argon2 from "argon2";
 import type { AuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
@@ -29,6 +30,7 @@ export const authConfig: AuthOptions = {
                 if (!credentials?.email || !credentials.password) {
                     return null;
                 }
+                console.log("CRED: ", credentials);
 
                 const userOrError = await getUserByEmail(credentials.email);
 
@@ -46,12 +48,12 @@ export const authConfig: AuthOptions = {
                 const user = userOrError.user;
 
                 console.log(user);
+                const strId: string = user.id.toString();
 
                 return {
-                    id: user.id,
+                    id: strId,
                     email: user.email,
                     role: user.role,
-                    key: uuid(),
                 };
             },
         }),
@@ -59,14 +61,14 @@ export const authConfig: AuthOptions = {
     callbacks: {
         session: ({ session, token }) => {
             if (token && session.user) {
-                session.user.role = token.role;
+                session.user.role = token.role as string;
             }
             return session;
         },
 
         jwt: ({ token, user }) => {
             if (user) {
-                token.role = user.role;
+                token.role = user.role as string;
             }
             return token;
         },
