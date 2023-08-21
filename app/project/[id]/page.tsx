@@ -14,14 +14,6 @@ export type Repo = {
     text: string;
 };
 
-export async function generateStaticParams() {
-    const res: { posts: any[] } = await getAllPosts();
-
-    return res.posts.map((post: any) => ({
-        slug: post.data.id,
-    }));
-}
-
 export default function Project({ params }: { params: any }) {
     return <main>{params.id}</main>;
 }

@@ -1,0 +1,5 @@
+[[redirects]]
+    from = "/project/*"
+    to = "/project/[id].html"
+    status = 200
+    force = true
