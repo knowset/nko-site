@@ -3,6 +3,7 @@ import { Layout } from "@/components/Layout";
 import "./globals.css";
 import { AuthProvider } from "@/components/AuthProvider";
 import { SessionComp } from "@/components/TestSessionComp";
+import { AdminCreateButton } from "@/components/AdminCreateButton";
 
 export const metadata = {
     title: "Ресурсный центр НКО ВоГУ 'Инициатива'",
@@ -20,8 +21,8 @@ export default function RootLayout({
                 <AuthProvider>
                 <SessionComp />
                 <Header />
-                <div className="pt-24">
-
+                <div className="pt-12">
+                
                 <Layout>{children}</Layout>
                 </div>
                 </AuthProvider>

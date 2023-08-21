@@ -1,21 +1,21 @@
-import { posts } from "@/constants";
+"use client";
 
-async function getData(id: number) {
-    const res = posts.find((post) => post.id == id);
-    return res;
-}
+import { PostDetail } from "@/components/PostDetail";
+import { fetcher } from "@/helpers";
+import useSWR from "swr";
+// async function getData(id: number) {
+//     const res = posts.find((post) => post.id == id);
+//     return res;
+// }
 
-export default async function Post({
+export default function Project({
     params: { id },
 }: {
-    params: { id: number };
+    params: { id: string };
 }) {
-    const post = await getData(id);
-
     return (
-        <>
-            <h1>{post?.title}</h1>
-            <p>{post?.text}</p>
-        </>
+        <main>
+            <PostDetail postId={id}/>
+        </main>
     );
 }

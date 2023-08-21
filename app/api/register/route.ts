@@ -19,7 +19,6 @@ export async function POST(request: Request) {
             data: { email, password: hashed_password },
         });
 
-
         if (userOrError.status != 200) {
             throw new Error(
                 JSON.stringify({
@@ -44,6 +43,4 @@ export async function POST(request: Request) {
             { status: errorData.status }
         );
     }
-
-    return new Response(JSON.stringify({ body: "hui" }));
 }

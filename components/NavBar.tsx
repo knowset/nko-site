@@ -1,4 +1,4 @@
-import { topicNavBarLinks, topNavBarLinks } from "@/constants";
+import { additionalNavbarLinks, navbarLinks } from "@/constants";
 import Link from "next/link";
 import { FC, useCallback, useState } from "react";
 import { SlArrowDown } from "react-icons/sl";
@@ -20,15 +20,15 @@ export const NavBar: FC<{}> = () => {
                 className="w-full flex-grow flex sm:items-center sm:w-auto"
             >
                 <div className="w-full container mx-auto hidden md:flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
-                    {topicNavBarLinks.map((item) => (
+                    {navbarLinks.map((item) => (
                         <NavItem key={item.title} item={item} />
                     ))}
                     <div>
-                        <DropDownMenu title="Центр" itemsArray={[{title: "", items: topicNavBarLinks}]} />
+                        <DropDownMenu title="Центр" itemsArray={[{title: "", items: additionalNavbarLinks}]} />
                     </div>
                 </div>
                 <div className="w-full container mx-auto flex md:hidden flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
-                    <DropDownMenu title="Меню" itemsArray={[{items: topNavBarLinks}, {title: "Центр", items: topicNavBarLinks}]}/>
+                    <DropDownMenu title="Меню" itemsArray={[{items: navbarLinks}, {title: "Центр", items: additionalNavbarLinks}]}/>
                 </div>
             </div>
         </nav>
