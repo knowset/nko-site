@@ -1,7 +1,7 @@
 // "use client";
 
 import { PostDetail } from "@/components/PostDetail";
-import { getBaseUrl } from "@/lib/getBaseUrl";
+import { getBaseURL } from "@/helpers";
 import { Metadata, ResolvingMetadata } from "next";
 // import { useState } from "react";
 
@@ -15,7 +15,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
     const id = params.id;
 
-    const post = await fetch(`${getBaseUrl()}/api/project/${id}`).then((res) =>
+    const post = await fetch(`${getBaseURL()}/api/project/${id}`).then((res) =>
         res.json()
     );
 
@@ -26,7 +26,7 @@ export async function generateMetadata(
 }
 
 const Project = async ({ params }: Props) => {
-    const res = await fetch(`${getBaseUrl()}/api/project/${params.id}`);
+    const res = await fetch(`${getBaseURL()}/api/project/${params.id}`);
     const data = await res.json();
     // const [post, setPost] = useState({});
     // const [isLoading, setIsLoading] = useState(true);
@@ -64,11 +64,8 @@ const Project = async ({ params }: Props) => {
     // return <PostDetail post={(post as any)}/>;
 
     // console.log(post);
-    console.log("DATA: ", data);
     const post: {id: string; title: string; text: string} = data.post; 
-    console.log("DATA: ", post);
     return <PostDetail key={post.id} post={post as any} />;
-    return <div>PARAMS</div>;
 };
 
 export default Project;

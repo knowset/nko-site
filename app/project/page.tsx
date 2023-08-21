@@ -2,10 +2,9 @@
 
 import { AdminCreateButton } from "@/components/AdminCreateButton";
 import { PostList } from "@/components/PostList";
-import { getBaseUrl } from "@/lib/getBaseUrl";
-import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import {getBaseURL} from "@/helpers"
 
 export default function Project() {
     const parm = useParams();
@@ -19,7 +18,7 @@ export default function Project() {
         try {
             if (isLoading) {
                 const retrieveData = async () => {
-                    const res = await fetch(`${getBaseUrl()}/api/project`);
+                    const res = await fetch(`${getBaseURL()}/api/project`);
                     const data = await res.json();
 
                     console.log(data);
