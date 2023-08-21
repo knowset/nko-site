@@ -1,20 +1,16 @@
-import { Inter } from "next/font/google";
-import { Post } from "@/components/Post";
+"use client";
 
-import { posts } from "@/constants";
-import { getServerSession } from "next-auth";
-import { authConfig } from "@/configs/auth";
+import { useRouter } from "next/navigation";
 
 
 export default async function Home() {
-    
+    // const router = useRouter() 
+    // router.push("/project/294b8d4a-e2da-4872-bf70-28c0ff6611f7")
     return (
         <main className="">
-            {/* <div className="grid grid-cols-1 gap-x-8 gap-y-10 ui-not-focus-visible:outline-none sm:grid-cols-2 sm:gap-y-16 md:grid-cols-3">
-                {posts.map((post) => (
-                    <Post key={post.id} post={post} />
-                ))}
-            </div> */}
+            <div>
+                123
+            </div>
         </main>
     );
 }

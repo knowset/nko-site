@@ -2,7 +2,6 @@
 
 import { FC, ReactNode, useEffect, useState } from "react";
 import Link from "next/link";
-import parse from "html-react-parser";
 
 export interface PostProps {
     post: {
@@ -49,6 +48,7 @@ export interface PostProps {
 //     );
 // };
 export const Post: FC<PostProps> = ({ post }) => {
+    console.log("POST:", post);
     return (
         <div>
             <div className="h-full  overflow-hidden rounded-md border-2 border-gray-200 border-opacity-60 dark:border-gray-700">
@@ -59,24 +59,18 @@ export const Post: FC<PostProps> = ({ post }) => {
                 )} */}
                 <div className="p-6">
                     <h2 className="mb-3 text-2xl font-bold leading-8 tracking-tight">
-                        <a
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <Link
                             href={`project/${post.id}`}
-                            aria-label="Link to A Search Engine"
                         >
                             {post.title}
-                        </a>
+                        </Link>
                     </h2>
                     <p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400">
                         {post.text}
                     </p>
                     <Link
-                        target="_blank"
-                        rel="noopener noreferrer"
                         href={`project/${post.id}`}
                         className="text-base font-medium leading-6 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                        aria-label="Link to A Search Engine"
                     >
                         Читать дальше →
                     </Link>
