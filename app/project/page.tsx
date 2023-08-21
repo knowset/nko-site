@@ -18,7 +18,7 @@ export default function Project() {
         try {
             if (isLoading) {
                 const retrieveData = async () => {
-                    const res = await fetch(`${getBaseURL()}/api/project`);
+                    const res = await fetch(`https://inciativa.netlify.app/api/project`);
                     const data = await res.json();
 
                     console.log(data);

@@ -15,18 +15,17 @@ export async function generateMetadata(
 ): Promise<Metadata> {
     const id = params.id;
 
-    const post = await fetch(`${getBaseURL()}/api/project/${id}`).then((res) =>
+    const post = await fetch(`https://inciativa.netlify.app/api/project/${id}`).then((res) =>
         res.json()
     );
 
     return {
-        title: "title",
-        referrer: "origin-when-cross-origin",
+        title: "title"
     };
 }
 
 const Project = async ({ params }: Props) => {
-    const res = await fetch(`${getBaseURL()}/api/project/${params.id}`);
+    const res = await fetch(`https://inciativa.netlify.app/api/project/${params.id}`);
     const data = await res.json();
     // const [post, setPost] = useState({});
     // const [isLoading, setIsLoading] = useState(true);
