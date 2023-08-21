@@ -1,19 +1,16 @@
-import { PostDetail } from "@/components/PostDetail";
-import { fetcher } from "@/helpers";
-import { getAllPosts } from "@/services/getPosts";
-import { GetServerSideProps, GetStaticPaths } from "next";
-import useSWR from "swr";
-// async function getData(id: number) {
-//     const res = posts.find((post) => post.id == id);
-//     return res;
-// }
+import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
 
-export type Repo = {
-    id: string;
-    title: string;
-    text: string;
-};
 
-export default function Project({ params }: { params: any }) {
-    return <main>{params.id}</main>;
+import { getPostById } from '@/services/getPosts'
+ 
+export default async function Layout({
+  params: { id },
+}: {
+  params: { id: string }
+}) {
+  const item = (await getPostById(id)).post;
+  console.log("ITEM:", item);
+
+  return (<div>{item.id}</div>)
+  // ...
 }
