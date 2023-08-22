@@ -1,5 +1,5 @@
 import { PostDetail } from "@/components/PostDetail";
-import { getBaseURL } from "@/helpers";
+import { getBaseURL } from "@/services/getBaseURL";
 import { Metadata, ResolvingMetadata } from "next";
 // import { useState } from "react";
 

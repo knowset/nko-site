@@ -1,6 +1,6 @@
 import { AdminCreateButton } from "@/components/AdminCreateButton";
 import { PostList } from "@/components/PostList";
-import { getBaseURL } from "@/helpers";
+import { getBaseURL } from "@/services/getBaseURL";
 
 const getPosts = async () => {
     try {

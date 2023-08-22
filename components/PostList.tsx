@@ -1,9 +1,5 @@
-"use client";
-
 import { Post } from "@/components/Post";
-import { fetcher } from "@/helpers";
 import { FC } from "react";
-import useSWR from "swr";
 
 interface PostListProps {
     posts: {
