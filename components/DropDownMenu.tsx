@@ -70,7 +70,7 @@ export const DropDownMenu: FC<DropDownMenuProps> = ({ title, itemsArray }) => {
                         >
                             <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                                 {itemsArray.map((i) => (
-                                    <>
+                                    <div key={"menu" + i.title}>
                                         {!!i.title && (
                                             <div className="bg-white px-2 pt-2">
                                                 <p className="text-sm text-gray-600 mx-2 font-medium">
@@ -94,7 +94,7 @@ export const DropDownMenu: FC<DropDownMenuProps> = ({ title, itemsArray }) => {
                                                 </Link>
                                             </div>
                                         ))}
-                                    </>
+                                    </div>
                                 ))}
                                 <div className="bg-gray-50 px-4 py-4">
                                     <div>

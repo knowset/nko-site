@@ -1,30 +1,14 @@
 import { AdminCreateButton } from "@/components/AdminCreateButton";
-import { PostList } from "@/components/PostList";
-import { getBaseURL } from "@/services/getBaseURL";
+import GeneralFeed from "@/components/GeneralFeed";
+import { Suspense } from "react";
 
-const getPosts = async () => {
-    try {
-        const res = await fetch(`${getBaseURL()}/api/project`, {
-            cache: "no-store",
-        });
-
-        if (!res.ok) {
-            throw new Error("Fail");
-        }
-        const data = await res.json();
-        return data;
-    } catch (err) {
-        return null;
-    }
-};
-
-export default async function Project() {
-    const { posts } = await getPosts();
+export default async function Projects() {
     return (
-        <main className="">
-            <AdminCreateButton />
-
-            <PostList posts={posts} />
-        </main>
+        <Suspense fallback={<p>loading feed...</p>}>
+            <main className="">
+                <AdminCreateButton />
+                <GeneralFeed postType="project" />
+            </main>
+        </Suspense>
     );
 }

@@ -8,7 +8,11 @@ export async function POST(req: NextRequest) {
         images: string[];
     };
 
-    const postOrError = await createPost("project", { title, text, images });
+    const postOrError = await createPost("success_stories", {
+        title,
+        text,
+        images,
+    });
 
     return NextResponse.json({ postOrError });
 }

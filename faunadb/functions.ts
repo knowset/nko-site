@@ -37,7 +37,6 @@ interface UserResponse {
     status: number;
 }
 
-
 interface FaunadbUserResponse {
     data: {
         ref: any;
@@ -58,6 +57,8 @@ interface FaunadbPostResponse {
             id: string;
             title: string;
             text: string;
+            images: string;
+            date: string;
         };
     }[];
 }
@@ -248,7 +249,7 @@ export const getPostByID = async (postType: string, postId: string) => {
 
 export const createPost = async (
     postType: string,
-    data: { title: string; text: string }
+    data: { title: string; text: string; images: string[] }
 ) => {
     try {
         const req = await client
@@ -258,7 +259,8 @@ export const createPost = async (
                         id: uuid(),
                         title: data.title,
                         text: data.text,
-                        // images: JSON.stringify(post.data.images),
+                        images: JSON.stringify(data.images),
+                        date: (new Date()).toString(),
                     },
                 })
             )

@@ -1,3 +1,12 @@
-export { default } from "next-auth/middleware";
+import { getToken } from "next-auth/jwt";
+import { NextRequest, NextResponse } from "next/server";
 
-export const config = { matcher: ["/project/new"] }
+export async function middleware(req: NextRequest) {
+    const token = await getToken({ req });
+
+    if (!token) {
+        return NextResponse.redirect(new URL("/login", req.nextUrl));
+    }
+}
+
+export const config = { matcher: ["/project/new"] };

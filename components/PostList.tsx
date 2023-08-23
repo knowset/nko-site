@@ -1,3 +1,5 @@
+"use client";
+
 import { Post } from "@/components/Post";
 import { FC } from "react";
 
@@ -9,12 +11,14 @@ interface PostListProps {
             id: string;
             title: string;
             text: string;
-        }
-    }[]
+            images: string;
+            date: string;
+        };
+    }[];
 }
 
-
 export const PostList: FC<PostListProps> = ({ posts }) => {
+    console.log("POSTLIST LOADED");
     return (
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 ui-not-focus-visible:outline-none sm:grid-cols-2 sm:gap-y-16 md:grid-cols-3">
             {posts.map((post) => (

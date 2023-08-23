@@ -1,21 +1,34 @@
-import { cache } from "react";
+import { getBaseURL } from "./getBaseURL";
 
-export const getAllPosts = async () => {
-    const response = await fetch(`${process.env.DOMAIN}/api/project`);
-
-    if (!response.ok) throw new Error("Unable to fetch posts.");
-    const data = await response.json();
-    return data;
+type Props = {
+    params: {
+        id: string;
+    };
 };
 
-// export const revalidate = 360;
+type PostsResponse = {
+    posts: any[];
+};
 
-export const getPostById = cache(async (id: string) => {
-    console.log("HERERE", id);
-    const response = await fetch(`${process.env.DOMAIN}/api/project/${id}`);
-    console.log("RESPONSE1: ", response);
-    if (!response.ok) throw new Error("Unable to fetch posts.");
-    const data = await response.json();
-    console.log("DATA1: ", data);
-    return data;
-});
+export const getPosts = async (postType: string) => {
+    try {
+        console.log("URL", getBaseURL() + "/api/" + postType);
+        const res = await fetch(`${getBaseURL()}/api/${postType}`);
+
+        if (!res.ok) {
+            throw new Error("Fail");
+        }
+        const data = await res.json();
+        console.log(data);
+        return data;
+    } catch (err) {
+        return { posts: [] };
+    }
+};
+
+export async function getPostByID({ params }: Props, postType: string) {
+    const res = await fetch(`${getBaseURL()}/api/${postType}/${params.id}`);
+    const post = await res.json();
+
+    return post;
+}
