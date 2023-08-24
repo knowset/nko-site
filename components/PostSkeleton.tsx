@@ -4,11 +4,11 @@ import { FC } from "react";
 
 export const PostSkeleton: FC<{}> = () => {
     return (
-        <div className="w-full bg-gradient-to-br from-white to-bg-zinc-200" style={{
+        <div className="bg-gradient-to-br from-white to-bg-zinc-200" style={{
             animation: ""
         }}>
             <div className="w-full p-2 mb-2">
-                <div className="rounded shadow-md h-full">
+                <div className="w-full rounded shadow-md h-full">
                     <div>
                         <div className="relative pb-[75%]">
                             <div className="flex justify-center items-center absolute w-full h-full object-cover rounded-t bg-zinc-300"></div>

@@ -1,9 +1,9 @@
 "use client";
 
 import { Post } from "@/components/Post";
-import { getAllPosts } from "@/faunadb/functions";
 import { PostItem } from "@/types/post";
 import { FC, useEffect, useState } from "react";
+import { AdminCreateButton } from "./AdminCreateButton";
 import { PostListSkeleton } from "./PostListSkeleton";
 
 type ReturnedData = {
@@ -52,12 +52,15 @@ export const PostList: FC<PostListProps> = ({ postType }) => {
     });
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:gap-4 lg:grid-cols-3">
-            {loading && <PostListSkeleton />}
-            {posts &&
-                posts.map((post) => (
-                    <Post key={post.data.id} post={post.data} />
-                ))}
+        <div>
+            <AdminCreateButton />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:gap-4 lg:grid-cols-3">
+                {loading && <PostListSkeleton />}
+                {posts &&
+                    posts.map((post) => (
+                        <Post key={post.data.id} post={post.data} />
+                    ))}
+            </div>
         </div>
     );
 };
