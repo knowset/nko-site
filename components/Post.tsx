@@ -22,23 +22,27 @@ export const Post: FC<PostProps> = ({ post }) => {
     }
 
     return (
-        <div>
+        <div className="w-full">
             <div className="w-full p-2 mb-2">
                 <div className="rounded shadow-md h-full">
-                    <div className="flex flex-row sm:block hover-img">
+                    <div>
                         <Link href={`${path}?p=${post.id}`}>
+                            <div className="relative pb-[75%]">
+
                             {images.length > 0 ? (
+                                
                                 <img
-                                    className="w-full h-[20rem] m-0 rounded-t lazy  object-cover"
-                                    src={images[0].value}
+                                className="absolute h-full w-full object-cover rounded-t"
+                                src={images[0].value}
                                 />
-                            ) : (
-                                <div className="flex justify-center items-center w-full h-[20rem] m-0 rounded-t bg-zinc-600">
-                                    <p className="text-white text-xl uppercase">
+                                ) : (
+                                    <div className="flex justify-center items-center absolute w-full h-full object-cover rounded-t bg-zinc-600">
+                                    <p className=" text-white text-xl uppercase">
                                         no image
                                     </p>
                                 </div>
                             )}
+                            </div>
                         </Link>
                     </div>
                     <div className="flex flex-col justify-between h-[10rem] p-4">
