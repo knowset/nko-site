@@ -1,21 +1,12 @@
-import { AdminCreateButton } from "@/components/AdminCreateButton";
-import GeneralFeed from "@/components/GeneralFeed";
-import { PostList } from "@/components/PostList";
-import { getAllPosts } from "@/faunadb/functions";
-import { useRouter } from "next/router";
-import { Suspense } from "react";
+import { PageItem } from "@/components/PageItem";
 
-export const dynamic = "force-dynamic";
-export const fetchCache = "force-no-store";
-export const runtime = "nodejs";
+export const metadata = {
+    title: "Истории успеха | Ресурсный центр НКО ВоГУ 'Инициатива'",
+    description: "",
+};
 
 export default async function SuccessStories() {
     return (
-        <Suspense fallback={<p>loading feed...</p>}>
-            <main className="">
-                <AdminCreateButton />
-                <GeneralFeed key="success_stories" postType="success_stories" />
-            </main>
-        </Suspense>
+        <PageItem />
     );
 }

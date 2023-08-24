@@ -1,9 +1,11 @@
 "use client";
 
 import { Post } from "@/components/Post";
-import { FC } from "react";
+import { getAllPosts } from "@/faunadb/functions";
+import { PostItem } from "@/types/post";
+import { FC, useEffect, useState } from "react";
 
-interface PostListProps {
+type ReturnedData = {
     posts: {
         ref: any;
         ts: any;
@@ -15,15 +17,46 @@ interface PostListProps {
             date: string;
         };
     }[];
+};
+
+interface PostListProps {
+    postType: string;
 }
 
-export const PostList: FC<PostListProps> = ({ posts }) => {
-    console.log("POSTLIST LOADED");
+export const PostList: FC<PostListProps> = ({ postType }) => {
+    const [posts, setPosts] = useState<PostItem[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const retrievData = async () => {
+            if (loading) {
+                const res = await fetch(`/api/${postType}`);
+
+                if (!res) {
+                    throw new Error("Невозможно получить посты");
+                }
+
+                const data: ReturnedData = await res.json();
+
+                setLoading(false);
+                if (!data || !data.posts) {
+                    setPosts([]);
+                }
+
+                setPosts(data.posts);
+            }
+            setLoading(false);
+        };
+        retrievData();
+    });
+
     return (
-        <div className="grid grid-cols-1 gap-x-8 gap-y-10 ui-not-focus-visible:outline-none sm:grid-cols-2 sm:gap-y-16 md:grid-cols-3">
-            {posts.map((post) => (
-                <Post key={post.data.id} post={post.data} />
-            ))}
+        <div className="grid lg:grid-cols-3">
+            {loading && <div>loading......</div>}
+            {posts &&
+                posts.map((post) => (
+                    <Post key={post.data.id} post={post.data} />
+                ))}
         </div>
     );
 };
