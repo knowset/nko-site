@@ -17,10 +17,10 @@ export const Header: FC<{}> = () => {
     console.log(session);
 
     return (
-        <>
+        <div>
             <TopNavBar />
             {/* <TextHeader /> */}
             <NavBar />
-        </>
+        </div>
     );
 };

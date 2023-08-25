@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { SessionComp } from "@/components/TestSessionComp";
 import { AdminCreateButton } from "@/components/AdminCreateButton";
+import { Footer } from "@/components/Footer";
 
 export const metadata = {
     title: "Ресурсный центр НКО ВоГУ 'Инициатива'",
@@ -17,14 +18,14 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className="bg-white">
+            <body className="bg-white min-h-[100vh] w-full flex flex-col">
                 <Providers>
-                <SessionComp />
-                <Header />
-                <div className="pt-12">
-                
-                <Layout>{children}</Layout>
-                </div>
+                    <SessionComp />
+                        <Header />
+                        <div className="pt-12 pb-20 flex-grow h-full">
+                            <Layout>{children}</Layout>
+                        </div>
+                        <Footer />
                 </Providers>
             </body>
         </html>
