@@ -23,6 +23,8 @@ export default async function Home() {
                     </h2>
                 </div>
             </div>
+
+            
         </main>
     );
 }

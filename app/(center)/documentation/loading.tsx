@@ -1,8 +1,5 @@
-import { DocPageSkeleton } from "@/components/documentation/DocPageSkeleton";
-import { documentation } from "@/constants";
+import { ContactsPageSkeleton } from "@/components/contacts/ContactsPageSkeleton";
 
-export default async function Loading() {
-    return (
-        <DocPageSkeleton />
-    );
+export default function Loading() {
+    return <ContactsPageSkeleton />;
 }

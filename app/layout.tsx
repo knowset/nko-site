@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className="bg-white min-h-[100vh] w-full flex flex-col">
+            <body className="bg-white min-h-[100vh] w-full flex flex-col no-scrollbar">
                 <Providers>
                     <SessionComp />
                         <Header />
