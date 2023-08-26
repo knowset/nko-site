@@ -7,8 +7,6 @@ export async function middleware(req: NextRequest) {
     if (!token) {
         return NextResponse.redirect(new URL("/login", req.nextUrl));
     }
-
-    return NextResponse.rewrite(req.nextUrl);
 }
 
 export const config = { matcher: ["/project/new"] };

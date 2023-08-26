@@ -1,6 +1,7 @@
 import { FC } from "react";
 import Image from "next/image";
 import { Layout } from "./Layout";
+import logo from "@/public/logo.jpg"
 
 export const TopNavBar: FC<{}> = () => {
     return (
@@ -17,10 +18,12 @@ export const TopNavBar: FC<{}> = () => {
                     <div className="w-full flex justify-center">
                         <Image
                             className="rounded-full"
-                            src="/logo.jpg"
+                            src={logo}
                             alt="logo"
+                            placeholder="blur"
                             width={64}
                             height={64}
+                            priority
                         />
                     </div>
                     <div className="flex items-center justify-end w-full">
@@ -35,10 +38,12 @@ export const TopNavBar: FC<{}> = () => {
                     <div className="flex justify-center">
                         <Image
                             className="rounded-full"
-                            src="/logo.jpg"
+                            src={logo}
                             alt="logo"
+                            placeholder="blur"
                             width={64}
                             height={64}
+                            priority
                         />
                     </div>
                     <div className="w-full text-gray-600 md:flex md:items-center">

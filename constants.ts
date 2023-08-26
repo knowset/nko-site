@@ -47,7 +47,7 @@ export const navlinks: {
     {
         title: "Центр",
         links: [
-            { title: "О центре", href: "/" },
+            { title: "О центре", href: "/about_the_center" },
             { title: "Документы", href: "/documentation" },
             { title: "Проекты", href: "/project" },
             { title: "Контакты", href: "/contacts" },
@@ -127,5 +127,47 @@ export const documentation: {
                 href: "",
             },
         ],
+    },
+];
+
+export const directions_of_work_of_the_center: {
+    picture: string;
+    text: string;
+}[] = [
+    {
+        picture: "/about_the_center/directions_of_work_of_the_center_1.png",
+        text: "Содействие в формировании и развитии молодежных общественных объединений",
+    },
+    {
+        picture: "/about_the_center/directions_of_work_of_the_center_2.png",
+        text: "Организация и проведение мероприятий, направленных на развитие гражданской активности молодежи, вовлечение молодежи в проектную и социальную деятельность",
+    },
+    {
+        picture: "/about_the_center/directions_of_work_of_the_center_3.png",
+        text: "Распространение информации полезной для успешной деятельности некоммерческих организаций и поддержки социальных инициатив молодёжи",
+    },
+    {
+        picture: "/about_the_center/directions_of_work_of_the_center_4.png",
+        text: "Разработка и изготовление методических материалов в сфере социального проектирования",
+    },
+];
+
+export const team: {
+    picture: string;
+    name: string;
+    job_title: string;
+    achievements: string;
+}[] = [
+    {
+        picture: "/about_the_center/people/yakunicheva_olga.png",
+        name: "Якуничева Ольга",
+        job_title: "Директор",
+        achievements: "Тренер по социальному проектированию, эксперт Росмолодежь. Гранты, эксперт платформы «Моя страна – моя Россия», эксперт областного конкурса молодежных проектов",
+    },
+    {
+        picture: "/about_the_center/people/ozhogin_michail.png",
+        name: "Ожогин Михаил",
+        job_title: "Менеджер",
+        achievements: "Тренер по социальному проектированию, эксперт платформы «Моя страна – моя Россия»",
     },
 ];

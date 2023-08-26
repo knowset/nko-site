@@ -5,10 +5,10 @@ import { H2BigSkeleton } from "../Text/H2BigSkeleton";
 
 export const DocPageSkeleton: FC<{}> = () => {
     return (
-        <div className="flex flex-col gap-12">
+        <div className="flex flex-col gap-10">
             <div>
                 <H1Skeleton />
-                <hr className="my-4" />
+                <hr className="mt-4" />
             </div>
             <div className="flex flex-col gap-4">
                 <H2Skeleton />

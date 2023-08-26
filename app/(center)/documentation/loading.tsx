@@ -1,5 +1,7 @@
-import { ContactsPageSkeleton } from "@/components/contacts/ContactsPageSkeleton";
+import { StaticPageSkeleton } from "@/components/Skeletons/StaticPageSkeleton";
 
 export default function Loading() {
-    return <ContactsPageSkeleton />;
+    return (
+        <StaticPageSkeleton />
+    );
 }

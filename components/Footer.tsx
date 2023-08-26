@@ -17,7 +17,7 @@ export const Footer: FC<{}> = () => {
                                 {section.links.map((link) => (
                                     <li key={"footerlink-" + link.title}>
                                         <Link
-                                            className="underline decoration-blue-400 sm:no-underline bg-gradient-to-r from-blue-400 to-blue-400 bg-[length:0px_3px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 hover:bg-[length:100%_3px] group-hover:bg-[length:100%_3px]"
+                                            className="bg-gradient-to-r from-blue-400 to-blue-400 bg-[length:0px_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 hover:bg-[length:100%_2px] group-hover:bg-[length:100%_2px]"
                                             href={link.href}
                                         >
                                             {link.title}

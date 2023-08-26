@@ -1,11 +1,11 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, AllHTMLAttributes } from "react";
 
-interface H1Props {
+interface H2Props {
     children: ReactNode;
     textsize?: string;
 }
 
-export const H2: FC<H1Props> = ({ children, textsize = "text-2xl" }) => {
+export const H2: FC<H2Props> = ({ children, textsize = "text-2xl"}) => {
     return (
         <h2 className="text-lg sm:text-xl">
             {children}

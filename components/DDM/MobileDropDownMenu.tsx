@@ -6,10 +6,10 @@ import { usePathname } from "next/navigation";
 import { NavButton } from "../Navbar/NavButton";
 
 interface DDMProps {
-    section: {
+    navlinks: {
         title: string;
         links: { title: string; href: string }[];
-    };
+    }[];
 }
 
 const menuVariants = {
@@ -23,7 +23,7 @@ const menuVariants = {
     },
 };
 
-export const DropDownMenu: FC<DDMProps> = ({ section }) => {
+export const MobileDropDownMenu: FC<DDMProps> = ({ navlinks }) => {
     const { ref, isComponentVisible, setIsComponentVisible } =
         useComponentVisible(false);
 
@@ -31,7 +31,7 @@ export const DropDownMenu: FC<DDMProps> = ({ section }) => {
         setIsComponentVisible((current: boolean) => !current);
     }, []);
     const path = usePathname();
-    const isActive = !!section.links.find((link) => link.href == path);
+    // const isActive = !!section.links.find((link) => link.href == path);
 
     return (
         <div
@@ -40,9 +40,9 @@ export const DropDownMenu: FC<DDMProps> = ({ section }) => {
         >
             <NavButton
                 type="button"
-                isActive={isActive}
+                isActive={true}
                 onClick={toggleMenu}
-                title={section.title}
+                title="Меню"
                 aria-expanded="false"
             />
 
@@ -54,20 +54,24 @@ export const DropDownMenu: FC<DDMProps> = ({ section }) => {
                             animate="open"
                             exit="closed"
                             variants={menuVariants}
-                            className="absolute left-0 -translate-x-[45vw] mt-1 md:left-1/2 md:-translate-x-1/2 transform z-50"
+                            className="absolute left-0 mt-1 w-[90vw] -translate-x-[35vw] md:left-1/2 md:-translate-x-1/2 transform z-50"
                         >
-                            <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white">
-                                {section.links.map((link) => (
-                                    <div
-                                        className="flex flex-col gap-2"
-                                        key={"ddm-link-" + link.title}
-                                    >
-                                        <NavItem
-                                            title={link.title}
-                                            href={link.href}
-                                        />
+                            <div className=" grid grid-cols-2 gap-2 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white p-2">
+                                {navlinks.map((section) => (
+                                    <div className="flex flex-col gap-1 p-2">
+                                        <p className="mb-1">{section.title}</p>
+                                        {section.links.map((link) => (
+                                            <NavItem
+                                                title={link.title}
+                                                href={link.href}
+                                            />
+                                        ))}
                                     </div>
                                 ))}
+                                <div>
+                                    <p>Другое</p>
+                                    <NavItem title="Главная" href="/" />
+                                </div>
                             </div>
                         </motion.div>
                     </>

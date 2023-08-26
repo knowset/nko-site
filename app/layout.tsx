@@ -7,7 +7,9 @@ import { AdminCreateButton } from "@/components/AdminCreateButton";
 import { Footer } from "@/components/Footer";
 
 export const metadata = {
-    title: "Ресурсный центр НКО ВоГУ 'Инициатива'",
+    title: {
+        default: "Ресурсный центр НКО ВоГУ 'Инициатива'",
+        template: "%s | Ресурсный центр НКО ВоГУ 'Инициатива'"},
     description: "",
 };
 
