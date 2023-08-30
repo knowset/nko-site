@@ -53,7 +53,7 @@ interface FaunadbPostResponse {
     data: {
         ref: any;
         ts: any;
-        data: {
+        data?: {
             id: string;
             title: string;
             text: string;
@@ -167,34 +167,39 @@ export const createUser = async (userData: {
 };
 
 export const getAllPosts = async (postType: string) => {
-    return new Promise<any>(async (resolve, reject) => {
-        try {
-            const req = (await client
-                .query(
-                    q.Reverse(
-                        q.Map(
-                            q.Paginate(q.Documents(q.Collection(postType))),
-                            q.Lambda("X", q.Get(q.Var("X")))
-                        )
-                    )
+    try {
+        const res: FaunadbPostResponse = await client.query(
+            q.Reverse(
+                q.Map(
+                    q.Paginate(q.Documents(q.Collection(postType))),
+                    q.Lambda("X", q.Get(q.Var("X")))
                 )
-                .then((ret) => {
-                    resolve(ret);
+            )
+        );
+        if (!res) {
+            throw new Error(
+                JSON.stringify({
+                    status: 500,
+                    error: {
+                        field: "",
+                        message: "Невозможно получить посты",
+                    },
                 })
-                .catch((err) =>
-                    console.error(
-                        "Error: [%s] %s: %s",
-                        err.name,
-                        err.message,
-                        err.errors()[0].description
-                    )
-                )) as any;
-
-            return { status: 200, body: JSON.stringify(await req) };
-        } catch (err) {
-            return JSON.parse((err as Error).message);
+            );
         }
-    });
+        const posts = res.data;
+        return { posts: posts };
+    } catch (err) {
+        const errorData: {
+            status: number;
+            error: { field: string; message: string };
+        } = JSON.parse((err as Error).message);
+
+        return {
+            errors: [errorData.error],
+            status: errorData.status,
+        };
+    }
 };
 
 export const getPostByID = async (postType: string, postId: string) => {
@@ -256,7 +261,7 @@ export const createPost = async (
         source_of_financing: string;
         amount_of_the_subsidy: string;
         main_results: string;
-        images: {id: number, value: string}[];
+        images: { id: number; value: string }[];
     }
 ) => {
     try {

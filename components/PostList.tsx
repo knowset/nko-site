@@ -53,7 +53,7 @@ export const PostList: FC<PostListProps> = ({ postType }) => {
         <div>
             <CRUDLayout isAdmin={isAdmin}>
                 {loading ? <PostListSkeleton /> : null}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:gap-4 lg:grid-cols-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:gap-4 xl:grid-cols-3">
                     {posts &&
                         posts.map((post) => (
                             <Post key={post.data.id} post={post.data} isAdmin={isAdmin} />
