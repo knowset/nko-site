@@ -1,6 +1,11 @@
 import { H1 } from "@/components/Text/H1";
 import { H2 } from "@/components/Text/H2";
 import { documentation } from "@/constants";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Документы"
+}
 
 export default async function Page() {
     return (

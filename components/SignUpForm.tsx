@@ -34,7 +34,6 @@ const SignUpForm = () => {
                     "Content-Type": "application/json",
                 },
             });
-            console.log(res);
             if (!res.ok) {
                 setError((await res.json()).message);
                 return;

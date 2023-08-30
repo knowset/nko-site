@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Image from "next/image";
 import { Layout } from "./Layout";
-import logo from "@/public/logo.jpg"
+import logo from "@/public/logo.png"
 
 export const TopNavBar: FC<{}> = () => {
     return (

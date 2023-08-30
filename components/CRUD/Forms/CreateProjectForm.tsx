@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent, FC, FormEventHandler, useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
+import { Input } from "../Input";
 
 interface FormProps {
     title: string;
@@ -18,7 +19,12 @@ export const CreatePostForm: FC<FormProps> = ({ title: formTitle, type }) => {
     ]);
     const [formValues, setFormValues] = useState({
         title: "",
-        text: "",
+        sub_title: "",
+        start_of_the_implementation_period: "",
+        end_of_the_implementation_period: "",
+        source_of_financing: "",
+        amount_of_the_subsidy: "",
+        main_results: "",
         images: [] as { id: number; value: string }[],
     });
     const [error, setError] = useState("");
@@ -26,10 +32,19 @@ export const CreatePostForm: FC<FormProps> = ({ title: formTitle, type }) => {
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
         event.preventDefault();
         setLoading(true);
-        setFormValues({ title: "", text: "", images: [] });
+        // setFormValues({
+        //     title: "",
+        //     sub_title: "",
+        //     start_of_the_implementation_period: "",
+        //     end_of_the_implementation_period: "",
+        //     source_of_financing: "",
+        //     amount_of_the_subsidy: "",
+        //     main_results: "",
+        //     images: [],
+        // });
 
         try {
-            const res = await fetch(`/api/${type}/new`, {
+            const res = await fetch(`/api/project/new`, {
                 method: "POST",
                 body: JSON.stringify(formValues),
                 headers: {
@@ -51,7 +66,6 @@ export const CreatePostForm: FC<FormProps> = ({ title: formTitle, type }) => {
         event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
         const { name, value } = event.target;
-        console.log(name, value);
         if (name.includes("input")) {
             const inputId = Number(name.split("-")[1]);
             const input = inputImageList.find((item) => item.id === inputId);
@@ -79,7 +93,6 @@ export const CreatePostForm: FC<FormProps> = ({ title: formTitle, type }) => {
         if (inputImageList.length < 10) {
             copy = [...copy, { id: inputImageList.length, value: "" }];
             setInputImageList(copy);
-            console.log(inputImageList);
         }
     };
 
@@ -90,7 +103,6 @@ export const CreatePostForm: FC<FormProps> = ({ title: formTitle, type }) => {
                 if (item.id < id) return item;
                 if (item.id > id) return { id: item.id - 1, value: item.value };
             });
-            console.log(copy);
             setInputImageList(copy);
         }
     };
@@ -98,56 +110,111 @@ export const CreatePostForm: FC<FormProps> = ({ title: formTitle, type }) => {
     return (
         <div className="flex justify-center">
             <form
-                className="flex flex-col bg-white rounded shadow-lg py-8 px-8 mt-12"
+                className="flex flex-col bg-white rounded shadow-lg py-8 px-8 mt-12 gap-4"
                 onSubmit={handleSubmit}
             >
                 <label className="font-semibold text-xl text-center">
                     {formTitle}
                 </label>
                 <hr className="my-4" />
-                <label className="font-semibold text-base">
-                    Название статьи
-                </label>
-                <input
+                <Input
+                    title="Название статьи"
                     value={formValues.title}
                     onChange={handleChange}
                     name="title"
                     type="text"
                     required
-                    className="flex items-center h-12 px-4 w-full bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
                 />
-                <label className="font-semibold text-base mt-3">
-                    Содержание
-                </label>
-                <textarea
-                    value={formValues.text}
+                <Input
+                    title="Дополнительная информация"
+                    value={formValues.sub_title}
                     onChange={handleChange}
-                    name="text"
+                    name="sub_title"
+                    type="text"
                     required
-                    className="flex items-center h-12 px-4 w-full bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
                 />
                 <label className="font-semibold text-base mt-3">
-                    Сылки на картинки
+                    Срок реализации
                 </label>
-                {inputImageList.map((item) => (
-                    <div
-                        key={"input" + item.id.toString()}
-                        className="flex items-center gap-2 mt-2"
-                    >
+                <div className="flex gap-4 mt-2">
+                    <div>
+                        <label>Начало</label>
                         <input
-                            className="flex items-center h-12 px-4 w-full bg-gray-200 rounded focus:outline-none focus:ring-2"
-                            key={item.id}
+                            value={
+                                formValues.start_of_the_implementation_period
+                            }
                             onChange={handleChange}
-                            name={"input-" + item.id.toString()}
+                            pattern="(?:((?:0[1-9]|1[0-9]|2[0-9])\/(?:0[1-9]|1[0-2])|(?:30)\/(?!02)(?:0[1-9]|1[0-2])|31\/(?:0[13578]|1[02]))\/(?:19|20)[0-9]{2})"
+                            type="date"
+                            name="start_of_the_implementation_period"
+                            required
+                            className="flex items-center h-12 px-4 w-full bg-gray-200 rounded focus:outline-none focus:ring-2"
                         />
-                        <button
-                            onClick={(e) => handleDeleteInput(e, item.id)}
-                            className="w-12 h-12 bg-red-500 hover:bg-red-600 text-white text-xl flex justify-center items-center rounded"
-                        >
-                            <RxCross2 />
-                        </button>
                     </div>
-                ))}
+                    <div>
+                        <label>Конец</label>
+                        <input
+                            value={formValues.end_of_the_implementation_period}
+                            onChange={handleChange}
+                            type="date"
+                            name="end_of_the_implementation_period"
+                            required
+                            className="flex items-center h-12 px-4 w-full bg-gray-200 rounded focus:outline-none focus:ring-2"
+                        />
+                    </div>
+                </div>
+                <Input
+                    title="Источник финансирования"
+                    value={formValues.source_of_financing}
+                    onChange={handleChange}
+                    name="source_of_financing"
+                    type="text"
+                    required
+                />
+                <Input
+                    title="Объем субсидии"
+                    value={formValues.amount_of_the_subsidy}
+                    onChange={handleChange}
+                    name="amount_of_the_subsidy"
+                    type="text"
+                    required
+                />
+                <div>
+                    <label className="font-semibold text-base">
+                        Основные результаты
+                    </label>
+                    <textarea
+                        value={formValues.main_results}
+                        onChange={handleChange}
+                        name="main_results"
+                        required
+                        className="flex items-center h-40 p-4 w-full bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
+                    />
+                </div>
+                <div>
+                    <label className="font-semibold text-base mt-3">
+                        Сылки на картинки
+                    </label>
+                    {inputImageList.map((item) => (
+                        <div
+                            key={"input" + item.id.toString()}
+                            className="flex items-center gap-2 mt-2"
+                        >
+                            <input
+                                className="flex items-center h-12 px-4 w-full bg-gray-200 rounded focus:outline-none focus:ring-2"
+                                key={item.id}
+                                onChange={handleChange}
+                                name={"input-" + item.id.toString()}
+                            />
+                            <button
+                                onClick={(e) => handleDeleteInput(e, item.id)}
+                                className="w-12 h-12 bg-red-500 hover:bg-red-600 text-white text-xl flex justify-center items-center rounded"
+                            >
+                                <RxCross2 />
+                            </button>
+                        </div>
+                    ))}
+                </div>
                 <button
                     className="flex items-center justify-center h-12 px-6 w-full bg-purple-600 mt-2 rounded font-semibold text-sm text-blue-100 hover:bg-purple-800"
                     type="button"

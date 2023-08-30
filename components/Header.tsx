@@ -15,8 +15,6 @@ export const Header: FC<{}> = () => {
 
     const session = useSession();
 
-    console.log(session);
-
     return (
         <div>
             <TopNavBar />

@@ -1,4 +1,4 @@
-import { CreatePostForm } from "@/components/CreatePostForm";
+import { CreatePostForm } from "@/components/CRUD/Forms/CreateProjectForm";
 
 export default async function NewProject() {
     

@@ -8,7 +8,7 @@ import { NavButton } from "../Navbar/NavButton";
 interface DDMProps {
     navlinks: {
         title: string;
-        links: { title: string; href: string }[];
+        links?: { title: string; href: string }[];
     }[];
 }
 
@@ -58,18 +58,34 @@ export const MobileDropDownMenu: FC<DDMProps> = ({ navlinks }) => {
                         >
                             <div className=" grid grid-cols-2 gap-2 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white p-2">
                                 {navlinks.map((section) => (
-                                    <div className="flex flex-col gap-1 p-2">
-                                        <p className="mb-1">{section.title}</p>
-                                        {section.links.map((link) => (
-                                            <NavItem
-                                                title={link.title}
-                                                href={link.href}
-                                            />
-                                        ))}
+                                    <div
+                                        key={"mddm-section-" + section.title}
+                                        className="flex flex-col gap-1 p-2"
+                                    >
+                                        <p className="text-blue-500 mb-1">
+                                            {section.title}
+                                        </p>
+                                        {!!section.links ? (
+                                            section.links.map((link) => (
+                                                <NavItem
+                                                    key={
+                                                        "mddm-link-" +
+                                                        link.title
+                                                    }
+                                                    title={link.title}
+                                                    href={link.href}
+                                                />
+                                            ))
+                                        ) : (
+                                            <p className="rounded py-1 md:py-2 md:px-4 font-medium text-base text-zinc-500">
+                                                Раздел появится в ближайшее
+                                                время
+                                            </p>
+                                        )}
                                     </div>
                                 ))}
-                                <div>
-                                    <p>Другое</p>
+                                <div className="flex flex-col gap-1 p-2">
+                                    <p className="text-blue-500 mb-1">Другое</p>
                                     <NavItem title="Главная" href="/" />
                                 </div>
                             </div>

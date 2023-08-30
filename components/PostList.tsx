@@ -2,21 +2,16 @@
 
 import { Post } from "@/components/Post";
 import { PostItem } from "@/types/post";
+import { useSession } from "next-auth/react";
 import { FC, useEffect, useState } from "react";
-import { AdminCreateButton } from "./AdminCreateButton";
+import { CRUDLayout } from "./CRUD/CRUDLayout";
 import { PostListSkeleton } from "./PostListSkeleton";
 
 type ReturnedData = {
     posts: {
         ref: any;
         ts: any;
-        data: {
-            id: string;
-            title: string;
-            text: string;
-            images: string;
-            date: string;
-        };
+        data: any
     }[];
 };
 
@@ -27,6 +22,7 @@ interface PostListProps {
 export const PostList: FC<PostListProps> = ({ postType }) => {
     const [posts, setPosts] = useState<PostItem[]>([]);
     const [loading, setLoading] = useState(true);
+    const {data: session} = useSession();
 
     useEffect(() => {
         const retrievData = async () => {
@@ -49,18 +45,21 @@ export const PostList: FC<PostListProps> = ({ postType }) => {
             setLoading(false);
         };
         retrievData();
-    });
+    }, [posts, loading]);
+
+    const isAdmin = session?.user.role == "admin";
 
     return (
         <div>
-            <AdminCreateButton />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:gap-4 lg:grid-cols-3">
-                {loading && <PostListSkeleton />}
-                {posts &&
-                    posts.map((post) => (
-                        <Post key={post.data.id} post={post.data} />
-                    ))}
-            </div>
+            <CRUDLayout isAdmin={isAdmin}>
+                {loading ? <PostListSkeleton /> : null}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:gap-4 lg:grid-cols-3">
+                    {posts &&
+                        posts.map((post) => (
+                            <Post key={post.data.id} post={post.data} isAdmin={isAdmin} />
+                        ))}
+                </div>
+            </CRUDLayout>
         </div>
     );
 };

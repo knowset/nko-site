@@ -4,7 +4,12 @@ export type PostItem = {
     data: {
         id: string;
         title: string;
-        text: string;
+        sub_title: string;
+        start_of_the_implementation_period: string;
+        end_of_the_implementation_period: string;
+        source_of_financing: string;
+        amount_of_the_subsidy: string;
+        main_results: string;
         images: string;
         date: string;
     };

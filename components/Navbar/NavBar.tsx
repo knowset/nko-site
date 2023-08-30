@@ -1,11 +1,8 @@
 "use client";
 
-import { additionalNavbarLinks, navbarLinks, navlinks } from "@/constants";
-import Link from "next/link";
+import { navlinks } from "@/constants";
 import { FC, useCallback, useState } from "react";
-import { SlArrowDown } from "react-icons/sl";
 import React from "react";
-import * as DDM from "@radix-ui/react-dropdown-menu";
 import { NavItem } from "./NavItem";
 import { DropDownMenu } from "../DDM/DropDownMenu";
 import { MobileDropDownMenu } from "../DDM/MobileDropDownMenu";

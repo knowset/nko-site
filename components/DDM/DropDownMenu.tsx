@@ -8,7 +8,7 @@ import { NavButton } from "../Navbar/NavButton";
 interface DDMProps {
     section: {
         title: string;
-        links: { title: string; href: string }[];
+        links?: { title: string; href: string }[];
     };
 }
 
@@ -31,7 +31,12 @@ export const DropDownMenu: FC<DDMProps> = ({ section }) => {
         setIsComponentVisible((current: boolean) => !current);
     }, []);
     const path = usePathname();
-    const isActive = !!section.links.find((link) => link.href == path);
+    // const isActive = !!section.links.find((link) => link.href == path);
+
+    let isActive = false;
+    if (section.links) {
+        isActive = !!section.links.find((link) => link.href == path);
+    }
 
     return (
         <div
@@ -57,17 +62,23 @@ export const DropDownMenu: FC<DDMProps> = ({ section }) => {
                             className="absolute left-0 -translate-x-[45vw] mt-1 md:left-1/2 md:-translate-x-1/2 transform z-50"
                         >
                             <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white">
-                                {section.links.map((link) => (
-                                    <div
-                                        className="flex flex-col gap-2"
-                                        key={"ddm-link-" + link.title}
-                                    >
-                                        <NavItem
-                                            title={link.title}
-                                            href={link.href}
-                                        />
+                                {!!section.links ? (
+                                    section.links.map((link) => (
+                                        <div
+                                            className="flex flex-col gap-2"
+                                            key={"ddm-link-" + link.title}
+                                        >
+                                            <NavItem
+                                                title={link.title}
+                                                href={link.href}
+                                            />
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div>
+                                        <p className="rounded py-1 md:py-2 md:px-4 font-medium text-base text-zinc-500">Раздел появится в ближайшее время</p>
                                     </div>
-                                ))}
+                                )}
                             </div>
                         </motion.div>
                     </>

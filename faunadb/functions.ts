@@ -92,7 +92,6 @@ export const getUserByEmail = async (email: string): Promise<UserResponse> => {
             );
         } else {
             const userData = resData.data[0];
-            console.log(userData.ref.id);
             return {
                 user: {
                     ...userData.data,
@@ -249,7 +248,16 @@ export const getPostByID = async (postType: string, postId: string) => {
 
 export const createPost = async (
     postType: string,
-    data: { title: string; text: string; images: string[] }
+    data: {
+        title: string;
+        sub_title: string;
+        start_of_the_implementation_period: string;
+        end_of_the_implementation_period: string;
+        source_of_financing: string;
+        amount_of_the_subsidy: string;
+        main_results: string;
+        images: {id: number, value: string}[];
+    }
 ) => {
     try {
         const req = await client
@@ -258,9 +266,16 @@ export const createPost = async (
                     data: {
                         id: uuid(),
                         title: data.title,
-                        text: data.text,
+                        sub_title: data.sub_title,
+                        start_of_the_implementation_period:
+                            data.start_of_the_implementation_period,
+                        end_of_the_implementation_period:
+                            data.end_of_the_implementation_period,
+                        source_of_financing: data.source_of_financing,
+                        amount_of_the_subsidy: data.amount_of_the_subsidy,
+                        main_results: data.main_results,
                         images: JSON.stringify(data.images),
-                        date: (new Date()).toString(),
+                        date: new Date().toString(),
                     },
                 })
             )
@@ -275,6 +290,40 @@ export const createPost = async (
             );
 
         return { statusCode: 200, body: JSON.stringify({ newMem: req }) };
+    } catch (err) {
+        return JSON.parse((err as Error).message);
+    }
+};
+
+export const deletePostById = async (postType: string, postId: string) => {
+    try {
+        const resData: FaunadbPostResponse = await client.query(
+            q.Map(
+                q.Filter(
+                    q.Paginate(q.Match(q.Index(postType + "_by_id"))),
+                    q.Lambda((ref) =>
+                        q.ContainsStr(
+                            q.Select(["data", "id"], q.Get(ref)),
+                            postId
+                        )
+                    )
+                ),
+                q.Lambda((ref) => q.Get(ref))
+            )
+        );
+        const faunadbPostId = resData.data[0].ref.id;
+        const res = await client.query(
+            q.Delete(q.Ref(q.Collection(postType), faunadbPostId))
+        );
+
+        if (!res) {
+            throw new Error("Something went wrong");
+        }
+
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ message: "Post successfully deleted" }),
+        };
     } catch (err) {
         return JSON.parse((err as Error).message);
     }

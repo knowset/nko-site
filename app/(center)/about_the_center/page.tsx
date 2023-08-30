@@ -75,7 +75,7 @@ export default async function Page() {
                                     {item.name}
                                 </h2>
                                 <p>{item.job_title}</p>
-                                <p className="p-2 lg:p-4 mt-4">
+                                <p className="p-2 lg:p-4 mt-4 text-lg">
                                     {item.achievements}
                                 </p>
                             </div>
