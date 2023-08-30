@@ -45,7 +45,7 @@ export const PostList: FC<PostListProps> = ({ postType }) => {
             setLoading(false);
         };
         retrievData();
-    }, [posts, loading]);
+    }, [posts]);
 
     const isAdmin = session?.user.role == "admin";
 

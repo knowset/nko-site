@@ -37,7 +37,6 @@ export const PostDetail: FC<{}> = () => {
     const path = usePathname();
     const searchParams = useSearchParams();
     const [post, setPost] = useState<PostItem | null>();
-    const [error, setError] = useState({});
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -65,7 +64,7 @@ export const PostDetail: FC<{}> = () => {
         retrievData();
     });
 
-    if (!post) return notFound();
+    if (!post && !loading) return notFound();
 
     let images: { id: number; value: string }[] = [];
     if (!!post?.images) {
