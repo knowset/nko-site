@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Image from "next/image";
-import mainimage from "@/public/mainpagepic.png";
+import mainimage from "@/public/main/mainpagepic.jpg";
+import Loading from "./loading";
 
 export const metadata: Metadata = {
     metadataBase: new URL("http://localhost:3000"),
@@ -19,12 +20,12 @@ export default async function Home() {
     return (
         <div className="flex flex-col gap-12">
             <div className="flex flex-col items-center justify-center gap-4">
-                <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-500 text-center">
+                <h1 className="text-4xl sm:text-5xl font-extrabold text-main text-center">
                     Преобразуем инициативы в проекты
                 </h1>
-                <h2 className="text-xl">
-                    Мы готовы поддержать твою самую смелую идею Действуй уже
-                    сегодня!
+                <h2 className="text-xl text-center">
+                    Мы готовы поддержать твою самую смелую идею <br />
+                    Действуй уже сегодня!
                 </h2>
                 <Image
                     width={700}
@@ -37,10 +38,10 @@ export default async function Home() {
                 />
             </div>
             <div className="flex flex-col items-center justify-center gap-4">
-                <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-500 text-center">
-                    НАША МИССИЯ
+                <h1 className="text-4xl sm:text-5xl font-extrabold text-main text-center">
+                    Наша миссия
                 </h1>
-                <h2 className="text-xl">
+                <h2 className="text-xl text-center">
                     Мы поддерживаем студентов ВоГУ в реализации социальных
                     инициатив, развиваем уверенность в своих силах, создаем
                     возможности для личностного и профессионального роста

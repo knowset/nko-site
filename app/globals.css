@@ -88,4 +88,7 @@
         scrollbar-width: none;  /* Firefox */
     }
   }
+  .text-main {
+    color: rgb(0, 158, 224)
+  }
 }

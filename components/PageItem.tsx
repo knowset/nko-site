@@ -2,17 +2,23 @@
 
 import { usePathname, useSearchParams } from "next/navigation";
 import { FC } from "react";
-import { PostDetail } from "./PostDetail";
-import { PostList } from "./PostList";
-
+import { ProjectDetail } from "./Project/ProjectDetail";
+import { ProjectList } from "./Project/ProjectList";
 
 export const PageItem: FC<{}> = () => {
     const searchParams = useSearchParams();
     const path = usePathname();
 
     if (searchParams.has("p")) {
-        return <PostDetail />
+        switch (path) {
+            case "/project":
+                return <ProjectDetail />;
+        }
+    }
+    switch (path) {
+        case "/project":
+            return <ProjectList />;
     }
 
-    return <PostList postType={path}/>;
+    return null;
 };

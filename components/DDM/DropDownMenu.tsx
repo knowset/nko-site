@@ -1,7 +1,7 @@
 import { FC, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useComponentVisible } from "@/hooks/handleHideDropdown";
-import { NavItem } from "../Navbar/NavItem";
+import { NavLink } from "../Navbar/NavLink";
 import { usePathname } from "next/navigation";
 import { NavButton } from "../Navbar/NavButton";
 
@@ -63,20 +63,20 @@ export const DropDownMenu: FC<DDMProps> = ({ section }) => {
                         >
                             <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white">
                                 {!!section.links ? (
-                                    section.links.map((link) => (
-                                        <div
-                                            className="flex flex-col gap-2"
-                                            key={"ddm-link-" + link.title}
-                                        >
-                                            <NavItem
+                                    <div className="flex flex-col gap-3 px-4 py-2">
+                                        {section.links.map((link) => (
+                                            <NavLink
+                                                key={"ddm-link-" + link.title}
                                                 title={link.title}
                                                 href={link.href}
                                             />
-                                        </div>
-                                    ))
+                                        ))}
+                                    </div>
                                 ) : (
                                     <div>
-                                        <p className="rounded py-1 md:py-2 md:px-4 font-medium text-base text-zinc-500">Раздел появится в ближайшее время</p>
+                                        <p className="rounded py-1 md:py-2 md:px-4 font-medium text-base text-zinc-500">
+                                            Раздел появится в ближайшее время
+                                        </p>
                                     </div>
                                 )}
                             </div>

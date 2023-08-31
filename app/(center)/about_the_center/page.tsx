@@ -25,7 +25,7 @@ export default async function Page() {
                 </H2>
                 <H2>
                     Основная{" "}
-                    <span className="text-blue-500 font-extrabold">
+                    <span className="text-main font-extrabold">
                         ЦЕЛЬ ДЕЯТЕЛЬНОСТИ{" "}
                     </span>
                     - продвижение социальных инициатив молодежи региона,
@@ -60,8 +60,8 @@ export default async function Page() {
                     {team.map((item) => (
                         <div className="mt-4 sm:mt-2 lg:mt-0 flex flex-col items-center gap-2 p-8 overflow-hidden rounded-lg shadow-md ring-1 ring-black ring-opacity-5 bg-white">
                             <Image
-                                width={128}
-                                height={128}
+                                width={256}
+                                height={256}
                                 alt=""
                                 src={item.picture}
                                 placeholder="blur"

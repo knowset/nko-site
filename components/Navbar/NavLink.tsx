@@ -9,15 +9,15 @@ interface NavItemProps {
     href: string;
 }
 
-export const NavItem: FC<NavItemProps> = ({ title, href }) => {
+export const NavLink: FC<NavItemProps> = ({ title, href }) => {
     const path = usePathname();
     return (
         <Link
             href={href}
-            className="flex group lg:hover:bg-gray-100 rounded py-1 md:py-2 md:px-4 font-medium text-base"
+            className="flex group font-medium text-base"
         >
             <p
-                className={` bg-gradient-to-r from-blue-400 to-blue-400 ${
+                className={` bg-gradient-to-r from-[rgb(0,158,224)] to-[rgb(0,158,224)] ${
                     path == href
                         ? "bg-[length:100%_2px]"
                         : "bg-[length:0px_0px]"

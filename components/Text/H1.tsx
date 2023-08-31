@@ -7,7 +7,7 @@ interface H1Props {
 
 export const H1: FC<H1Props> = ({ children, textsize = "text-2xl" }) => {
     return (
-        <h1 className={`${textsize} font-extrabold text-blue-500`}>
+        <h1 className={`${textsize} font-extrabold text-main`}>
             {children}
         </h1>
     );

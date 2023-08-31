@@ -1,11 +1,11 @@
 "use client";
 
-import { Post } from "@/components/Post";
+import { Project } from "@/components/Project/Project";
 import { PostItem } from "@/types/post";
 import { useSession } from "next-auth/react";
 import { FC, useEffect, useState } from "react";
-import { CRUDLayout } from "./CRUD/CRUDLayout";
-import { PostListSkeleton } from "./PostListSkeleton";
+import { CRUDLayout } from "../CRUD/CRUDLayout";
+import { ProjectListSkeleton} from "./ProjectListSkeleton";
 
 type ReturnedData = {
     posts: {
@@ -15,11 +15,8 @@ type ReturnedData = {
     }[];
 };
 
-interface PostListProps {
-    postType: string;
-}
 
-export const PostList: FC<PostListProps> = ({ postType }) => {
+export const ProjectList: FC<{}> = () => {
     const [posts, setPosts] = useState<PostItem[]>([]);
     const [loading, setLoading] = useState(true);
     const {data: session} = useSession();
@@ -27,7 +24,7 @@ export const PostList: FC<PostListProps> = ({ postType }) => {
     useEffect(() => {
         const retrievData = async () => {
             if (loading) {
-                const res = await fetch(`/api/${postType}`);
+                const res = await fetch(`/api/project`);
 
                 if (!res) {
                     throw new Error("Невозможно получить посты");
@@ -52,11 +49,11 @@ export const PostList: FC<PostListProps> = ({ postType }) => {
     return (
         <div>
             <CRUDLayout isAdmin={isAdmin}>
-                {loading ? <PostListSkeleton /> : null}
+                {loading ? <ProjectListSkeleton /> : null}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:gap-4 xl:grid-cols-3">
                     {posts &&
                         posts.map((post) => (
-                            <Post key={post.data.id} post={post.data} isAdmin={isAdmin} />
+                            <Project key={post.data.id} post={post.data} isAdmin={isAdmin} />
                         ))}
                 </div>
             </CRUDLayout>

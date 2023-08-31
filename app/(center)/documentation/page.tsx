@@ -30,7 +30,7 @@ export default async function Page() {
                     {section.links.map((link) => (
                         <H2>
                             {link.title}{" "}
-                            <a className="text-blue-500" href={link.href}>
+                            <a className="text-main" href={link.href}>
                                 (скачать pdf)
                             </a>
                         </H2>

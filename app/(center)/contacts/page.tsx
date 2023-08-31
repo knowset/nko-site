@@ -53,7 +53,7 @@ export default async function Page() {
                         <p className="text-center">iakunichevaon@vogu35.ru</p>
                     </div>
                     <div className="flex flex-col items-center p-8">
-                        <SlSocialVkontakte className="text-[4rem] text-blue-400" />
+                        <SlSocialVkontakte className="text-[4rem] text-main" />
                         <h1 className="mt-4 text-lg font-bold">
                             Социальные сети
                         </h1>

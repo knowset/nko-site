@@ -96,7 +96,7 @@ const SignUpForm = () => {
                     { loading ? <AiOutlineLoading3Quarters className="animate-spin text-2xl"/> : "Зарегистрироваться" }
                 </button>
                 <div className="flex mt-6 justify-end text-base space-x-6">
-                    <a className="text-blue-400 hover:text-blue-500" href="#">
+                    <a className="text-main hover:text-main" href="#">
                         Вход
                     </a>
                 </div>

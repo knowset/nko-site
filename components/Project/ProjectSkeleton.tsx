@@ -2,7 +2,7 @@ import { FC } from "react";
 
 
 
-export const PostSkeleton: FC<{}> = () => {
+export const ProjectSkeleton: FC<{}> = () => {
     return (
         <div className="bg-gradient-to-br from-white to-bg-zinc-200" style={{
             animation: ""

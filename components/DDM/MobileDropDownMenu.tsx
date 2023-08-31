@@ -1,7 +1,7 @@
 import { FC, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useComponentVisible } from "@/hooks/handleHideDropdown";
-import { NavItem } from "../Navbar/NavItem";
+import { NavLink } from "../Navbar/NavLink";
 import { usePathname } from "next/navigation";
 import { NavButton } from "../Navbar/NavButton";
 
@@ -48,13 +48,13 @@ export const MobileDropDownMenu: FC<DDMProps> = ({ navlinks }) => {
 
             <AnimatePresence>
                 {isComponentVisible && (
-                    <>
+                    <div className="relative">
                         <motion.div
                             initial="closed"
                             animate="open"
                             exit="closed"
                             variants={menuVariants}
-                            className="absolute left-0 mt-1 w-[90vw] -translate-x-[35vw] md:left-1/2 md:-translate-x-1/2 transform z-50"
+                            className="absolute inset-0 mt-1 w-[90vw] -translate-x-1/2 left-1/2 md:-translate-x-1/2 transform z-50"
                         >
                             <div className=" grid grid-cols-2 gap-2 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white p-2">
                                 {navlinks.map((section) => (
@@ -62,12 +62,12 @@ export const MobileDropDownMenu: FC<DDMProps> = ({ navlinks }) => {
                                         key={"mddm-section-" + section.title}
                                         className="flex flex-col gap-1 p-2"
                                     >
-                                        <p className="text-blue-500 mb-1">
+                                        <p className="text-main mb-1">
                                             {section.title}
                                         </p>
                                         {!!section.links ? (
                                             section.links.map((link) => (
-                                                <NavItem
+                                                <NavLink
                                                     key={
                                                         "mddm-link-" +
                                                         link.title
@@ -85,12 +85,12 @@ export const MobileDropDownMenu: FC<DDMProps> = ({ navlinks }) => {
                                     </div>
                                 ))}
                                 <div className="flex flex-col gap-1 p-2">
-                                    <p className="text-blue-500 mb-1">Другое</p>
-                                    <NavItem title="Главная" href="/" />
+                                    <p className="text-main mb-1">Другое</p>
+                                    <NavLink title="Главная" href="/" />
                                 </div>
                             </div>
                         </motion.div>
-                    </>
+                    </div>
                 )}
             </AnimatePresence>
         </div>

@@ -24,7 +24,7 @@ export default function RootLayout({
             <body className="bg-white min-h-[100vh] w-full flex flex-col no-scrollbar">
                 <Providers>
                     <Header />
-                    <div className="pt-12 pb-20 flex-grow h-full">
+                    <div className="pt-12 pb-20 flex-grow h-full flex justify-center items-center">
                         <Layout>{children}</Layout>
                     </div>
                     <Footer />

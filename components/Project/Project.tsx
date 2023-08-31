@@ -3,12 +3,12 @@
 import { FC, ReactNode, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { DeleteButton } from "./CRUD/DeleteButton";
-import { H1 } from "./Text/H1";
-import { EditButton } from "./CRUD/EditButton";
+import { DeleteButton } from "../CRUD/DeleteButton";
+import { H1 } from "../Text/H1";
+import { EditButton } from "../CRUD/EditButton";
 import { AiOutlineArrowRight } from "react-icons/ai";
 
-export interface PostProps {
+export interface ProjectProps {
     post: {
         id: string;
         title: string;
@@ -24,7 +24,7 @@ export interface PostProps {
     isAdmin?: boolean;
 }
 
-export const Post: FC<PostProps> = ({ post, isAdmin = false }) => {
+export const Project: FC<ProjectProps> = ({ post, isAdmin = false }) => {
     const path = usePathname();
     let images: { id: number; value: string }[] = [];
     if (!!post.images) {
@@ -53,16 +53,17 @@ export const Post: FC<PostProps> = ({ post, isAdmin = false }) => {
                             </div>
                         </Link>
                     </div>
-                    <div className="flex flex-col justify-between h-[10rem] px-4 pt-2 pb-4">
+                    <div className="flex flex-col justify-between px-4 pt-2 pb-4">
                         <div className="text-center">
-                            <H1 textsize="text-2xl">
+                            <H1 textsize="text-xl lg:text-2xl">
                                 <Link href={`${path}?p=${post.id}`}>
                                     {post.title}
                                 </Link>
                             </H1>
                             <p className="text-base">{post.sub_title}</p>
                         </div>
-                        <div className="flex justify-between">
+                        <div className="flex justify-between mt-2">
+
                             <Link
                                 href={`${path}?p=${post.id}`}
                                 className="mt-auto flex items-center gap-1"

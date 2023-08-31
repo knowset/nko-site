@@ -87,11 +87,11 @@ export const SignInForm = () => {
                     )}
                 </button>
                 <div className="flex mt-6 justify-center text-base space-x-6">
-                    <a className="text-blue-400 hover:text-blue-500" href="#">
+                    <a className="text-main hover:text-main" href="#">
                         Забыли пароль
                     </a>
                     <span className="mx-2 text-gray-300">/</span>
-                    <Link className="text-blue-400 hover:text-blue-500" href="/register">
+                    <Link className="text-main hover:text-main" href="/register">
                         Регистрация
                     </Link>
                 </div>
