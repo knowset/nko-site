@@ -1,4 +1,3 @@
-import { StaticPageSkeleton } from "@/components/Skeletons/StaticPageSkeleton";
 import { H1 } from "@/components/Text/H1";
 import { H2 } from "@/components/Text/H2";
 import { Metadata } from "next";

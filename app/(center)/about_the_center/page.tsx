@@ -1,4 +1,3 @@
-import { StaticPageSkeleton } from "@/components/Skeletons/StaticPageSkeleton";
 import { H1 } from "@/components/Text/H1";
 import { H2 } from "@/components/Text/H2";
 import { directions_of_work_of_the_center, team } from "@/constants";
