@@ -18,7 +18,7 @@ export interface ProjectProps {
         source_of_financing: string;
         amount_of_the_subsidy: string;
         main_results: string;
-        images: string;
+        images: {id: number, value: string}[];
         date: string;
     };
     isAdmin?: boolean;
@@ -26,20 +26,16 @@ export interface ProjectProps {
 
 export const Project: FC<ProjectProps> = ({ post, isAdmin = false }) => {
     const path = usePathname();
-    let images: { id: number; value: string }[] = [];
-    if (!!post.images) {
-        images = JSON.parse(post.images);
-    }
 
     return (
         <div className="rounded shadow-md h-full w-full mb-2">
             <div className="flex flex-col justify-between h-full">
                 <Link href={`${path}?p=${post.id}`}>
                     <div className="relative pb-[75%]">
-                        {images.length > 0 ? (
+                        {post.images.length > 0 ? (
                             <img
                                 className="absolute h-full w-full object-cover rounded-t"
-                                src={images[0].value}
+                                src={post.images[0].value}
                             />
                         ) : (
                             <div className="flex justify-center items-center absolute w-full h-full object-cover rounded-t bg-zinc-600">

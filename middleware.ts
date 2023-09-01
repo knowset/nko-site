@@ -9,4 +9,4 @@ export async function middleware(req: NextRequest) {
     }
 }
 
-export const config = { matcher: ["/project/new"] };
+export const config = { matcher: ["/project/new", "/project/edit"] };

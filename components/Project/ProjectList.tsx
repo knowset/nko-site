@@ -1,7 +1,6 @@
 "use client";
 
 import { Project } from "@/components/Project/Project";
-import { PostItem } from "@/types/post";
 import { useSession } from "next-auth/react";
 import { FC, useEffect, useState } from "react";
 import { CRUDLayout } from "../CRUD/CRUDLayout";
@@ -15,8 +14,25 @@ type ReturnedData = {
     }[];
 };
 
+type Project = {
+    ref: any;
+    ts: any;
+    data: {
+        id: string;
+        title: string;
+        sub_title: string;
+        start_of_the_implementation_period: string;
+        end_of_the_implementation_period: string;
+        source_of_financing: string;
+        amount_of_the_subsidy: string;
+        main_results: string;
+        images: { id: number; value: string }[];
+        date: string;
+    };
+};
+
 export const ProjectList: FC<{}> = () => {
-    const [posts, setPosts] = useState<PostItem[]>([]);
+    const [posts, setPosts] = useState<Project[]>([]);
     const [loading, setLoading] = useState(true);
     const { data: session } = useSession();
 
@@ -41,7 +57,7 @@ export const ProjectList: FC<{}> = () => {
             setLoading(false);
         };
         retrievData();
-    }, []);
+    }, [posts]);
 
     const isAdmin = session?.user.role == "admin";
 

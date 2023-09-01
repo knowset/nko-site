@@ -31,11 +31,11 @@ export const navlinks: {
         title: "Инфотека",
         links: [
             { title: "Инфографика", href: "/infographics" },
-            { title: "Чек-листы", href: "/checklists" },
-            {
-                title: "Доклады о развитии гражданского общества",
-                href: "/civil_society_development_reports",
-            },
+            // { title: "Чек-листы", href: "/checklists" },
+            // {
+            //     title: "Доклады о развитии гражданского общества",
+            //     href: "/civil_society_development_reports",
+            // },
         ],
     },
     {

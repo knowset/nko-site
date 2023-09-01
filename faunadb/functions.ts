@@ -26,7 +26,6 @@ interface ErrorField {
 
 interface UserResponse {
     errors?: ErrorField[];
-    // поменять на data: User | Post
     user?: User;
     status: number;
 }
@@ -49,18 +48,28 @@ interface FaunadbUserResponse {
     }[];
 }
 
-interface FaunadbPostResponse {
-    data: {
-        ref: any;
-        ts: any;
-        data?: {
-            id: string;
-            title: string;
-            text: string;
-            images: string;
-            date: string;
-        };
-    }[];
+interface Project {
+    title: string;
+    sub_title: string;
+    start_of_the_implementation_period: string;
+    end_of_the_implementation_period: string;
+    source_of_financing: string;
+    amount_of_the_subsidy: string;
+    main_results: string;
+    images: { id: number; value: string }[];
+}
+
+interface FaunadbPosts {
+    data: FaunadbPost[];
+}
+
+interface FaunadbPost {
+    ref: any;
+    ts: any;
+    data?: {
+        id: string;
+        date: string;
+    } & Project;
 }
 
 export const getUserByEmail = async (email: string): Promise<UserResponse> => {
@@ -168,7 +177,7 @@ export const createUser = async (userData: {
 
 export const getAllPosts = async (postType: string) => {
     try {
-        const res: FaunadbPostResponse = await client.query(
+        const res: FaunadbPosts = await client.query(
             q.Reverse(
                 q.Map(
                     q.Paginate(q.Documents(q.Collection(postType))),
@@ -204,7 +213,7 @@ export const getAllPosts = async (postType: string) => {
 
 export const getPostByID = async (postType: string, postId: string) => {
     try {
-        const resData: FaunadbPostResponse = await client.query(
+        const resData: FaunadbPosts = await client.query(
             q.Map(
                 q.Filter(
                     q.Paginate(q.Match(q.Index(postType + "_by_id"))),
@@ -232,9 +241,7 @@ export const getPostByID = async (postType: string, postId: string) => {
         } else {
             const postData = resData.data[0];
             return {
-                post: {
-                    ...postData.data,
-                },
+                post: postData,
                 status: 200,
             };
         }
@@ -251,35 +258,15 @@ export const getPostByID = async (postType: string, postId: string) => {
     }
 };
 
-export const createPost = async (
-    postType: string,
-    data: {
-        title: string;
-        sub_title: string;
-        start_of_the_implementation_period: string;
-        end_of_the_implementation_period: string;
-        source_of_financing: string;
-        amount_of_the_subsidy: string;
-        main_results: string;
-        images: { id: number; value: string }[];
-    }
-) => {
+export const createPost = async (postType: string, data: Project) => {
+    console.log(data);
     try {
         const req = await client
             .query(
                 q.Create(q.Collection(postType), {
                     data: {
                         id: uuid(),
-                        title: data.title,
-                        sub_title: data.sub_title,
-                        start_of_the_implementation_period:
-                            data.start_of_the_implementation_period,
-                        end_of_the_implementation_period:
-                            data.end_of_the_implementation_period,
-                        source_of_financing: data.source_of_financing,
-                        amount_of_the_subsidy: data.amount_of_the_subsidy,
-                        main_results: data.main_results,
-                        images: JSON.stringify(data.images),
+                        ...data,
                         date: new Date().toString(),
                     },
                 })
@@ -300,9 +287,32 @@ export const createPost = async (
     }
 };
 
+export const updatePostById = async (postType: string, data: FaunadbPost) => {
+    try {
+        const id = data.ref["@ref"].id;
+
+        const res: FaunadbPosts = await client.query(
+            q.Update(q.Ref(q.Collection(postType), id), {
+                data: data.data,
+            })
+        );
+
+        if (!res || !res?.data) {
+            throw new Error("Something went wrong");
+        }
+
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ message: "Post successfully updated" }),
+        };
+    } catch (err) {
+        return JSON.parse((err as Error).message);
+    }
+};
+
 export const deletePostById = async (postType: string, postId: string) => {
     try {
-        const resData: FaunadbPostResponse = await client.query(
+        const resData: FaunadbPosts = await client.query(
             q.Map(
                 q.Filter(
                     q.Paginate(q.Match(q.Index(postType + "_by_id"))),
@@ -316,9 +326,9 @@ export const deletePostById = async (postType: string, postId: string) => {
                 q.Lambda((ref) => q.Get(ref))
             )
         );
-        const faunadbPostId = resData.data[0].ref.id;
+        const FaunadbPostsId = resData.data[0].ref.id;
         const res = await client.query(
-            q.Delete(q.Ref(q.Collection(postType), faunadbPostId))
+            q.Delete(q.Ref(q.Collection(postType), FaunadbPostsId))
         );
 
         if (!res) {

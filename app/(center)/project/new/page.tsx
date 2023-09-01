@@ -1,12 +1,5 @@
-import { CreatePostForm } from "@/components/CRUD/Forms/CreateProjectForm";
+import { CreateProjectForm } from "@/components/CRUD/Forms/Create/CreateProjectForm";
 
 export default async function NewProject() {
-    
-    return (
-        <main className="">
-            <div>
-                <CreatePostForm title="Создание нового проекта" type="project"/>        
-            </div>
-        </main>
-    );
+    return <CreateProjectForm />;
 }

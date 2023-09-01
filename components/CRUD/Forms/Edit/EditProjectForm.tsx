@@ -1,52 +1,38 @@
 "use client";
 
+import { Project } from "@/types";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FC, FormEventHandler, useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
-import { Input } from "../Input";
+import { Input } from "../../Input";
 
-interface FormProps {
-    title: string;
-    type: string;
+interface EditProjectFormProps {
+    project: Project;
 }
 
-export const CreatePostForm: FC<FormProps> = ({ title: formTitle, type }) => {
+export const EditProjectForm: FC<EditProjectFormProps> = ({ project }) => {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
-    const [inputImageList, setInputImageList] = useState([
-        { id: 0, value: "" },
-    ]);
+    const [inputImageList, setInputImageList] = useState(project.data.images);
     const [formValues, setFormValues] = useState({
-        title: "",
-        sub_title: "",
-        start_of_the_implementation_period: "",
-        end_of_the_implementation_period: "",
-        source_of_financing: "",
-        amount_of_the_subsidy: "",
-        main_results: "",
-        images: [] as { id: number; value: string }[],
+        ...project.data,
+        images: project.data.images,
     });
     const [error, setError] = useState("");
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
         event.preventDefault();
         setLoading(true);
-        // setFormValues({
-        //     title: "",
-        //     sub_title: "",
-        //     start_of_the_implementation_period: "",
-        //     end_of_the_implementation_period: "",
-        //     source_of_financing: "",
-        //     amount_of_the_subsidy: "",
-        //     main_results: "",
-        //     images: [],
-        // });
 
         try {
-            const res = await fetch(`/api/project/new`, {
+            const res = await fetch(`/api/project/edit/${project.data.id}`, {
                 method: "POST",
-                body: JSON.stringify(formValues),
+                body: JSON.stringify({
+                    ref: project.ref,
+                    ts: project.ts,
+                    data: formValues,
+                }),
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -55,7 +41,7 @@ export const CreatePostForm: FC<FormProps> = ({ title: formTitle, type }) => {
                 setError((await res.json()).message);
                 return;
             }
-            router.push(`/${type}`);
+            router.push(`/project`);
         } catch (error: any) {
             setError(error);
             setLoading(false);
@@ -108,13 +94,13 @@ export const CreatePostForm: FC<FormProps> = ({ title: formTitle, type }) => {
     };
 
     return (
-        <div className="flex justify-center">
+        <div className="flex justify-center w-full">
             <form
-                className="flex flex-col bg-white rounded shadow-lg py-8 px-8 mt-12 gap-4"
+                className="flex flex-col bg-white rounded shadow-lg py-8 px-8 mt-12 gap-4 w-full sm:w-[90%] lg:w-[80%] xl:w-[70]"
                 onSubmit={handleSubmit}
             >
                 <label className="font-semibold text-xl text-center">
-                    {formTitle}
+                    Редактирование проекта
                 </label>
                 <hr className="my-4" />
                 <Input
@@ -124,6 +110,8 @@ export const CreatePostForm: FC<FormProps> = ({ title: formTitle, type }) => {
                     name="title"
                     type="text"
                     required
+                    inputType="textaria"
+                    height="h-24"
                 />
                 <Input
                     title="Дополнительная информация"
@@ -131,7 +119,8 @@ export const CreatePostForm: FC<FormProps> = ({ title: formTitle, type }) => {
                     onChange={handleChange}
                     name="sub_title"
                     type="text"
-                    
+                    inputType="textaria"
+                    height="h-24"
                 />
                 <label className="font-semibold text-base mt-3">
                     Срок реализации
@@ -170,6 +159,8 @@ export const CreatePostForm: FC<FormProps> = ({ title: formTitle, type }) => {
                     name="source_of_financing"
                     type="text"
                     required
+                    inputType="textaria"
+                    height="h-24"
                 />
                 <Input
                     title="Объем субсидии"
@@ -179,18 +170,15 @@ export const CreatePostForm: FC<FormProps> = ({ title: formTitle, type }) => {
                     type="text"
                     required
                 />
-                <div>
-                    <label className="font-semibold text-base">
-                        Основные результаты
-                    </label>
-                    <textarea
-                        value={formValues.main_results}
-                        onChange={handleChange}
-                        name="main_results"
-                        required
-                        className="flex items-center h-40 p-4 w-full bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
-                    />
-                </div>
+                <Input
+                    title="Основные результаты"
+                    value={formValues.main_results}
+                    onChange={handleChange}
+                    name="main_results"
+                    required
+                    className="flex items-center h-40 p-4 w-full bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
+                    inputType="textaria"
+                />
                 <div>
                     <label className="font-semibold text-base mt-3">
                         Сылки на картинки
@@ -205,6 +193,7 @@ export const CreatePostForm: FC<FormProps> = ({ title: formTitle, type }) => {
                                 key={item.id}
                                 onChange={handleChange}
                                 name={"input-" + item.id.toString()}
+                                value={item.value}
                             />
                             <button
                                 onClick={(e) => handleDeleteInput(e, item.id)}
@@ -216,20 +205,20 @@ export const CreatePostForm: FC<FormProps> = ({ title: formTitle, type }) => {
                     ))}
                 </div>
                 <button
-                    className="flex items-center justify-center h-12 px-6 w-full bg-purple-600 mt-2 rounded font-semibold text-sm text-blue-100 hover:bg-purple-800"
+                    className="flex items-center justify-center h-12 px-6 w-full bg-purple-600 mt-2 rounded font-semibold text-sm text-white hover:bg-purple-800"
                     type="button"
                     onClick={handleAddInput}
                 >
                     Добавить поле для ссылки
                 </button>
                 <button
-                    className="flex items-center justify-center h-12 px-6 w-full bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700"
+                    className="flex items-center justify-center h-12 px-6 w-full bg-blue-600 mt-8 rounded font-semibold text-sm text-white hover:bg-blue-700"
                     type="submit"
                 >
                     {loading ? (
                         <AiOutlineLoading3Quarters className="animate-spin text-2xl" />
                     ) : (
-                        "Создать"
+                        "Редактировать"
                     )}
                 </button>
                 {error && (

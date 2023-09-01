@@ -1,4 +1,4 @@
-export type PostItem = {
+export type Project = {
     ref: any;
     ts: any;
     data: {
@@ -10,7 +10,7 @@ export type PostItem = {
         source_of_financing: string;
         amount_of_the_subsidy: string;
         main_results: string;
-        images: string;
+        images: { id: number; value: string }[];
         date: string;
     };
 };
