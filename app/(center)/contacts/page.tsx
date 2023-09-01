@@ -6,7 +6,29 @@ import Link from "next/link";
 import { SlSocialVkontakte } from "react-icons/sl";
 
 export const metadata: Metadata = {
+    metadataBase: new URL("https://inciativa.netlify.app"),
     title: "Контакты",
+    description:
+        "Преобразуем инициативы в проекты\nМы готовы поддержать твою самую смелую идею Действуй уже сегодня!",
+    openGraph: {
+        url: "https://inciativa.netlify.app",
+        type: "website",
+        title: "Контакты",
+        description:
+            "Автономная некоммерческая организация «Ресурсный центр поддержки социально ориентированных некоммерческих организаций «Инициатива» Вологодского государственного университета»",
+        images: [
+            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
+        ],
+    },
+    twitter: {
+        title: "Контакты",
+        card: "summary_large_image",
+        description:
+            "Автономная некоммерческая организация «Ресурсный центр поддержки социально ориентированных некоммерческих организаций «Инициатива» Вологодского государственного университета»",
+        images: [
+            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
+        ],
+    },
 };
 
 export default async function Page() {

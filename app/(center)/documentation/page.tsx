@@ -4,8 +4,30 @@ import { documentation } from "@/constants";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Документы"
-}
+    metadataBase: new URL("https://inciativa.netlify.app"),
+    title: "Документы",
+    description:
+        "Преобразуем инициативы в проекты\nМы готовы поддержать твою самую смелую идею Действуй уже сегодня!",
+    openGraph: {
+        url: "https://inciativa.netlify.app",
+        type: "website",
+        title: "Документы",
+        description:
+            "Автономная некоммерческая организация «Ресурсный центр поддержки социально ориентированных некоммерческих организаций «Инициатива» Вологодского государственного университета»",
+        images: [
+            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
+        ],
+    },
+    twitter: {
+        title: "Документы",
+        card: "summary_large_image",
+        description:
+            "Автономная некоммерческая организация «Ресурсный центр поддержки социально ориентированных некоммерческих организаций «Инициатива» Вологодского государственного университета»",
+        images: [
+            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
+        ],
+    },
+};
 
 export default async function Page() {
     return (

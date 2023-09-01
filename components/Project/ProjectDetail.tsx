@@ -5,7 +5,7 @@ import { FC, useEffect, useState } from "react";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale";
 import { ImageTabs } from "../ImageTabs";
-import { ProjectDetailSkeleton } from "./ProjectDetailSkeleton";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 type ReturnedData = {
     post: {
@@ -66,7 +66,12 @@ export const ProjectDetail: FC<{}> = () => {
         retrievData();
     });
 
-    if (loading) return <ProjectDetailSkeleton />;
+    if (loading)
+        return (
+            <div className="text-main text-4xl">
+                <AiOutlineLoading3Quarters className="animate-spin" />
+            </div>
+        );
 
     if (!post && !loading) return notFound();
 
@@ -87,7 +92,7 @@ export const ProjectDetail: FC<{}> = () => {
                             </p>
                         </dl>
                         <div>
-                            <h1 className="text-3xl font-extrabold leading-9 tracking-tight sm:text-4xl sm:leading-10 md:text-5xl md:leading-14 text-main">
+                            <h1 className="text-2xl font-extrabold leading-8 tracking-tight sm:text-4xl sm:leading-10 md:leading-14 text-main">
                                 {post.title}
                             </h1>
                         </div>

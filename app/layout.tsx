@@ -7,11 +7,23 @@ import Favicon from "@/public/favicon.ico";
 
 export const metadata = {
     title: {
-        default: "Ресурсный центр НКО ВоГУ 'Инициатива'",
-        template: "%s | Ресурсный центр НКО ВоГУ 'Инициатива'",
+        default: 'Ресурсный центр НКО ВоГУ "Инициатива"',
+        template: '%s | Ресурсный центр НКО ВоГУ "Инициатива"',
     },
     description: "",
     icons: [{ rel: "icon", url: Favicon.src }],
+    openGraph: {
+        title: {
+            default: 'Ресурсный центр НКО ВоГУ "Инициатива"',
+            template: '%s | Ресурсный центр НКО ВоГУ "Инициатива"',
+        },
+    },
+    twitter: {
+        title: {
+            default: 'Ресурсный центр НКО ВоГУ "Инициатива"',
+            template: '%s | Ресурсный центр НКО ВоГУ "Инициатива"',
+        },
+    },
 };
 
 export default function RootLayout({
@@ -24,9 +36,11 @@ export default function RootLayout({
             <body className="bg-white min-h-[100vh] w-full flex flex-col no-scrollbar">
                 <Providers>
                     <Header />
-                    <div className="pt-12 pb-20 flex-grow h-full flex justify-center items-center">
-                        <Layout>{children}</Layout>
-                    </div>
+                    <Layout>
+                        <div className="pt-12 pb-20 flex-grow h-full flex flex-col justify-center items-center">
+                            {children}
+                        </div>
+                    </Layout>
                     <Footer />
                 </Providers>
             </body>

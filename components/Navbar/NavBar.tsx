@@ -30,7 +30,7 @@ export const NavBar: FC<{}> = () => {
                         />
                     ))}
                 </div>
-                <div className="w-full container mx-auto flex md:hidden flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
+                <div className="w-full container mx-auto flex md:hidden flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-4">
                     <MobileDropDownMenu navlinks={navlinks} />
                 </div>
             </div>

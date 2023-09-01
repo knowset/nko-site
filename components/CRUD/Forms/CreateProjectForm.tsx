@@ -131,7 +131,7 @@ export const CreatePostForm: FC<FormProps> = ({ title: formTitle, type }) => {
                     onChange={handleChange}
                     name="sub_title"
                     type="text"
-                    required
+                    
                 />
                 <label className="font-semibold text-base mt-3">
                     Срок реализации

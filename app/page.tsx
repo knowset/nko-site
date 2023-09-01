@@ -3,13 +3,11 @@ import Image from "next/image";
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://inciativa.netlify.app"),
-    title: 'Ресурсный центр НКО ВоГУ "Инициатива"',
     description:
         "Преобразуем инициативы в проекты\nМы готовы поддержать твою самую смелую идею Действуй уже сегодня!",
     openGraph: {
         url: "https://inciativa.netlify.app",
         type: "website",
-        title: 'Ресурсный центр НКО ВоГУ "Инициатива"',
         description:
             "Преобразуем инициативы в проекты\nМы готовы поддержать твою самую смелую идею Действуй уже сегодня!",
         images: [
@@ -17,7 +15,6 @@ export const metadata: Metadata = {
         ],
     },
     twitter: {
-        title: 'Ресурсный центр НКО ВоГУ "Инициатива"',
         card: "summary_large_image",
         description:
             "Преобразуем инициативы в проекты\nМы готовы поддержать твою самую смелую идею Действуй уже сегодня!",

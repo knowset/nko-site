@@ -1,7 +1,6 @@
 import { FC } from "react";
 import Image from "next/image";
 import { Layout } from "./Layout";
-import logo from "@/public/logo.png"
 
 export const TopNavBar: FC<{}> = () => {
     return (
@@ -18,9 +17,10 @@ export const TopNavBar: FC<{}> = () => {
                     <div className="w-full flex justify-center">
                         <Image
                             className="rounded-full"
-                            src={logo}
+                            src="https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600"
                             alt="logo"
                             placeholder="blur"
+                            blurDataURL="https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600"
                             width={64}
                             height={64}
                             priority
@@ -38,9 +38,10 @@ export const TopNavBar: FC<{}> = () => {
                     <div className="flex justify-center">
                         <Image
                             className="rounded-full"
-                            src={logo}
+                            src="https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600"
                             alt="logo"
                             placeholder="blur"
+                            blurDataURL="https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600"
                             width={64}
                             height={64}
                             priority
