@@ -37,7 +37,6 @@ export async function POST(req: Request) {
         fields: "id",
     });
 
-    console.log("RES", res);
     const id = res.data.id;
 
     return NextResponse.json({ id: id });

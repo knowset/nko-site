@@ -29,7 +29,6 @@ export const ProjectList: FC<{}> = () => {
                 }
 
                 const data: FaunadbPostsOrError<ProjectType> = await res.json();
-                console.log(data.posts);
                 setLoading(false);
                 if (data.errors) {
                     setErrors(data.errors);

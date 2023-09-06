@@ -19,7 +19,6 @@ export const ImageSelector: FC<ImageSelectorProps> = ({
     setImages,
     isLoading = false,
 }) => {
-    console.log("UPDATA");
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
             let copy: IMG[] = [...images];

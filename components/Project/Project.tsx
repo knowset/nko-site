@@ -16,7 +16,6 @@ export type ProjectProps = {
 
 export const Project: FC<ProjectProps> = ({ post, isAdmin = false }) => {
     const path = usePathname();
-    console.log(post);
 
     const preview_url =
         "https://drive.google.com/uc?export=view&id=" + post.data.images_ids[0];
