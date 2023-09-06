@@ -16,6 +16,7 @@ export const EditPage: FC<{}> = ({}) => {
     const [data, setData] = useState({} as ReturnedData);
     const [isLoading, setisLoading] = useState(true);
 
+    console.log(data);
     if (!!!postId) {
         return notFound();
     }

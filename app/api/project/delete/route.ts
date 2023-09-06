@@ -1,12 +1,12 @@
 import { deletePostById } from "@/faunadb/functions";
+import { FaunadbPost, Project } from "@/types";
 import { NextRequest, NextResponse } from "next/server";
 
 
 export async function POST(req: NextRequest) {
-    const { id } = (await req.json()) as {
-        id: string;
-    };
-    const postOrError = await deletePostById("project", id);
+    const data = (await req.json()) as FaunadbPost<Project>
+    console.log(data);
+    const postOrError = await deletePostById("project", {...data});
 
-    return NextResponse.json({ postOrError });
+    return NextResponse.json({ "": "" });
 }

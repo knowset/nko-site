@@ -6,32 +6,12 @@ import { format } from "date-fns";
 import { ru } from "date-fns/locale";
 import { ImageTabs } from "../ImageTabs";
 import { LoadingPostDetail } from "../LoadingPostDetail";
-
-type Project = {
-    ref: any;
-    ts: any;
-    data: {
-        id: string;
-        title: string;
-        sub_title: string;
-        start_of_the_implementation_period: string;
-        end_of_the_implementation_period: string;
-        source_of_financing: string;
-        amount_of_the_subsidy: string;
-        main_results: string;
-        images: { id: number; value: string }[];
-        date: string;
-    };
-};
-
-type ReturnedData = {
-    post: Project;
-};
+import { FaunadbPost, FaunadbPostOrError, Project } from "@/types";
 
 export const ProjectDetail: FC<{}> = () => {
     const path = usePathname();
     const searchParams = useSearchParams();
-    const [post, setPost] = useState<Project | null>();
+    const [post, setPost] = useState<FaunadbPost<Project> | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -45,11 +25,12 @@ export const ProjectDetail: FC<{}> = () => {
                     throw new Error("Невозможно получить пост");
                 }
 
-                const data: ReturnedData = await res.json();
+                const data: FaunadbPostOrError<Project> = await res.json();
 
                 setLoading(false);
                 if (!data || !data.post) {
                     setPost(null);
+                    return;
                 }
 
                 setPost(data.post);
@@ -63,16 +44,27 @@ export const ProjectDetail: FC<{}> = () => {
 
     if (!post && !loading) return notFound();
 
+    let images_urls: string[] = [];
+    if (post) {
+        images_urls = post?.data.images_ids.map((item) => {
+            return `https://drive.google.com/thumbnail?id=${item}&sz=w${2000}-h${2000}`;
+        });
+    }
+
     return !!post ? (
-        <section className="mx-auto max-w-3xl lg:px-4 sm:px-6 xl:max-w-5xl xl:px-0 mb-8">
+        <section className="w-full max-w-3xl lg:px-4 sm:px-6 xl:max-w-5xl xl:px-0 mb-8">
             <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
                 <header className="pt-6 xl:pb-6">
                     <div className="space-y-1 text-center">
                         <dl className="space-y-10">
                             <p className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                                {format(new Date(post.data.date), "d MMMM yyyy", {
-                                    locale: ru,
-                                })}
+                                {format(
+                                    new Date(post.data.date),
+                                    "d MMMM yyyy",
+                                    {
+                                        locale: ru,
+                                    }
+                                )}
                             </p>
                         </dl>
                         <div>
@@ -82,8 +74,8 @@ export const ProjectDetail: FC<{}> = () => {
                         </div>
                     </div>
                 </header>
-                <ImageTabs images={post.data.images} />
-                <div className="flex flex-col gap-2 py-4 xl:p-4 text-lg mt-4">
+                <ImageTabs images_urls={images_urls} />
+                <div className="flex flex-col gap-2 py-4 xl:p-4 text-lg mt-4 min-w-fit">
                     <p>
                         <span className="font-bold">Срок реализации: </span>{" "}
                         {post.data.start_of_the_implementation_period

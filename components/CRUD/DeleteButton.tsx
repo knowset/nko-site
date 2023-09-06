@@ -1,20 +1,21 @@
 "use client";
 
+import { FaunadbPost } from "@/types";
 import { useRouter } from "next/navigation";
 import { FC } from "react";
 import { RxCross2 } from "react-icons/rx";
 
 interface DeleteButtonProps {
-    id: string;
+    post: FaunadbPost<any>;
     path: string;
 }
 
-export const DeleteButton: FC<DeleteButtonProps> = ({ id, path }) => {
+export const DeleteButton: FC<DeleteButtonProps> = ({ post, path }) => {
     const router = useRouter();
     const handleClick = async () => {
         const res = await fetch(`/api${path}/delete`, {
             method: "POST",
-            body: JSON.stringify({ id: id }),
+            body: JSON.stringify(post),
         });
         if (res) {
             router.refresh();

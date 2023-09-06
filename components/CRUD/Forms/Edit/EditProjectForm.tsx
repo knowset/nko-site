@@ -1,6 +1,7 @@
 "use client";
 
-import { Project } from "@/types";
+import { ImageSelector } from "@/components/ImageSelector";
+import { FaunadbPost, Project } from "@/types";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FC, FormEventHandler, useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -8,16 +9,18 @@ import { RxCross2 } from "react-icons/rx";
 import { Input } from "../../Input";
 
 interface EditProjectFormProps {
-    project: Project;
+    project: FaunadbPost<Project>;
 }
 
 export const EditProjectForm: FC<EditProjectFormProps> = ({ project }) => {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
-    const [inputImageList, setInputImageList] = useState(project.data.images);
+    const [inputImageList, setInputImageList] = useState(
+        project.data.images_ids
+    );
     const [formValues, setFormValues] = useState({
         ...project.data,
-        images: project.data.images,
+        images: project.data.images_ids,
     });
     const [error, setError] = useState("");
 
@@ -52,45 +55,7 @@ export const EditProjectForm: FC<EditProjectFormProps> = ({ project }) => {
         event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
         const { name, value } = event.target;
-        if (name.includes("input")) {
-            const inputId = Number(name.split("-")[1]);
-            const input = inputImageList.find((item) => item.id === inputId);
-            const index = inputImageList.indexOf(input as any);
-            inputImageList[index].value = value;
-            setInputImageList(inputImageList);
-            setFormValues({ ...formValues, images: inputImageList });
-        } else {
-            setFormValues({ ...formValues, [name]: value });
-        }
-    };
-
-    const handleAddInput = (e: any) => {
-        e.preventDefault();
-        addInputImage();
-    };
-
-    const handleDeleteInput = (e: any, id: number) => {
-        e.preventDefault();
-        deleteInputImage(id);
-    };
-
-    const addInputImage = () => {
-        let copy = [...inputImageList];
-        if (inputImageList.length < 10) {
-            copy = [...copy, { id: inputImageList.length, value: "" }];
-            setInputImageList(copy);
-        }
-    };
-
-    const deleteInputImage = (id: number) => {
-        let copy: { id: number; value: string }[];
-        if (inputImageList.length > 0) {
-            copy = inputImageList.filter((item) => {
-                if (item.id < id) return item;
-                if (item.id > id) return { id: item.id - 1, value: item.value };
-            });
-            setInputImageList(copy);
-        }
+        setFormValues({ ...formValues, [name]: value });
     };
 
     return (
@@ -125,7 +90,7 @@ export const EditProjectForm: FC<EditProjectFormProps> = ({ project }) => {
                 <label className="font-semibold text-base mt-3">
                     Срок реализации
                 </label>
-                <div className="flex gap-4 mt-2">
+                <div className="flex gap-4 mt-2 flex-col sm:flex-row">
                     <div>
                         <label>Начало</label>
                         <input
@@ -152,6 +117,11 @@ export const EditProjectForm: FC<EditProjectFormProps> = ({ project }) => {
                         />
                     </div>
                 </div>
+                <label className="font-semibold text-base mt-3">
+                    Срок реализации
+                </label>
+                <p>Измениние картинок скоро появится</p>
+                {/* <ImageSelector /> */}
                 <Input
                     title="Источник финансирования"
                     value={formValues.source_of_financing}
@@ -179,38 +149,6 @@ export const EditProjectForm: FC<EditProjectFormProps> = ({ project }) => {
                     className="flex items-center h-40 p-4 w-full bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
                     inputType="textaria"
                 />
-                <div>
-                    <label className="font-semibold text-base mt-3">
-                        Сылки на картинки
-                    </label>
-                    {inputImageList.map((item) => (
-                        <div
-                            key={"input" + item.id.toString()}
-                            className="flex items-center gap-2 mt-2"
-                        >
-                            <input
-                                className="flex items-center h-12 px-4 w-full bg-gray-200 rounded focus:outline-none focus:ring-2"
-                                key={item.id}
-                                onChange={handleChange}
-                                name={"input-" + item.id.toString()}
-                                value={item.value}
-                            />
-                            <button
-                                onClick={(e) => handleDeleteInput(e, item.id)}
-                                className="w-12 h-12 bg-red-500 hover:bg-red-600 text-white text-xl flex justify-center items-center rounded"
-                            >
-                                <RxCross2 />
-                            </button>
-                        </div>
-                    ))}
-                </div>
-                <button
-                    className="flex items-center justify-center h-12 px-6 w-full bg-purple-600 mt-2 rounded font-semibold text-sm text-white hover:bg-purple-800"
-                    type="button"
-                    onClick={handleAddInput}
-                >
-                    Добавить поле для ссылки
-                </button>
                 <button
                     className="flex items-center justify-center h-12 px-6 w-full bg-blue-600 mt-8 rounded font-semibold text-sm text-white hover:bg-blue-700"
                     type="submit"

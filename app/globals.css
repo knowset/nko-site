@@ -96,4 +96,8 @@
   .text-main {
     color: rgb(0, 158, 224)
   }
+  
+  .image-selector::-webkit-scrollbar {
+    height: 5px;
+  }
 }

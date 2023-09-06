@@ -15,6 +15,7 @@ export const NavLink: FC<NavItemProps> = ({ title, href }) => {
         <Link
             href={href}
             className="flex group font-medium text-base"
+            prefetch={false}
         >
             <p
                 className={` bg-gradient-to-r from-[rgb(0,158,224)] to-[rgb(0,158,224)] ${

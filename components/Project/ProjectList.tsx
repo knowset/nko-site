@@ -1,39 +1,22 @@
 "use client";
 
-import { Project } from "@/components/Project/Project";
+import {
+    ErrorField,
+    FaunadbPost,
+    FaunadbPostsOrError,
+    Project as ProjectType,
+} from "@/types";
+import { connectors } from "googleapis/build/src/apis/connectors";
 import { useSession } from "next-auth/react";
 import { FC, useEffect, useState } from "react";
 import { CRUDLayout } from "../CRUD/CRUDLayout";
+import { Project } from "./Project";
 import { ProjectListSkeleton } from "./ProjectListSkeleton";
 
-type ReturnedData = {
-    posts: {
-        ref: any;
-        ts: any;
-        data: any;
-    }[];
-};
-
-type Project = {
-    ref: any;
-    ts: any;
-    data: {
-        id: string;
-        title: string;
-        sub_title: string;
-        start_of_the_implementation_period: string;
-        end_of_the_implementation_period: string;
-        source_of_financing: string;
-        amount_of_the_subsidy: string;
-        main_results: string;
-        images: { id: number; value: string }[];
-        date: string;
-    };
-};
-
 export const ProjectList: FC<{}> = () => {
-    const [posts, setPosts] = useState<Project[]>([]);
+    const [posts, setPosts] = useState<FaunadbPost<ProjectType>[]>([]);
     const [loading, setLoading] = useState(true);
+    const [errors, setErrors] = useState<ErrorField[] | null>(null);
     const { data: session } = useSession();
 
     useEffect(() => {
@@ -45,11 +28,16 @@ export const ProjectList: FC<{}> = () => {
                     throw new Error("Невозможно получить посты");
                 }
 
-                const data: ReturnedData = await res.json();
-
+                const data: FaunadbPostsOrError<ProjectType> = await res.json();
+                console.log(data.posts);
                 setLoading(false);
+                if (data.errors) {
+                    setErrors(data.errors);
+                    return;
+                }
                 if (!data || !data.posts) {
                     setPosts([]);
+                    return;
                 }
 
                 setPosts(data.posts);
@@ -64,16 +52,25 @@ export const ProjectList: FC<{}> = () => {
     return (
         <CRUDLayout isAdmin={isAdmin}>
             {loading ? <ProjectListSkeleton /> : null}
-            <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4 xl:grid-cols-3">
-                {posts &&
-                    posts.map((post) => (
-                        <Project
-                            key={post.data.id}
-                            post={post.data}
-                            isAdmin={isAdmin}
-                        />
+            {!!errors ? <div>
+                <ul className="text-2xl">
+                    {errors.map((error) => (
+                        <li>{error.message}</li>
                     ))}
-            </div>
+                </ul>
+            </div> : null}
+            {
+                <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4 xl:grid-cols-3">
+                    {posts &&
+                        posts.map((post) => (
+                            <Project
+                                key={post.data.id}
+                                post={post}
+                                isAdmin={isAdmin}
+                            />
+                        ))}
+                </div>
+            }
         </CRUDLayout>
     );
 };

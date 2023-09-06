@@ -1,18 +1,31 @@
 "use client";
 
+import { ImageSelector } from "@/components/ImageSelector";
+import { ImageState, IMG } from "@/types";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, FC, FormEventHandler, useState } from "react";
+import { ChangeEvent, FC, FormEventHandler, useEffect, useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
 import { Input } from "../../Input";
 
+type Project = {
+    title: string;
+    sub_title: string;
+    start_of_the_implementation_period: string;
+    end_of_the_implementation_period: string;
+    source_of_financing: string;
+    amount_of_the_subsidy: string;
+    main_results: string;
+    images_ids: string[];
+};
+
 export const CreateProjectForm: FC<{}> = () => {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
-    const [inputImageList, setInputImageList] = useState([
-        { id: 0, value: "" },
-    ]);
-    const [formValues, setFormValues] = useState({
+
+    const [images, setImages] = useState<IMG[]>([]);
+
+    const [formValues, setFormValues] = useState<Project>({
         title: "",
         sub_title: "",
         start_of_the_implementation_period: "",
@@ -20,7 +33,7 @@ export const CreateProjectForm: FC<{}> = () => {
         source_of_financing: "",
         amount_of_the_subsidy: "",
         main_results: "",
-        images: [] as { id: number; value: string }[],
+        images_ids: [],
     });
     const [error, setError] = useState("");
 
@@ -28,10 +41,11 @@ export const CreateProjectForm: FC<{}> = () => {
         event.preventDefault();
         setLoading(true);
 
+        const images_ids = await uploadImage(images);
         try {
             const res = await fetch(`/api/project/new`, {
                 method: "POST",
-                body: JSON.stringify(formValues),
+                body: JSON.stringify({ ...formValues, images_ids: images_ids }),
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -51,45 +65,38 @@ export const CreateProjectForm: FC<{}> = () => {
         event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
         const { name, value } = event.target;
-        if (name.includes("input")) {
-            const inputId = Number(name.split("-")[1]);
-            const input = inputImageList.find((item) => item.id === inputId);
-            const index = inputImageList.indexOf(input as any);
-            inputImageList[index].value = value;
-            setInputImageList(inputImageList);
-            setFormValues({ ...formValues, images: inputImageList });
-        } else {
-            setFormValues({ ...formValues, [name]: value });
-        }
+        setFormValues({ ...formValues, [name]: value });
     };
 
-    const handleAddInput = (e: any) => {
-        e.preventDefault();
-        addInputImage();
-    };
+    const uploadImage: (imagess: IMG[]) => Promise<string[]> = async (
+        imagess
+    ) => {
+        if (imagess.length == 0) return [];
 
-    const handleDeleteInput = (e: any, id: number) => {
-        e.preventDefault();
-        deleteInputImage(id);
-    };
+        const imagessIDS: string[] = [];
 
-    const addInputImage = () => {
-        let copy = [...inputImageList];
-        if (inputImageList.length < 10) {
-            copy = [...copy, { id: inputImageList.length, value: "" }];
-            setInputImageList(copy);
-        }
-    };
+        await Promise.all(
+            imagess.map(async (item) => {
+                if (!item.image) return [];
 
-    const deleteInputImage = (id: number) => {
-        let copy: { id: number; value: string }[];
-        if (inputImageList.length > 0) {
-            copy = inputImageList.filter((item) => {
-                if (item.id < id) return item;
-                if (item.id > id) return { id: item.id - 1, value: item.value };
-            });
-            setInputImageList(copy);
-        }
+                item.state = ImageState.LOADING;
+
+                const form = new FormData();
+                form.append(
+                    "file",
+                    item.image,
+                    item.image.name + "-" + new Date()
+                );
+                const res = await fetch("/api/save-images", {
+                    method: "POST",
+                    body: form,
+                });
+                const imageID = (await res.json()).id;
+                item.state = ImageState.UPLOADED;
+                imagessIDS.push(imageID);
+            })
+        );
+        return imagessIDS;
     };
 
     return (
@@ -182,34 +189,12 @@ export const CreateProjectForm: FC<{}> = () => {
                     <label className="font-semibold text-base mt-3">
                         Сылки на картинки
                     </label>
-                    {inputImageList.map((item) => (
-                        <div
-                            key={"input" + item.id.toString()}
-                            className="flex items-center gap-2 mt-2"
-                        >
-                            <input
-                                className="flex items-center h-12 px-4 w-full bg-gray-200 rounded focus:outline-none focus:ring-2"
-                                key={item.id}
-                                onChange={handleChange}
-                                name={"input-" + item.id.toString()}
-                                value={item.value}
-                            />
-                            <button
-                                onClick={(e) => handleDeleteInput(e, item.id)}
-                                className="w-12 h-12 bg-red-500 hover:bg-red-600 text-white text-xl flex justify-center items-center rounded"
-                            >
-                                <RxCross2 />
-                            </button>
-                        </div>
-                    ))}
+                    <ImageSelector
+                        images={images}
+                        setImages={setImages}
+                        isLoading={loading}
+                    />
                 </div>
-                <button
-                    className="flex items-center justify-center h-12 px-6 w-full bg-purple-600 mt-2 rounded font-semibold text-sm text-white hover:bg-purple-800"
-                    type="button"
-                    onClick={handleAddInput}
-                >
-                    Добавить поле для ссылки
-                </button>
                 <button
                     className="flex items-center justify-center h-12 px-6 w-full bg-blue-600 mt-8 rounded font-semibold text-sm text-white hover:bg-blue-700"
                     type="submit"
@@ -217,7 +202,7 @@ export const CreateProjectForm: FC<{}> = () => {
                     {loading ? (
                         <AiOutlineLoading3Quarters className="animate-spin text-2xl" />
                     ) : (
-                        "Редактировать"
+                        "Создать"
                     )}
                 </button>
                 {error && (
