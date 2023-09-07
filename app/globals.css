@@ -96,6 +96,12 @@
   .text-main {
     color: rgb(0, 158, 224)
   }
+  .bg-main {
+    background: rgb(0, 158, 224);
+  }  
+  .bg-main:hover {
+    background: rgb(0, 142, 202);
+  }
   
   .image-selector::-webkit-scrollbar {
     height: 5px;

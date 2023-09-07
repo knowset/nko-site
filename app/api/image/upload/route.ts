@@ -1,31 +1,25 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import driveService from "@/configs/google";
-import { Readable, Stream } from "stream";
-
-async function stream2buffer(stream: Stream): Promise<Buffer> {
-    return new Promise<Buffer>((resolve, reject) => {
-        const _buf = Array<any>();
-
-        stream.on("data", (chunk) => _buf.push(chunk));
-        stream.on("end", () => resolve(Buffer.concat(_buf)));
-        stream.on("error", (err) => reject(`error converting stream - ${err}`));
-    });
-}
+import { Readable } from "stream";
 
 export async function POST(req: Request) {
     let formData = await req.formData();
 
     const file = formData.get("file") as File;
-    
-    if (!file) return NextResponse.json("");
+    const postType = formData.get("postType") as string;
+    const title = formData.get("title") as string;
+
+    if (!file) return NextResponse.json("Something went wront!");
 
     const ab = await file.arrayBuffer();
     const bf = Buffer.from(ab);
     const stream = Readable.from(bf);
 
+    const imageName = `${postType}-[${title}]-[${new Date().toDateString()}]`;
+
     const res = await driveService.files.create({
         requestBody: {
-            name: file.name,
+            name: imageName,
             parents: ["1VQJm8jw3lO1Z3VIiY7HbpamIZ409NoMZ"],
             mimeType: file.type,
         },

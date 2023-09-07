@@ -1,6 +1,7 @@
 "use client";
 
 import { ImageState, IMG } from "@/types";
+import Image from "next/image";
 import { ChangeEvent, FC, useState } from "react";
 import {
     AiFillPlusCircle,
@@ -32,13 +33,21 @@ export const ImageSelector: FC<ImageSelectorProps> = ({
     const handleFileDelete = (id: number) => {
         let copy: IMG[] = [];
         const file = (images as never as IMG[]).at(id);
-        images.map((item) => {
-            if (file?.image !== item.image) {
-                if (file) {
-                    copy.push(item);
+        if (file) {
+            images.map(async (item) => {
+                if (file.image instanceof File) {
+                    if (file.image !== item.image) {
+                        copy.push(item);
+                    }
+                } else if (typeof file.image === "string") {
+                    if (file.image !== item.image) {
+                        copy.push(item);
+                    } else {
+                        item.state = ImageState.DELETED;
+                    }
                 }
-            }
-        });
+            });
+        }
         setImages(copy);
     };
 
@@ -67,24 +76,41 @@ export const ImageSelector: FC<ImageSelectorProps> = ({
                                 </div>
                             </div>
                         ) : null}
-                        {file.state == ImageState.UPLOADED ? (
+                        {file.state == ImageState.PREUPLOADED ? (
                             <div className="text-4xl lg:text-5xl w-full h-full absolute backdrop-blur-md rounded-md">
                                 <div className="w-full h-full flex justify-center items-center">
                                     <AiOutlineCheckCircle className="fill-zinc-500" />
                                 </div>
                             </div>
                         ) : null}
-                        <img
-                            className="w-full h-full border ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md object-scale-down"
-                            src={URL.createObjectURL(file.image)}
-                        />
+                        {file.image instanceof File ? (
+                            <img
+                                className="w-full h-full border-4 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border-gray-200 hover:border-gray-300 transition-all duration-100 rounded-md shadow-md object-scale-down"
+                                src={URL.createObjectURL(file.image)}
+                            />
+                        ) : (
+                            <Image
+                                className={`${
+                                    file.state == ImageState.DELETED
+                                        ? "hidden"
+                                        : ""
+                                } w-full h-full border-4 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border-gray-200 hover:border-gray-300 transition-all duration-100 rounded-md shadow-md object-scale-down`}
+                                src={
+                                    "https://drive.google.com/uc?export=view&id=" +
+                                    file.image
+                                }
+                                width={1000}
+                                height={1000}
+                                alt=""
+                            />
+                        )}
                     </li>
                 ))}
                 {files.length < 10 && (
                     <li>
                         <label htmlFor="file">
-                            <div className="flex justify-center items-center text-4xl lg:text-5xl group w-20 h-20 lg:w-28 lg:h-28 border ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-zinc-100 hover:bg-zinc-200 transition-all duration-100 rounded-md shadow-md">
-                                <AiFillPlusCircle className="fill-zinc-300 group-hover:fill-zinc-400" />
+                            <div className="flex justify-center items-center text-4xl lg:text-5xl group w-20 h-20 lg:w-28 lg:h-28 border-4 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border-gray-200 hover:border-gray-300 border-dashed transition-all duration-100 rounded-md shadow-md">
+                                <AiFillPlusCircle className="fill-gray-200 group-hover:fill-gray-300" />
                             </div>
                         </label>
                         <input

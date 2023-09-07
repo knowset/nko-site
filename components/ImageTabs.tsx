@@ -19,7 +19,7 @@ export const ImageTabs: FC<ImageTabsProps> = ({ images_urls }) => {
                 >
                     <div className="flex justify-center xl:px-4 relative pb-[100%] xl:pb-[60%] my-4">
                         <Image
-                            className="absolute h-full w-full xl:w-[60%] object-cover rounded-lg my-2"
+                            className="absolute h-full w-full xl:w-[75%] object-cover rounded-lg my-2"
                             src={image_url}
                             alt=""
                             placeholder="blur"

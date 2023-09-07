@@ -46,10 +46,12 @@ export type FaunadbPostOrError<T> = {
 export enum ImageState {
     DEFAULT,
     LOADING,
+    PREUPLOADED,
     UPLOADED,
+    DELETED,
 }
 
 export type IMG = {
     state: ImageState;
-    image: File;
+    image: File | string;
 };

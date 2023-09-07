@@ -48,7 +48,7 @@ export default async function Page() {
             </div>
             <div className="flex flex-col gap-4">
                 <H1>
-                    Реквизиты центра <span>(скачать pdf)</span>
+                    Реквизиты центра <a className="underline" href="https://drive.google.com/uc?export=view&id=1MDQqwfobMmVQBihDIrLsOFvWRY9Q30JJ">(скачать .doc)</a>
                 </H1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                     <div className="flex flex-col items-center p-8">

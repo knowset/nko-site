@@ -14,7 +14,7 @@ export const CreateButton: FC<CreateButtonProps> = ({ path }) => {
         <div className="w-full flex justify-center my-4">
             <Link
                 href={`${path}/new`}
-                className="bg-blue-500 hover:bg-blue-700 text-white p-4 rounded-xl font-semibold"
+                className="bg-main hover:bg-main text-white p-4 rounded-xl font-semibold"
             >
                 Создать статью
             </Link>

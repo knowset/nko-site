@@ -1,7 +1,7 @@
 "use client";
 
 import { ImageSelector } from "@/components/ImageSelector";
-import { FaunadbPost, Project } from "@/types";
+import { FaunadbPost, ImageState, IMG, Project } from "@/types";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FC, FormEventHandler, useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -14,27 +14,32 @@ interface EditProjectFormProps {
 
 export const EditProjectForm: FC<EditProjectFormProps> = ({ project }) => {
     const router = useRouter();
-    const [loading, setLoading] = useState(false);
-    const [inputImageList, setInputImageList] = useState(
-        project.data.images_ids
+    const [isLoading, setIsLoading] = useState(false);
+
+    const [images, setImages] = useState<IMG[]>(
+        project.data.images_ids.map((item) => {
+            return { state: ImageState.UPLOADED, image: item };
+        })
     );
-    const [formValues, setFormValues] = useState({
+
+    const [formValues, setFormValues] = useState<Project>({
         ...project.data,
-        images: project.data.images_ids,
+        images_ids: project.data.images_ids,
     });
     const [error, setError] = useState("");
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
         event.preventDefault();
-        setLoading(true);
+        setIsLoading(true);
 
+        const images_ids = await uploadImage(images);
         try {
             const res = await fetch(`/api/project/edit/${project.data.id}`, {
                 method: "POST",
                 body: JSON.stringify({
                     ref: project.ref,
                     ts: project.ts,
-                    data: formValues,
+                    data: { ...formValues, images_ids: images_ids },
                 }),
                 headers: {
                     "Content-Type": "application/json",
@@ -47,7 +52,7 @@ export const EditProjectForm: FC<EditProjectFormProps> = ({ project }) => {
             router.push(`/project`);
         } catch (error: any) {
             setError(error);
-            setLoading(false);
+            setIsLoading(false);
         }
     };
 
@@ -56,6 +61,51 @@ export const EditProjectForm: FC<EditProjectFormProps> = ({ project }) => {
     ) => {
         const { name, value } = event.target;
         setFormValues({ ...formValues, [name]: value });
+    };
+
+    const uploadImage: (images: IMG[]) => Promise<string[]> = async (
+        images
+    ) => {
+        if (images.length == 0) return [];
+
+        const imagesIDS: string[] = [];
+
+        await Promise.all(
+            images.map(async (item) => {
+                if (!item.image) return [];
+
+                if (item.image instanceof File) {
+                    item.state = ImageState.LOADING;
+                    const form = new FormData();
+                    form.append(
+                        "file",
+                        item.image,
+                        item.image.name + "-" + new Date()
+                    );
+                    form.append("postType", "project");
+                    form.append("title", formValues.title);
+
+                    const res = await fetch("/api/image/upload", {
+                        method: "POST",
+                        body: form,
+                    });
+                    const imageID = (await res.json()).id;
+                    item.state = ImageState.PREUPLOADED;
+                    imagesIDS.push(imageID);
+                } else if (typeof item.image === "string") {
+                    if (item.state === ImageState.DELETED) {
+                        await fetch("/api/image/delete", {
+                            method: "POST",
+                            body: JSON.stringify({ id: item.state }),
+                        });
+                        return;
+                    } else {
+                        imagesIDS.push(item.image);
+                    }
+                }
+            })
+        );
+        return imagesIDS;
     };
 
     return (
@@ -117,11 +167,6 @@ export const EditProjectForm: FC<EditProjectFormProps> = ({ project }) => {
                         />
                     </div>
                 </div>
-                <label className="font-semibold text-base mt-3">
-                    Срок реализации
-                </label>
-                <p>Измениние картинок скоро появится</p>
-                {/* <ImageSelector /> */}
                 <Input
                     title="Источник финансирования"
                     value={formValues.source_of_financing}
@@ -149,14 +194,20 @@ export const EditProjectForm: FC<EditProjectFormProps> = ({ project }) => {
                     className="flex items-center h-40 p-4 w-full bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
                     inputType="textaria"
                 />
+                <label className="font-semibold text-base">Картинки</label>
+                <ImageSelector
+                    images={images}
+                    isLoading={isLoading}
+                    setImages={setImages}
+                />
                 <button
                     className="flex items-center justify-center h-12 px-6 w-full bg-blue-600 mt-8 rounded font-semibold text-sm text-white hover:bg-blue-700"
                     type="submit"
                 >
-                    {loading ? (
+                    {isLoading ? (
                         <AiOutlineLoading3Quarters className="animate-spin text-2xl" />
                     ) : (
-                        "Редактировать"
+                        "Сохранить"
                     )}
                 </button>
                 {error && (

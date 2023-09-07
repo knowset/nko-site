@@ -254,7 +254,6 @@ export const createPost = async (postType: string, data: Project) => {
                     err.errors()[0].description
                 )
             );
-        console.log("REQ FROM create:", res);
         return { statusCode: 200, body: JSON.stringify({ res }) };
     } catch (err) {
         return JSON.parse((err as Error).message);
@@ -265,27 +264,27 @@ export const updatePostById = async (
     postType: string,
     data: FaunadbPost<Project>
 ) => {
-    return;
-    // try {
-    //     const id = data.ref["@ref"].id;
+    try {
+        const id = data.ref["@ref"].id;
 
-    //     const res: FaunadbPosts<Project> = await client.query(
-    //         q.Update(q.Ref(q.Collection(postType), id), {
-    //             data: data.data,
-    //         })
-    //     );
+        const res: FaunadbPosts<Project> = await client.query(
+            q.Update(q.Ref(q.Collection(postType), id), {
+                data: data.data,
+            })
+        );
 
-    //     if (!res || !res?.data) {
-    //         throw new Error("Something went wrong");
-    //     }
+        if (!res || !res?.data) {
+            throw new Error("Something went wrong");
+        }
 
-    //     return {
-    //         statusCode: 200,
-    //         body: JSON.stringify({ message: "Post successfully updated" }),
-    //     };
-    // } catch (err) {
-    //     return JSON.parse((err as Error).message);
-    // }
+        // NOTE: make the same response as other functions
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ message: "Post successfully updated" }),
+        };
+    } catch (err) {
+        return JSON.parse((err as Error).message);
+    }
 };
 
 export const deletePostById = async (

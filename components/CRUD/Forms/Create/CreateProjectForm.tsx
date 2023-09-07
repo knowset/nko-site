@@ -3,7 +3,14 @@
 import { ImageSelector } from "@/components/ImageSelector";
 import { ImageState, IMG } from "@/types";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, FC, FormEventHandler, useEffect, useState } from "react";
+import {
+    ChangeEvent,
+    FC,
+    FormEvent,
+    FormEventHandler,
+    useEffect,
+    useState,
+} from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
 import { Input } from "../../Input";
@@ -21,7 +28,7 @@ type Project = {
 
 export const CreateProjectForm: FC<{}> = () => {
     const router = useRouter();
-    const [loading, setLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const [images, setImages] = useState<IMG[]>([]);
 
@@ -37,9 +44,11 @@ export const CreateProjectForm: FC<{}> = () => {
     });
     const [error, setError] = useState("");
 
-    const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+    const handleSubmit: (
+        event: FormEvent<HTMLFormElement>
+    ) => Promise<void> = async (event) => {
         event.preventDefault();
-        setLoading(true);
+        setIsLoading(true);
 
         const images_ids = await uploadImage(images);
         try {
@@ -57,7 +66,9 @@ export const CreateProjectForm: FC<{}> = () => {
             router.push(`/project`);
         } catch (error: any) {
             setError(error);
-            setLoading(false);
+        } finally {
+            setIsLoading(false);
+            return;
         }
     };
 
@@ -81,19 +92,24 @@ export const CreateProjectForm: FC<{}> = () => {
 
                 item.state = ImageState.LOADING;
 
-                const form = new FormData();
-                form.append(
-                    "file",
-                    item.image,
-                    item.image.name + "-" + new Date()
-                );
-                const res = await fetch("/api/save-images", {
-                    method: "POST",
-                    body: form,
-                });
-                const imageID = (await res.json()).id;
-                item.state = ImageState.UPLOADED;
-                imagessIDS.push(imageID);
+                if (item.image instanceof File) {
+                    const form = new FormData();
+                    form.append(
+                        "file",
+                        item.image,
+                        item.image.name + "-" + new Date()
+                    );
+                    form.append("postType", "project");
+                    form.append("title", formValues.title);
+
+                    const res = await fetch("/api/image/upload", {
+                        method: "POST",
+                        body: form,
+                    });
+                    const imageID = (await res.json()).id;
+                    item.state = ImageState.PREUPLOADED;
+                    imagessIDS.push(imageID);
+                }
             })
         );
         return imagessIDS;
@@ -185,21 +201,17 @@ export const CreateProjectForm: FC<{}> = () => {
                     className="flex items-center h-40 p-4 w-full bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
                     inputType="textaria"
                 />
-                <div>
-                    <label className="font-semibold text-base mt-3">
-                        Сылки на картинки
-                    </label>
-                    <ImageSelector
-                        images={images}
-                        setImages={setImages}
-                        isLoading={loading}
-                    />
-                </div>
+                <label className="font-semibold text-base">Картинки</label>
+                <ImageSelector
+                    images={images}
+                    setImages={setImages}
+                    isLoading={isLoading}
+                />
                 <button
-                    className="flex items-center justify-center h-12 px-6 w-full bg-blue-600 mt-8 rounded font-semibold text-sm text-white hover:bg-blue-700"
+                    className="flex items-center justify-center h-12 px-6 w-full bg-main hover:bg-main mt-2 rounded font-semibold text-sm text-white "
                     type="submit"
                 >
-                    {loading ? (
+                    {isLoading ? (
                         <AiOutlineLoading3Quarters className="animate-spin text-2xl" />
                     ) : (
                         "Создать"
