@@ -31,7 +31,7 @@ export const navlinks: {
         title: "Инфотека",
         links: [
             { title: "Инфографика", href: "/infographics" },
-            // { title: "Чек-листы", href: "/checklists" },
+            { title: "Чек-листы", href: "/checklists" },
             // {
             //     title: "Доклады о развитии гражданского общества",
             //     href: "/civil_society_development_reports",
@@ -140,19 +140,37 @@ export const infographics: {
     title: string;
 }[] = [
     {
-        picture: "/infographics/Целевая группа.jpg",
+        picture: "1IqwniAi8t-z_hAly2zbywpdcZz5O9Ok6",
         title: "Целевая группа",
     },
     {
-        picture: "/infographics/Социальная проблема.jpg",
+        picture: "1qnL4teG9Qmv-t-oYYCaNaaYWb6-ei9rC",
         title: "Социальная проблема",
     },
     {
-        picture: "/infographics/Результат проекта.jpg",
+        picture: "1FHnuLr6uWM2j9W1t-OFOMQ0QftH73fUH",
         title: "Результат проекта",
     },
     {
-        picture: "/infographics/Цель социального проекта.jpg",
+        picture: "11othIhhtFzeWX1o2SQXBdGrqiqUvxMq8",
         title: "Цель социального проекта",
+    },
+];
+
+export const checklists: {
+    fileName: string;
+    fileGoogleId: string;
+}[] = [
+    {
+        fileName: "Чек-лист заявки областного конкурса молодежных проектов.",
+        fileGoogleId: "1i7QVY03_0iyW_qhrw1vHxAVhXhBvdyTM",
+    },
+    {
+        fileName: "Чек-лист заявки Росмолодёжь. Гранты.",
+        fileGoogleId: "1D8ZsDqyzp3LfrWn0l-bmNJHUJRJcFrRC",
+    },
+    {
+        fileName: "Бинго-лист для форумов Росмолодёжи.",
+        fileGoogleId: "11zolicpGtc-n47S5sw3ENsqKXKaOFBuo",
     },
 ];

@@ -1,6 +1,27 @@
-import { H2 } from "@/components/Text/H2";
 import { infographics } from "@/constants";
+import { Metadata } from "next";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+    metadataBase: new URL("https://initsiativa.vercel.app"),
+    title: "Инфографика",
+    openGraph: {
+        url: "https://initsiativa.vercel.app/infographics",
+        type: "website",
+        title: "Инфографика",
+        images: [
+            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
+        ],
+    },
+    twitter: {
+        title: "Инфографика",
+        card: "summary_large_image",
+        images: [
+            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
+        ],
+    },
+};
+
 
 export default function Page() {
     return (
@@ -8,15 +29,28 @@ export default function Page() {
             {infographics.map((item) => (
                 <div
                     key={"infographics-item-" + item.title}
-                    className="flex flex-col justify-center items-center gap-8"
+                    className="flex flex-col justify-center items-center gap-24 text-center"
                 >
-                    <h1 className="text-4xl">{item.title}</h1>
-                    <Image
-                        src={item.picture}
-                        width={4242}
-                        height={4000}
-                        alt={item.title}
-                    />
+                    <div className="flex flex-col gap-8 justify-center items-center my-4">
+                        <h1 className="text-3xl xl:text-4xl">{item.title}</h1>
+                        <Image
+                            src={
+                                "https://drive.google.com/thumbnail?id=" +
+                                item.picture +
+                                "&sz=w4242-h4000"
+                            }
+                            placeholder="blur"
+                            blurDataURL={
+                                "https://drive.google.com/thumbnail?id=" +
+                                item.picture +
+                                "&sz=w424-h400"
+                            }
+                            width={4242}
+                            height={4000}
+                            alt={item.title}
+                            className="rounded-md shadow-lg"
+                        />
+                    </div>
                 </div>
             ))}
         </div>

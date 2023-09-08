@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     description:
         "Преобразуем инициативы в проекты\nМы готовы поддержать твою самую смелую идею Действуй уже сегодня!",
     openGraph: {
-        url: "https://initsiativa.vercel.app",
+        url: "https://initsiativa.vercel.app/contacts",
         type: "website",
         title: "Контакты",
         description:
@@ -21,6 +21,7 @@ export const metadata: Metadata = {
         ],
     },
     twitter: {
+        
         title: "Контакты",
         card: "summary_large_image",
         description:

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description:
         "Преобразуем инициативы в проекты\nМы готовы поддержать твою самую смелую идею Действуй уже сегодня!",
     openGraph: {
-        url: "https://initsiativa.vercel.app",
+        url: "https://initsiativa.vercel.app/documentation",
         type: "website",
         title: "Документы",
         description:
@@ -53,7 +53,7 @@ export default async function Page() {
                         <H2>
                             {link.title}{" "}
                             <a className="text-main" href={link.href}>
-                                (скачать pdf)
+                                (скачать .pdf)
                             </a>
                         </H2>
                     ))}

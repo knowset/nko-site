@@ -36,10 +36,11 @@ export const ImageTabs: FC<ImageTabsProps> = ({ images_urls }) => {
                     <TabsTrigger
                         key={"image-tab-" + image_url}
                         value={"image-tab-" + image_url}
+                        className="rounded-md shadow-md z-[1000]"
                     >
-                        <div className="flex justify-center px-12 relative pb-[100%]">
+                        <div className="flex justify-center px-12 relative pb-[100%] rounded-md">
                             <Image
-                                className="absolute h-full w-full object-cover rounded-lg shadow-lg hover:scale-105 transition-all"
+                                className="absolute w-full h-full border-4 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border-gray-200 hover:border-gray-300 transition-all duration-100 rounded-md object-scale-down"
                                 src={image_url}
                                 alt=""
                                 placeholder="blur"
