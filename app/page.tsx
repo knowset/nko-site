@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import Image from "next/image";
-import Loading from "./loading";
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
@@ -26,7 +25,6 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-    return <Loading />
     return (
         <div className="flex flex-col gap-12">
             <div className="flex flex-col items-center justify-center gap-4">
