@@ -4,12 +4,12 @@ import { documentation } from "@/constants";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    metadataBase: new URL("https://inciativa.netlify.app"),
+    metadataBase: new URL("https://initsiativa.vercel.app"),
     title: "Документы",
     description:
         "Преобразуем инициативы в проекты\nМы готовы поддержать твою самую смелую идею Действуй уже сегодня!",
     openGraph: {
-        url: "https://inciativa.netlify.app",
+        url: "https://initsiativa.vercel.app",
         type: "website",
         title: "Документы",
         description:

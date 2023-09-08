@@ -18,20 +18,12 @@ export const Project: FC<ProjectProps> = ({ post, isAdmin = false }) => {
     const path = usePathname();
 
     const preview_url =
-        "https://drive.google.com/uc?export=view&id=" + post.data.images_ids[0];
-
-    // <a href="https://drive.google.com/uc?export=view&id=19Beq03UXi_w92HyxwJgDjQ7Hbobm6JAv">
-    //     {" "}
-    //     <img
-    //         src="https://drive.google.com/uc?export=view&id=19Beq03UXi_w92HyxwJgDjQ7Hbobm6JAv"
-    //         width="100%"
-    //     />
-    // </a>;
+        `https://drive.google.com/thumbnail?id=${post.data.images_ids[0]}&sz=w${2000}-h${2000}`;
 
     return (
         <div className="rounded shadow-md h-full w-full mb-2">
             <div className="flex flex-col justify-between h-full">
-                <Link href={`${path}?p=${post.data.id}`}>
+                <Link href={`${path}/${post.data.id}`}>
                     <div className="relative pb-[75%] bg-zinc-600 rounded-t">
                         {post.data.images_ids.length > 0 ? (
                             <Image
@@ -55,7 +47,7 @@ export const Project: FC<ProjectProps> = ({ post, isAdmin = false }) => {
                 <div className="flex flex-col px-4 py-2">
                     <div className="text-center">
                         <h1 className="text-main text-xl font-bold leading-6">
-                            <Link href={`${path}?p=${post.data.id}`}>
+                            <Link href={`${path}/${post.data.id}`}>
                                 {post.data.title}
                             </Link>
                         </h1>
@@ -64,7 +56,7 @@ export const Project: FC<ProjectProps> = ({ post, isAdmin = false }) => {
                 </div>
                 <div className="flex justify-between mt-auto px-4 pt-2 pb-4">
                     <Link
-                        href={`${path}?p=${post.data.id}`}
+                        href={`${path}/${post.data.id}`}
                         className="mt-auto flex items-center gap-1"
                     >
                         <p className="font-medium bg-gradient-to-r from-[rgb(0,158,224)] to-[rgb(0,158,224)] bg-[length:0px_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 hover:bg-[length:100%_2px] group-hover:bg-[length:100%_2px]">

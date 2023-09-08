@@ -19,7 +19,7 @@ export const ImageTabs: FC<ImageTabsProps> = ({ images_urls }) => {
                 >
                     <div className="flex justify-center xl:px-4 relative pb-[100%] xl:pb-[60%] my-4">
                         <Image
-                            className="absolute h-full w-full xl:w-[75%] object-cover rounded-lg my-2"
+                            className="absolute h-full w-full xl:w-[75%] object-cover rounded-lg my-2 shadow-lg"
                             src={image_url}
                             alt=""
                             placeholder="blur"
@@ -31,7 +31,7 @@ export const ImageTabs: FC<ImageTabsProps> = ({ images_urls }) => {
                     </div>
                 </TabsContent>
             ))}
-            <TabsList className="h-full xl:w-[75%] mt-4 gap-4 xl:mx-[12.5%] overflow-x-scroll flex justify-start image-selector pb-2">
+            <TabsList className="h-full xl:w-[75%] mt-8 gap-4 xl:mx-[12.5%] overflow-x-scroll flex justify-start image-selector pb-6">
                 {images_urls.map((image_url) => (
                     <TabsTrigger
                         key={"image-tab-" + image_url}
@@ -39,7 +39,7 @@ export const ImageTabs: FC<ImageTabsProps> = ({ images_urls }) => {
                     >
                         <div className="flex justify-center px-12 relative pb-[100%]">
                             <Image
-                                className="absolute h-full w-full object-cover rounded-lg"
+                                className="absolute h-full w-full object-cover rounded-lg shadow-lg hover:scale-105 transition-all"
                                 src={image_url}
                                 alt=""
                                 placeholder="blur"

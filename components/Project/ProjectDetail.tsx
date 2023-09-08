@@ -6,51 +6,21 @@ import { format } from "date-fns";
 import { ru } from "date-fns/locale";
 import { ImageTabs } from "../ImageTabs";
 import { LoadingPostDetail } from "../LoadingPostDetail";
-import { FaunadbPost, FaunadbPostOrError, Project } from "@/types";
+import { FaunadbPost, Project as ProjectType } from "@/types";
 import { EditButton } from "../CRUD/EditButton";
 import { DeleteButton } from "../CRUD/DeleteButton";
 import { useSession } from "next-auth/react";
 
-export const ProjectDetail: FC<{}> = () => {
-    const path = usePathname();
+interface Project {
+    post: FaunadbPost<ProjectType>;
+}
+
+export const ProjectDetail: FC<Project> = ({ post }) => {
     const { data: session } = useSession();
-    const searchParams = useSearchParams();
-    const [post, setPost] = useState<FaunadbPost<Project> | null>(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const retrievData = async () => {
-            if (loading) {
-                const res = await fetch(
-                    `/api/${path}/${searchParams.get("p")}`
-                );
-
-                if (!res) {
-                    throw new Error("Невозможно получить пост");
-                }
-
-                const data: FaunadbPostOrError<Project> = await res.json();
-
-                setLoading(false);
-                if (!data || !data.post) {
-                    setPost(null);
-                    return;
-                }
-
-                setPost(data.post);
-            }
-            setLoading(false);
-        };
-        retrievData();
-    }, [post]);
-
-    if (loading) return <LoadingPostDetail />;
-
-    if (!post && !loading) return notFound();
 
     let images_urls: string[] = [];
     if (post) {
-        images_urls = post?.data.images_ids.map((item) => {
+        images_urls = post.data.images_ids.map((item) => {
             return `https://drive.google.com/thumbnail?id=${item}&sz=w${2000}-h${2000}`;
         });
     }
@@ -59,8 +29,8 @@ export const ProjectDetail: FC<{}> = () => {
         <>
             {session?.user.role == "admin" ? (
                 <div className="fixed right-4 bottom-4 flex gap-4">
-                    <EditButton id={post.data.id} path={path} isPostDetail />
-                    <DeleteButton post={post} path={path} isPostDetail />
+                    <EditButton id={post.data.id} path="/project" isPostDetail />
+                    <DeleteButton post={post} path="project" isPostDetail />
                 </div>
             ) : null}
             <section className="w-full max-w-3xl lg:px-4 sm:px-6 xl:max-w-5xl xl:px-0 mb-8">

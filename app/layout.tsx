@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer";
 import Favicon from "@/public/favicon.ico";
 
 export const metadata = {
-    metadataBase: new URL("https://inciativa.netlify.app"),
+    metadataBase: new URL("https://initsiativa.vercel.app"),
     title: {
         default: 'Ресурсный центр НКО ВоГУ "Инициатива"',
         template: '%s | Ресурсный центр НКО ВоГУ "Инициатива"',

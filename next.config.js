@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    experimental: {
+        appDir: true,
+    },
     images: {
         remotePatterns: [
             {
@@ -12,8 +15,8 @@ const nextConfig = {
                 protocol: "https",
                 hostname: "drive.google.com",
                 port: "",
-                pathname: "/*"
-            }
+                pathname: "/*",
+            },
         ],
     },
 };

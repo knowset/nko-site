@@ -5,12 +5,12 @@ import { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-    metadataBase: new URL("https://inciativa.netlify.app"),
+    metadataBase: new URL("https://initsiativa.vercel.app"),
     title: "О центре",
     description:
         "Преобразуем инициативы в проекты\nМы готовы поддержать твою самую смелую идею Действуй уже сегодня!",
     openGraph: {
-        url: "https://inciativa.netlify.app",
+        url: "https://initsiativa.vercel.app",
         type: "website",
         title: "О центре",
         description:

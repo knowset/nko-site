@@ -1,6 +1,7 @@
 import { FC } from "react";
 import Image from "next/image";
 import { Layout } from "./Layout";
+import Link from "next/link";
 
 export const TopNavBar: FC<{}> = () => {
     return (
@@ -30,7 +31,9 @@ export const TopNavBar: FC<{}> = () => {
                         <span className="mx-1 text-lg text-end">
                             г. Вологда, Ленина, 15
                             <br />
+                            <Link href="https://vk.com/nko_vogu" className="underline">
                             vk.com/nko_vogu
+                            </Link>
                         </span>
                     </div>
                 </nav>

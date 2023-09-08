@@ -2,7 +2,7 @@
 
 import { ImageState, IMG } from "@/types";
 import Image from "next/image";
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC } from "react";
 import {
     AiFillPlusCircle,
     AiOutlineCheckCircle,
@@ -83,7 +83,7 @@ export const ImageSelector: FC<ImageSelectorProps> = ({
                                 </div>
                             </div>
                         ) : null}
-                        {file.image instanceof File ? (
+                        {!(typeof file.image === "string") ? (
                             <img
                                 className="w-full h-full border-4 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border-gray-200 hover:border-gray-300 transition-all duration-100 rounded-md shadow-md object-scale-down"
                                 src={URL.createObjectURL(file.image)}

@@ -5,7 +5,6 @@ import { FaunadbPost, ImageState, IMG, Project } from "@/types";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FC, FormEventHandler, useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { RxCross2 } from "react-icons/rx";
 import { Input } from "../../Input";
 
 interface EditProjectFormProps {
