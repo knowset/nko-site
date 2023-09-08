@@ -39,7 +39,7 @@ export async function generateMetadata({
 
 async function getProjectById(params: { id: string }) {
     if (!params.id) return null;
-    
+
     const res = await fetch(`${process.env.API_URL}/api/project/${params.id}`);
 
     if (!res) {
@@ -57,7 +57,7 @@ export default async function page({ params }: { params: { id: string } }) {
     if (!data || !data.post) return notFound();
 
     if (!!data?.errors) {
-        throw new Error(JSON.stringify({ errors: data.errors }));
+        return null;
     }
 
     return <ProjectDetail post={data.post} />;

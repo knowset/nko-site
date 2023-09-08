@@ -1,6 +1,8 @@
 import { ProjectList } from "@/components/Project/ProjectList";
 import { FaunadbPostsOrError, Project } from "@/types";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
     title: "Проекты | Ресурсный центр НКО ВоГУ 'Инициатива'",
     description: "",
@@ -20,6 +22,8 @@ async function getProjects() {
 
 export default async function Page() {
     const data = await getProjects();
+
+    if (!data) return null;
 
     if (!data.posts) return null;
 
