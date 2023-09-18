@@ -2,6 +2,8 @@ import { EditProjectForm } from "@/components/CRUD/Forms/Edit/EditProjectForm";
 import { FaunadbPostOrError, Project } from "@/types";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 async function getProjectById(params: { id: string }) {
     if (!params.id) return null;
 

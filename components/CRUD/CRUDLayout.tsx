@@ -13,7 +13,6 @@ export const CRUDLayout: FC<CRUDLayoutProps> = ({
     children,
 }) => {
     const path = usePathname();
-    // useSession
     return (
         <>
             {isAdmin ? <CreateButton path={path} /> : null}

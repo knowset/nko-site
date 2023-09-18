@@ -194,15 +194,13 @@ export const getPostByID: (
                 q.Filter(
                     q.Paginate(q.Match(q.Index(postType + "_by_id"))),
                     q.Lambda((ref) =>
-                        q.ContainsStr(
-                            q.Select(["data", "id"], q.Get(ref)),
-                            postId
-                        )
+                        q.Equals(q.Select(["data", "id"], q.Get(ref)), postId)
                     )
                 ),
                 q.Lambda((ref) => q.Get(ref))
             )
         );
+        console.log("resData", resData.data[0].data.images_ids);
 
         if (resData?.data.length == 0) {
             throw new Error(
@@ -216,6 +214,7 @@ export const getPostByID: (
             );
         } else {
             const post = resData.data[0];
+            console.log("POST: ", post);
             return {
                 post: post,
                 status: 200,

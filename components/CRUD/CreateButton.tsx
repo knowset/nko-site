@@ -11,7 +11,7 @@ interface CreateButtonProps {
 
 export const CreateButton: FC<CreateButtonProps> = ({ path }) => {
     return (
-        <div className="w-full flex justify-center my-4">
+        <div className="fixed right-4 bottom-4 my-4">
             <Link
                 href={`${path}/new`}
                 className="bg-main hover:bg-main text-white p-4 rounded-xl font-semibold"

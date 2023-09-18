@@ -5,7 +5,6 @@ import { FC, useEffect, useState } from "react";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale";
 import { ImageTabs } from "../ImageTabs";
-import { LoadingPostDetail } from "../LoadingPostDetail";
 import { FaunadbPost, Project as ProjectType } from "@/types";
 import { EditButton } from "../CRUD/EditButton";
 import { DeleteButton } from "../CRUD/DeleteButton";
@@ -24,12 +23,15 @@ export const ProjectDetail: FC<Project> = ({ post }) => {
             return `https://drive.google.com/thumbnail?id=${item}&sz=w${2000}-h${2000}`;
         });
     }
-
     return !!post ? (
         <>
             {session?.user.role == "admin" ? (
                 <div className="fixed right-4 bottom-4 flex gap-4">
-                    <EditButton id={post.data.id} path="/project" isPostDetail />
+                    <EditButton
+                        id={post.data.id}
+                        path="/project"
+                        isPostDetail
+                    />
                     <DeleteButton post={post} path="project" isPostDetail />
                 </div>
             ) : null}

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
             "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
         ],
     },
-    twitter: {        
+    twitter: {
         title: "Проекты",
         card: "summary_large_image",
         images: [
@@ -23,7 +23,6 @@ export const metadata: Metadata = {
         ],
     },
 };
-
 
 async function getProjects() {
     const res = await fetch(`${process.env.API_URL}/api/project`);

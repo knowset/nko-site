@@ -13,15 +13,15 @@ export default function Error({
 }) {
     const router = useRouter();
     return (
-        <div className="flex flex-col items-center justify-center gap-4">
-            <h2 className="text-4xl">Что-то пошло не так</h2>
-            <button className=""
+        <div className="flex flex-col justify-center items-center gap-6">
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-main text-center">Что-то пошло не так</h1>
+            <button className="text-xl underline"
                 onClick={
                     // Attempt to recover by trying to re-render the segment
                     () => router.back()
                 }
             >
-                Вернуться назад
+                Вернуться назад?
             </button>
         </div>
     );

@@ -22,32 +22,33 @@ export const metadata: Metadata = {
     },
 };
 
-
 export default function Page() {
     return (
         <div className="flex flex-col gap-12">
             {infographics.map((item) => (
                 <div
-                    key={"infographics-item-" + item.title}
+                    key={"infographics-item-" + item.fileName}
                     className="flex flex-col justify-center items-center gap-24 text-center"
                 >
                     <div className="flex flex-col gap-8 justify-center items-center my-4">
-                        <h1 className="text-3xl xl:text-4xl">{item.title}</h1>
+                        <h1 className="text-3xl xl:text-4xl">
+                            {item.fileName}
+                        </h1>
                         <Image
                             src={
                                 "https://drive.google.com/thumbnail?id=" +
-                                item.picture +
+                                item.pictureGoogleId +
                                 "&sz=w4242-h4000"
                             }
                             placeholder="blur"
                             blurDataURL={
                                 "https://drive.google.com/thumbnail?id=" +
-                                item.picture +
+                                item.pictureGoogleId +
                                 "&sz=w424-h400"
                             }
                             width={4242}
                             height={4000}
-                            alt={item.title}
+                            alt={item.fileName}
                             className="rounded-md shadow-lg"
                         />
                     </div>

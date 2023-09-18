@@ -77,7 +77,7 @@ export const SignInForm = () => {
                     className="flex items-center h-12 px-4 w-full bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
                 />
                 <button
-                    className="flex items-center justify-center h-12 px-6 w-full bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700"
+                    className="flex items-center justify-center h-12 px-6 w-full bg-main mt-8 rounded font-semibold text-sm text-white hover:bg-main"
                     type="submit"
                 >
                     {loading ? (

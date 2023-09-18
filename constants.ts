@@ -22,20 +22,20 @@ export const navlinks: {
     },
     {
         title: "НКО",
-        // links: [
-        //     { title: "Обучение служением", href: "/service_learning" },
-        //     { title: "Партнеры", href: "/partners" },
-        // ],
+        links: [
+            { title: "Обучение служением", href: "/service_learning" },
+            //     { title: "Партнеры", href: "/partners" },
+        ],
     },
     {
         title: "Инфотека",
         links: [
             { title: "Инфографика", href: "/infographics" },
             { title: "Чек-листы", href: "/checklists" },
-            // {
-            //     title: "Доклады о развитии гражданского общества",
-            //     href: "/civil_society_development_reports",
-            // },
+            {
+                title: "Доклады о развитии гражданского общества",
+                href: "/civil_society_development_reports",
+            },
         ],
     },
     {
@@ -136,24 +136,24 @@ export const team: {
 ];
 
 export const infographics: {
-    picture: string;
-    title: string;
+    pictureGoogleId: string;
+    fileName: string;
 }[] = [
     {
-        picture: "1IqwniAi8t-z_hAly2zbywpdcZz5O9Ok6",
-        title: "Целевая группа",
+        pictureGoogleId: "1IqwniAi8t-z_hAly2zbywpdcZz5O9Ok6",
+        fileName: "Целевая группа",
     },
     {
-        picture: "1qnL4teG9Qmv-t-oYYCaNaaYWb6-ei9rC",
-        title: "Социальная проблема",
+        pictureGoogleId: "1qnL4teG9Qmv-t-oYYCaNaaYWb6-ei9rC",
+        fileName: "Социальная проблема",
     },
     {
-        picture: "1FHnuLr6uWM2j9W1t-OFOMQ0QftH73fUH",
-        title: "Результат проекта",
+        pictureGoogleId: "1FHnuLr6uWM2j9W1t-OFOMQ0QftH73fUH",
+        fileName: "Результат проекта",
     },
     {
-        picture: "11othIhhtFzeWX1o2SQXBdGrqiqUvxMq8",
-        title: "Цель социального проекта",
+        pictureGoogleId: "11othIhhtFzeWX1o2SQXBdGrqiqUvxMq8",
+        fileName: "Цель социального проекта",
     },
 ];
 
@@ -172,5 +172,56 @@ export const checklists: {
     {
         fileName: "Бинго-лист для форумов Росмолодёжи.",
         fileGoogleId: "11zolicpGtc-n47S5sw3ENsqKXKaOFBuo",
+    },
+];
+
+export const civil_society_development_reports: {
+    fileName: string;
+    fileGoogleId: string;
+}[] = [
+    {
+        fileName:
+            "Доклад о состоянии и развитии институтов гражданского общества в 2022 году",
+        fileGoogleId: "1Z8VSgSfESqngZOCkQJk9gRshtIcu-YVu",
+    },
+    {
+        fileName:
+            "Доклад о состоянии и развитии институтов гражданского общества в 2021 году",
+        fileGoogleId: "1T3H3Z1_PSWj7HdrA5K1FPCcr40SLPsDy",
+    },
+    {
+        fileName:
+            "Доклад о состоянии и развитии институтов гражданского общества в 2020 году",
+        fileGoogleId: "18Cc72sbehNMLC_EmOpfDA91wI9qkWS0L",
+    },
+];
+
+export const service_learning: {
+    picture: string;
+    text: string;
+}[] = [
+    {
+        picture: "/service_learning/1__business-group.png",
+        text: "Привлечение заказчиков с учетом карт компетенций образовательных программ",
+    },
+    {
+        picture: "/service_learning/2__web-design.png",
+        text: "Ужегодное формирование «социального заказа» для образовательного модуля «Социальное проектирование» на учебный год",
+    },
+    {
+        picture: "/service_learning/3__new-user.png",
+        text: "Верификация социальных заказчиков для сотрудничества с Вологодским государственным университетом",
+    },
+    {
+        picture: "/service_learning/4__check_document.png",
+        text: "Верификация «социального заказа», упаковка его в образовательные задачи",
+    },
+    {
+        picture: "/service_learning/5__network-2-1.png",
+        text: "Организация и проведение мероприятий по реализации программы",
+    },
+    {
+        picture: "/service_learning/6__management.png",
+        text: "Оказание методической поддержки студентам при работе с «социальным заказом»",
     },
 ];

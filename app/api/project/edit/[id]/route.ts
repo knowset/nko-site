@@ -6,6 +6,6 @@ export async function POST(req: NextRequest) {
     const data = (await req.json()) as FaunadbPost<Project>;
 
     const postOrError = await updatePostById("project", { ...data });
-    
+
     return NextResponse.json(postOrError);
 }

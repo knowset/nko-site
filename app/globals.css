@@ -102,6 +102,13 @@
   .bg-main:hover {
     background: rgb(0, 142, 202);
   }
+
+  .border-main {
+    border-color: rgb(0, 158, 224);
+  }
+  .border-main:hover {
+    border-color: rgb(0, 142, 202);
+  }
   
   .image-selector::-webkit-scrollbar {
     height: 5px;
