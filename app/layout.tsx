@@ -34,8 +34,13 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className="bg-white min-h-[100vh] w-full flex flex-col no-scrollbar">
-                <Providers>
+            <body className="bg-white dark:bg-zinc-800 transition-colors duration-300 min-h-[100vh] w-full flex flex-col no-scrollbar">
+                <Providers
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                >
                     <Header />
                     <Layout>
                         <div className="pt-12 pb-20 flex-grow h-full flex flex-col justify-center items-center">

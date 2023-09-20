@@ -12,6 +12,7 @@ export const metadata: Metadata = {
         "«ОБУЧЕНИЕ СЛУЖЕНИЕМ» — это уникальная программа, которая объединяет теоретическое обучение и практическую общественную деятельность в единый образовательный процесс.",
     openGraph: {
         url: "https://initsiativa.vercel.app/service_learning",
+        description: " ",
         type: "website",
         title: "Обучение служением",
     },
@@ -27,7 +28,7 @@ export default function Page() {
         <div className="flex flex-col gap-10 w-full">
             <div>
                 <H1 textsize="text-4xl">Обучение служением</H1>
-                <hr className="mt-4" />
+                <hr className="mt-4 dark:border-zinc-700" />
             </div>
             <div className="flex flex-col gap-4">
                 <H2>

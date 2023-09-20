@@ -34,7 +34,7 @@ export default async function Page() {
         <div className="flex flex-col gap-10">
             <div>
                 <H1 textsize="text-4xl">Документы</H1>
-                <hr className="mt-4" />
+                <hr className="mt-4 dark:border-zinc-700" />
             </div>
             <div className="flex flex-col gap-4">
                 <H1>ПОЛНОЕ НАИМЕНОВАНИЕ ЦЕНТРА</H1>

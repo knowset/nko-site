@@ -6,7 +6,7 @@ import { NavLink } from "./Navbar/NavLink";
 
 export const Footer: FC<{}> = () => {
     return (
-        <nav className="flex-shrink w-full py-4 border-t border-b bg-gray-100">
+        <nav className="flex-shrink w-full py-4 border-t border-b bg-gray-100 dark:bg-zinc-700 dark:border-zinc-600">
             <Layout>
                 <div className="my-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
                     {navlinks.map((section) => (
@@ -21,10 +21,9 @@ export const Footer: FC<{}> = () => {
                                 {section.links ? (
                                     section.links.map((link) => (
                                         <li key={"footerlink-" + link.title}>
-                                            <NavLink
-                                                href={link.href}
-                                                title={link.title}
-                                            />
+                                            <NavLink href={link.href}>
+                                                {link.title}
+                                            </NavLink>
                                         </li>
                                     ))
                                 ) : (

@@ -1,3 +1,4 @@
+import { H1 } from "@/components/Text/H1";
 import { infographics } from "@/constants";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -25,6 +26,10 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <div className="flex flex-col gap-12">
+            <div>
+                <H1 textsize="text-4xl">Инфографика</H1>
+                <hr className="mt-4 dark:border-zinc-700 dark:border-zinc-700" />
+            </div>
             {infographics.map((item) => (
                 <div
                     key={"infographics-item-" + item.fileName}

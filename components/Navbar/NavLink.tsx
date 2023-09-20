@@ -22,11 +22,16 @@ const linkVariants = cva(
 );
 
 interface NavLinkProps extends VariantProps<typeof linkVariants> {
-    title: string;
+    children: ReactNode;
     href: string;
+    isActive?: boolean;
 }
 
-export const NavLink: FC<NavLinkProps> = ({ title, href }) => {
+export const NavLink: FC<NavLinkProps> = ({
+    children,
+    href,
+    isActive = false,
+}) => {
     const path = usePathname();
     return (
         <Link
@@ -37,11 +42,11 @@ export const NavLink: FC<NavLinkProps> = ({ title, href }) => {
             <span
                 className={cn(
                     linkVariants({
-                        variant: path === href ? "active" : "default",
+                        variant: isActive ? "active" : "default",
                     })
                 )}
             >
-                {title}
+                {children}
             </span>
         </Link>
     );

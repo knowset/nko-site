@@ -7,7 +7,7 @@ export const TopNavBar: FC<{}> = () => {
     return (
         <>
             <Layout>
-                <nav className="hidden h-20 md:flex items-center justify-between text-gray-600">
+                <nav className="hidden h-20 md:flex items-center justify-between text-gray-600 dark:text-gray-400">
                     <div className="w-full  md:flex md:items-center">
                         <span className="mx-1 text-lg">
                             Ресурсный центр
@@ -37,7 +37,7 @@ export const TopNavBar: FC<{}> = () => {
                         </span>
                     </div>
                 </nav>
-                <nav className="h-20 flex md:hidden items-center gap-4 text-gray-600">
+                <nav className="h-20 flex md:hidden items-center gap-4 text-gray-600 dark:text-gray-400">
                     <div className="flex justify-center">
                         <Image
                             className="rounded-full"
@@ -50,7 +50,7 @@ export const TopNavBar: FC<{}> = () => {
                             priority
                         />
                     </div>
-                    <div className="w-full text-gray-600 md:flex md:items-center">
+                    <div className="w-full md:flex md:items-center">
                         <h1 className="mx-1 text-base">
                             Ресурсный центр
                             <br />

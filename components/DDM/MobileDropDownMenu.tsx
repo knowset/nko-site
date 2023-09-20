@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useComponentVisible } from "@/hooks/handleHideDropdown";
 import { NavLink } from "../Navbar/NavLink";
 import { usePathname } from "next/navigation";
-import { NavButton } from "../Navbar/NavButton";
+import { Button } from "../Button";
 
 interface DDMProps {
     navlinks: {
@@ -38,13 +38,9 @@ export const MobileDropDownMenu: FC<DDMProps> = ({ navlinks }) => {
             ref={ref}
             className={`${isComponentVisible ? "z-50" : ""}  relative`}
         >
-            <NavButton
-                type="button"
-                isActive={true}
-                onClick={toggleMenu}
-                title="Меню"
-                aria-expanded="false"
-            />
+            <Button type="button" onClick={toggleMenu} aria-expanded="false">
+                Menu
+            </Button>
 
             <AnimatePresence>
                 {isComponentVisible && (
@@ -72,9 +68,10 @@ export const MobileDropDownMenu: FC<DDMProps> = ({ navlinks }) => {
                                                         "mddm-link-" +
                                                         link.title
                                                     }
-                                                    title={link.title}
                                                     href={link.href}
-                                                />
+                                                >
+                                                    {link.title}
+                                                </NavLink>
                                             ))
                                         ) : (
                                             <p className="rounded py-1 md:py-2 md:px-4 font-medium text-base text-zinc-500">
@@ -86,7 +83,7 @@ export const MobileDropDownMenu: FC<DDMProps> = ({ navlinks }) => {
                                 ))}
                                 <div className="flex flex-col gap-1 p-2">
                                     <p className="text-main mb-1">Другое</p>
-                                    <NavLink title="Главная" href="/" />
+                                    <NavLink href="/">Главная</NavLink>
                                 </div>
                             </div>
                         </motion.div>
