@@ -1,9 +1,9 @@
 import { Children, FC, ReactNode, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useComponentVisible } from "@/hooks/handleHideDropdown";
-import { NavLink } from "../Navbar/NavLink";
+import { NavLink } from "./Navbar/NavLink";
 import { usePathname } from "next/navigation";
-import { Button } from "../Button";
+import { Button } from "./Button";
 import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
@@ -89,9 +89,7 @@ export const DropDownMenu: FC<DDMProps> = ({
                                 })
                             )}
                         >
-                            {/* <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white dark:bg-zinc-800"> */}
-                                {children}
-                            {/* </div> */}
+                            {children}
                         </motion.div>
                     </>
                 )}

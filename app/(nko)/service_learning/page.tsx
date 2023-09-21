@@ -1,3 +1,4 @@
+import { Card } from "@/components/Card";
 import { H1 } from "@/components/Text/H1";
 import { H2 } from "@/components/Text/H2";
 import { service_learning } from "@/constants";
@@ -62,22 +63,28 @@ export default function Page() {
                     </span>{" "}
                     с Вологодским государственным университетом осуществляет:
                 </H2>
-                <div className="mt-4 grid sm:grid-cols-2 gap-8 lg:px-24">
+                <div className="mt-4 grid md:grid-cols-2 2xl:grid-cols-3 gap-8 sm:px-16 md:px-0 lg:px-8 xl:px-16 2xl:px-0">
                     {service_learning.map((item) => (
-                        <div className="mt-4 sm:mt-2 lg:mt-0 flex flex-col items-center gap-4 p-8 overflow-hidden rounded-lg shadow-md ring-1 ring-black ring-opacity-5 bg-white">
-                            <Image
-                                width={128}
-                                height={128}
-                                alt=""
-                                src={item.picture}
-                                placeholder="blur"
-                                blurDataURL={item.picture}
-                                loading="lazy"
-                                quality={100}
-                                className="m-4"
-                            />
-                            <p className="text-center text-lg">{item.text}</p>
-                        </div>
+                        <Card className="p-16 md:p-8 2xl:p-8">
+                            <Card.Image>
+                                <Image
+                                    width={128}
+                                    height={128}
+                                    alt=""
+                                    src={item.picture}
+                                    placeholder="blur"
+                                    blurDataURL={item.picture}
+                                    loading="lazy"
+                                    quality={100}
+                                    className="m-4"
+                                />
+                            </Card.Image>
+                            <Card.Content>
+                                <p className="text-center text-lg">
+                                    {item.text}
+                                </p>
+                            </Card.Content>
+                        </Card>
                     ))}
                 </div>
             </div>

@@ -5,26 +5,31 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DeleteButton } from "../CRUD/DeleteButton";
 import { EditButton } from "../CRUD/EditButton";
-import { AiOutlineArrowRight } from "react-icons/ai";
 import { FaunadbPost, Project as ProjectType } from "@/types";
 import Image from "next/image";
+import { Card } from "../Card";
+import { BsArrowRight } from "react-icons/bs";
 
-export type ProjectProps = {
+export type ProjectCardProps = {
     post: FaunadbPost<ProjectType>;
     isAdmin?: boolean;
 };
 
-export const Project: FC<ProjectProps> = ({ post, isAdmin = false }) => {
+export const ProjectCard: FC<ProjectCardProps> = ({
+    post,
+    isAdmin = false,
+}) => {
     const path = usePathname();
 
-    const preview_url =
-        `https://drive.google.com/thumbnail?id=${post.data.images_ids[0]}&sz=w${2000}-h${2000}`;
+    const preview_url = `https://drive.google.com/thumbnail?id=${
+        post.data.images_ids[0]
+    }&sz=w${2000}-h${2000}`;
 
     return (
-        <div className="rounded shadow-md h-full w-full mb-2">
-            <div className="flex flex-col justify-between h-full">
-                <Link href={`${path}/${post.data.id}`}>
-                    <div className="relative pb-[75%] bg-zinc-600 rounded-t">
+        <Card className="h-full">
+            <Card.Image>
+                <div className="relative w-full pb-[80%] bg-zinc-600 rounded-t">
+                    <Link href={`${path}/${post.data.id}`} className="w-full">
                         {post.data.images_ids.length > 0 ? (
                             <Image
                                 className="absolute h-full w-full object-cover rounded-t"
@@ -42,9 +47,11 @@ export const Project: FC<ProjectProps> = ({ post, isAdmin = false }) => {
                                 </p>
                             </div>
                         )}
-                    </div>
-                </Link>
-                <div className="flex flex-col px-4 py-2">
+                    </Link>
+                </div>
+            </Card.Image>
+            <Card.Content className="flex flex-col justify-between h-[10rem] w-full">
+                <div className="flex flex-col px-4 py-2 h-[7rem] w-full">
                     <div className="text-center">
                         <h1 className="text-main text-xl font-bold leading-6">
                             <Link href={`${path}/${post.data.id}`}>
@@ -63,7 +70,7 @@ export const Project: FC<ProjectProps> = ({ post, isAdmin = false }) => {
                             Читать дальше
                         </p>
                         <span className="text-sm">
-                            <AiOutlineArrowRight />
+                            <BsArrowRight />
                         </span>
                     </Link>
                     {isAdmin ? (
@@ -73,7 +80,7 @@ export const Project: FC<ProjectProps> = ({ post, isAdmin = false }) => {
                         </div>
                     ) : null}
                 </div>
-            </div>
-        </div>
+            </Card.Content>
+        </Card>
     );
 };

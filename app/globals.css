@@ -113,4 +113,7 @@
   .image-selector::-webkit-scrollbar {
     height: 5px;
   }
+  .break-word {
+    word-break: break-word;
+  }
 }

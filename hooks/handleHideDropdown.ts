@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-export const useComponentVisible = (initialIsVisible: any) => {
+export const useComponentVisible = <T>(initialIsVisible: boolean) => {
     const [isComponentVisible, setIsComponentVisible] =
         useState(initialIsVisible);
     const [scroll, setScroll] = useState(0);

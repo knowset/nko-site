@@ -2,7 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { FC, ReactNode } from "react";
-import { DropDownMenu } from "./DDM/DropDownMenu";
+import { DropDownMenu } from "./DropDownMenu";
 import { BsMoon, BsSun } from "react-icons/bs";
 import { Button } from "./Button";
 import { cva, VariantProps } from "class-variance-authority";

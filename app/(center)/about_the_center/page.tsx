@@ -1,3 +1,4 @@
+import { Card } from "@/components/Card";
 import { H1 } from "@/components/Text/H1";
 import { H2 } from "@/components/Text/H2";
 import { directions_of_work_of_the_center, team } from "@/constants";
@@ -56,42 +57,50 @@ export default async function Page() {
             </div>
             <div className="flex flex-col gap-4">
                 <H1>НАПРАВЛЕНИЯ РАБОТЫ ЦЕНТРА</H1>
-                <div className="mt-4 grid sm:grid-cols-2 gap-8 lg:px-24">
+                <div className="mt-4 grid md:grid-cols-2 gap-8 sm:px-16 md:px-0 lg:px-8 2xl:px-24">
                     {directions_of_work_of_the_center.map((item) => (
-                        <div className="mt-4 sm:mt-2 lg:mt-0 flex flex-col items-center gap-4 p-8 overflow-hidden rounded-lg shadow-md ring-1 ring-black ring-opacity-5 bg-white dark:bg-zinc-700">
-                            <Image
-                                width={128}
-                                height={128}
-                                alt=""
-                                src={item.picture}
-                                placeholder="blur"
-                                blurDataURL={item.picture}
-                                loading="lazy"
-                                quality={100}
-                                className="m-4"
-                            />
-                            <p className="text-center text-lg">{item.text}</p>
-                        </div>
+                        <Card className="p-16 md:p-8 2xl:p-8">
+                            <Card.Image>
+                                <Image
+                                    width={128}
+                                    height={128}
+                                    alt=""
+                                    src={item.picture}
+                                    placeholder="blur"
+                                    blurDataURL={item.picture}
+                                    loading="lazy"
+                                    quality={100}
+                                    className="m-4"
+                                />
+                            </Card.Image>
+                            <Card.Content>
+                                <p className="text-center text-lg">
+                                    {item.text}
+                                </p>
+                            </Card.Content>
+                        </Card>
                     ))}
                 </div>
             </div>
             <div className="flex flex-col gap-4 mt-4">
                 <H1>КОМАНДА</H1>
-                <div className="mt-2 grid sm:grid-cols-2 gap-8 lg:px-24">
+                <div className="mt-4 grid md:grid-cols-2 gap-8 sm:px-16 md:px-0 lg:px-8 2xl:px-24">
                     {team.map((item) => (
-                        <div className="mt-4 sm:mt-2 lg:mt-0 flex flex-col items-center gap-2 p-8 overflow-hidden rounded-lg shadow-md ring-1 ring-black ring-opacity-5 bg-white dark:bg-zinc-700">
-                            <Image
-                                width={256}
-                                height={256}
-                                alt=""
-                                src={item.picture}
-                                placeholder="blur"
-                                blurDataURL={item.picture}
-                                loading="lazy"
-                                quality={100}
-                                className="m-4"
-                            />
-                            <div className="text-center">
+                        <Card className="p-8">
+                            <Card.Image>
+                                <Image
+                                    width={256}
+                                    height={256}
+                                    alt=""
+                                    src={item.picture}
+                                    placeholder="blur"
+                                    blurDataURL={item.picture}
+                                    loading="lazy"
+                                    quality={100}
+                                    className="m-4"
+                                />
+                            </Card.Image>
+                            <Card.Content>
                                 <h2 className="text-xl font-bold">
                                     {item.name}
                                 </h2>
@@ -99,8 +108,8 @@ export default async function Page() {
                                 <p className="p-2 lg:p-4 mt-4 text-lg">
                                     {item.achievements}
                                 </p>
-                            </div>
-                        </div>
+                            </Card.Content>
+                        </Card>
                     ))}
                 </div>
             </div>

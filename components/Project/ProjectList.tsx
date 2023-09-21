@@ -1,13 +1,15 @@
 "use client";
 
-import { FaunadbPost, Project as ProjectType } from "@/types";
+import { FaunadbPost, Project } from "@/types";
 import { useSession } from "next-auth/react";
 import { FC } from "react";
 import { CRUDLayout } from "../CRUD/CRUDLayout";
-import { Project } from "./Project";
+import { ProjectCard } from "./ProjectCard";
+import { ProjectCardSkeleton } from "./ProjectCardSkeleton";
+import { ProjectListSkeleton } from "./ProjectListSkeleton";
 
 interface ProjectListProps {
-    posts: FaunadbPost<ProjectType>[];
+    posts: FaunadbPost<Project>[];
 }
 
 export const ProjectList: FC<ProjectListProps> = ({ posts }) => {
@@ -17,10 +19,10 @@ export const ProjectList: FC<ProjectListProps> = ({ posts }) => {
     return (
         <CRUDLayout isAdmin={isAdmin}>
             {
-                <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4 xl:grid-cols-3">
+                <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-4 xl:grid-cols-3">
                     {posts &&
                         posts.map((post) => (
-                            <Project
+                            <ProjectCard
                                 key={post.data.id}
                                 post={post}
                                 isAdmin={isAdmin}
