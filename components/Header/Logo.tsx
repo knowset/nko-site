@@ -1,13 +1,13 @@
 import { FC } from "react";
 import Image from "next/image";
-import { Layout } from "./Layout";
+import { Layout } from "../Layout";
 import Link from "next/link";
 
-export const TopNavBar: FC<{}> = () => {
+export const Logo: FC<{}> = () => {
     return (
         <>
             <Layout>
-                <nav className="hidden h-20 md:flex items-center justify-between text-gray-600 dark:text-gray-400">
+                <nav className="hidden h-[90px] md:flex items-center justify-between text-gray-600 dark:text-gray-400">
                     <div className="w-full  md:flex md:items-center">
                         <span className="mx-1 text-lg">
                             Ресурсный центр
@@ -37,7 +37,7 @@ export const TopNavBar: FC<{}> = () => {
                         </span>
                     </div>
                 </nav>
-                <nav className="h-20 flex md:hidden items-center gap-4 text-gray-600 dark:text-gray-400">
+                <nav className="h-[90px] flex md:hidden items-center gap-4 text-gray-600 dark:text-gray-400">
                     <div className="flex justify-center">
                         <Image
                             className="rounded-full"

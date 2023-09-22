@@ -26,7 +26,7 @@ export const ProjectDetail: FC<Project> = ({ post }) => {
     return !!post ? (
         <>
             {session?.user.role == "admin" ? (
-                <div className="fixed right-4 bottom-4 flex gap-4">
+                <div className="fixed right-4 bottom-4 flex gap-4 z-50">
                     <EditButton
                         id={post.data.id}
                         path="/project"

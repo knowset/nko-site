@@ -7,8 +7,6 @@ export async function GET(
     req: NextRequest,
     { params }: { params: { id: string } }
 ) {
-    console.log("HERERERER");
     const post = await getPostByID("project", params.id);
-    console.log("GET:", post);
     return NextResponse.json(post);
 }

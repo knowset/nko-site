@@ -2,9 +2,8 @@
 
 import { FC, useCallback, useState } from "react";
 import { useSession } from "next-auth/react";
-import { TopNavBar } from "./TopNavBar";
-import { NavBar } from "./Navbar/NavBar";
-
+import { Logo } from "./Logo";
+import { NavBar } from "./NavBar";
 
 export const Header: FC<{}> = () => {
     const [showMenu, setShowMenu] = useState(false);
@@ -16,10 +15,9 @@ export const Header: FC<{}> = () => {
     const session = useSession();
 
     return (
-        <div>
-            <TopNavBar />
-            {/* <TextHeader /> */}
+        <>
+            <Logo />
             <NavBar />
-        </div>
+        </>
     );
 };

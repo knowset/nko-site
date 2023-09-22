@@ -22,12 +22,12 @@ type ContentProps = {
     className?: string;
 };
 
-type CardSubChildrenProps = {
+type CardSubComponentsProps = {
     Image: FC<ImageProps>;
     Content: FC<ContentProps>;
 };
 
-export const Card: FC<CardProps> & CardSubChildrenProps = ({
+export const Card: FC<CardProps> & CardSubComponentsProps = ({
     children,
     className,
 }) => {

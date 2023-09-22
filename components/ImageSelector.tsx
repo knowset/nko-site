@@ -94,7 +94,7 @@ export const ImageSelector: FC<ImageSelectorProps> = ({
                                     file.state == ImageState.DELETED
                                         ? "hidden"
                                         : ""
-                                } w-full h-full border-4 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border-gray-200 hover:border-gray-300 transition-all duration-100 rounded-md shadow-md object-scale-down`}
+                                } w-full h-full border border-border-light dark:border-border-dark hover:border-black hover:dark:border-white transition-all duration-100 rounded-md shadow-md object-scale-down`}
                                 src={
                                     "https://drive.google.com/uc?export=view&id=" +
                                     file.image
@@ -109,8 +109,8 @@ export const ImageSelector: FC<ImageSelectorProps> = ({
                 {files.length < 10 && (
                     <li>
                         <label htmlFor="file">
-                            <div className="flex justify-center items-center text-4xl lg:text-5xl group w-20 h-20 lg:w-28 lg:h-28 border-4 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border-gray-200 hover:border-gray-300 border-dashed transition-all duration-100 rounded-md shadow-md">
-                                <AiFillPlusCircle className="fill-gray-200 group-hover:fill-gray-300" />
+                            <div className="group flex justify-center items-center text-4xl lg:text-5xl group w-20 h-20 lg:w-28 lg:h-28 border border-border-light dark:border-border-dark hover:border-black hover:dark:border-white border-dashed transition-all duration-300 rounded-md shadow-md">
+                                <AiFillPlusCircle className="fill-border-light dark:fill-border-dark group-hover:fill-black group-hover:dark:fill-white duration-300" />
                             </div>
                         </label>
                         <input

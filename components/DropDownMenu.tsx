@@ -1,7 +1,14 @@
-import { Children, FC, ReactNode, useCallback } from "react";
+import {
+    Children,
+    cloneElement,
+    FC,
+    Fragment,
+    ReactNode,
+    useCallback,
+} from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useComponentVisible } from "@/hooks/handleHideDropdown";
-import { NavLink } from "./Navbar/NavLink";
+import { NavLink } from "./NavLink";
 import { usePathname } from "next/navigation";
 import { Button } from "./Button";
 import { cva, VariantProps } from "class-variance-authority";
@@ -16,10 +23,6 @@ const ddmVariants = cva("mt-1 transform z-50", {
             left: "absolute left-0",
             fixedLeft: "fixed left-0",
         },
-        triggerType: {
-            default: "",
-            asLink: "",
-        },
         contentWidth: {
             default: "",
             mobile: "object-left w-[100vw-5px]",
@@ -30,8 +33,20 @@ const ddmVariants = cva("mt-1 transform z-50", {
     },
 });
 
-interface DDMProps extends VariantProps<typeof ddmVariants> {
-    title: any;
+type TriggerProps = {
+    children: ReactNode;
+};
+
+type ContentProps = {
+    children: ReactNode;
+};
+
+type DropDownMenuSubComponentsProps = {
+    Trigger: FC<TriggerProps>;
+    Content: FC<ContentProps>;
+};
+
+interface DropDownMenuProps extends VariantProps<typeof ddmVariants> {
     children: ReactNode;
 }
 
@@ -46,12 +61,11 @@ const menuVariants = {
     },
 };
 
-export const DropDownMenu: FC<DDMProps> = ({
-    title,
+export const DropDownMenu: FC<DropDownMenuProps> &
+    DropDownMenuSubComponentsProps = ({
     children,
     variant = "default",
     contentWidth = "default",
-    triggerType = "default",
 }) => {
     const { ref, isComponentVisible, setIsComponentVisible } =
         useComponentVisible(false);
@@ -59,20 +73,20 @@ export const DropDownMenu: FC<DDMProps> = ({
     const toggleMenu = useCallback(() => {
         setIsComponentVisible((current: boolean) => !current);
     }, []);
+    const trigger = Children.map(children, (child: any, index) => {
+        return child.type.displayName === TRIGGER_DISPLAY_NAME ? child : null;
+    });
+
+    const content = Children.map(children, (child: any, index) => {
+        return child.type.displayName === CONTENT_DISPLAY_NAME ? child : null;
+    });
 
     return (
         <div
             ref={ref}
             className={`${isComponentVisible ? "z-50 " : ""}relative`}
         >
-            <Button
-                type="button"
-                onClick={toggleMenu}
-                aria-expanded="false"
-                variant={triggerType}
-            >
-                {title}
-            </Button>
+            <div onClick={toggleMenu}>{trigger}</div>
 
             <AnimatePresence>
                 {isComponentVisible && (
@@ -89,7 +103,7 @@ export const DropDownMenu: FC<DDMProps> = ({
                                 })
                             )}
                         >
-                            {children}
+                            {content}
                         </motion.div>
                     </>
                 )}
@@ -97,3 +111,17 @@ export const DropDownMenu: FC<DDMProps> = ({
         </div>
     );
 };
+
+const Trigger: FC<TriggerProps> = ({ children }) => {
+    return <>{children}</>;
+};
+const TRIGGER_DISPLAY_NAME = "DROPDOWNMENU_TRIGGER";
+Trigger.displayName = TRIGGER_DISPLAY_NAME;
+DropDownMenu.Trigger = Trigger;
+
+const Content: FC<ContentProps> = ({ children }) => {
+    return <>{children}</>;
+};
+const CONTENT_DISPLAY_NAME = "DROPDOWNMENU_CONTENT";
+Content.displayName = CONTENT_DISPLAY_NAME;
+DropDownMenu.Content = Content;

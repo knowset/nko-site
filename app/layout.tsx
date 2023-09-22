@@ -1,9 +1,10 @@
-import { Header } from "@/components/Header";
+import { Header } from "@/components/Header/Header";
 import { Layout } from "@/components/Layout";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { Footer } from "@/components/Footer";
 import Favicon from "@/public/favicon.ico";
+import { Inter, Roboto } from "next/font/google";
 
 export const metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
@@ -27,13 +28,18 @@ export const metadata = {
     },
 };
 
+const inter = Inter({
+    subsets: ["cyrillic", "latin"],
+    display: "swap",
+});
+
 export default function RootLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
+        <html lang="ru" className={inter.className}>
             <body className="bg-white dark:bg-primary-dark transition-colors duration-300 min-h-[100vh] w-full flex flex-col no-scrollbar">
                 <Providers
                     attribute="class"
@@ -42,7 +48,7 @@ export default function RootLayout({
                     disableTransitionOnChange
                 >
                     <Header />
-                    <Layout>
+                    <Layout isContent>
                         <div className="pt-12 pb-20 flex-grow h-full flex flex-col justify-center items-center">
                             {children}
                         </div>
