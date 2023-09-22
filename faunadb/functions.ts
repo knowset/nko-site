@@ -200,7 +200,6 @@ export const getPostByID: (
                 q.Lambda((ref) => q.Get(ref))
             )
         );
-        console.log("resData", resData.data[0].data.images_ids);
 
         if (resData?.data.length == 0) {
             throw new Error(
@@ -214,7 +213,6 @@ export const getPostByID: (
             );
         } else {
             const post = resData.data[0];
-            console.log("POST: ", post);
             return {
                 post: post,
                 status: 200,

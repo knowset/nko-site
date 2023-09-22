@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { cva, VariantProps } from "class-variance-authority";
 import { ButtonHTMLAttributes, FC, ReactNode } from "react";
 
-const buttonVariants = cva("", {
+const buttonVariants = cva("select-none", {
     variants: {
         variant: {
             default: "",
@@ -26,7 +26,10 @@ export const Button: FC<ButtonProps> = ({
     ...props
 }) => {
     return (
-        <button {...props} className="group font-medium text-base whitespace-nowrap">
+        <button
+            {...props}
+            className="group font-medium text-base whitespace-nowrap"
+        >
             <span className={cn(buttonVariants({ variant }))}>{children}</span>
         </button>
     );

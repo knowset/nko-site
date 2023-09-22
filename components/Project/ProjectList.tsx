@@ -5,8 +5,6 @@ import { useSession } from "next-auth/react";
 import { FC } from "react";
 import { CRUDLayout } from "../CRUD/CRUDLayout";
 import { ProjectCard } from "./ProjectCard";
-import { ProjectCardSkeleton } from "./ProjectCardSkeleton";
-import { ProjectListSkeleton } from "./ProjectListSkeleton";
 
 interface ProjectListProps {
     posts: FaunadbPost<Project>[];

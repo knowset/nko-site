@@ -29,7 +29,7 @@ export default function Page() {
         <div className="flex flex-col gap-10 w-full">
             <div>
                 <H1 textsize="text-4xl">Обучение служением</H1>
-                <hr className="mt-4 dark:border-zinc-700" />
+                <hr className="mt-4 border-border-light dark:border-border-dark" />
             </div>
             <div className="flex flex-col gap-4">
                 <H2>

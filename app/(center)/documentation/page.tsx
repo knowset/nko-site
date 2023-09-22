@@ -34,7 +34,7 @@ export default async function Page() {
         <div className="flex flex-col gap-10">
             <div>
                 <H1 textsize="text-4xl">Документы</H1>
-                <hr className="mt-4 dark:border-zinc-700" />
+                <hr className="mt-4 border-border-light dark:border-border-dark" />
             </div>
             <div className="flex flex-col gap-4">
                 <H1>ПОЛНОЕ НАИМЕНОВАНИЕ ЦЕНТРА</H1>
@@ -52,7 +52,7 @@ export default async function Page() {
                     {section.links.map((link) => (
                         <H2>
                             {link.title}{" "}
-                            <a className="text-main" href={link.href}>
+                            <a className="text-main hover:text-main-hover" href={link.href}>
                                 (скачать .pdf)
                             </a>
                         </H2>

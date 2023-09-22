@@ -34,7 +34,7 @@ export const DeleteButton: FC<DeleteButtonProps> = ({
             <button
                 className={`bg-red-500 hover:bg-red-700 ${
                     isPostDetail ? "h-16 w-16" : "h-8 w-8"
-                } flex justify-center items-center text-white text-xl rounded`}
+                } flex justify-center items-center text-white text-xl rounded  transition-all duration-200`}
                 onClick={handleClick}
             >
                 {!isLoading ? (

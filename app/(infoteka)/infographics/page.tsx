@@ -28,7 +28,7 @@ export default function Page() {
         <div className="flex flex-col gap-12">
             <div>
                 <H1 textsize="text-4xl">Инфографика</H1>
-                <hr className="mt-4 dark:border-zinc-700 dark:border-zinc-700" />
+                <hr className="mt-4 border-border-light dark:border-border-dark border-border-light dark:border-border-dark" />
             </div>
             {infographics.map((item) => (
                 <div

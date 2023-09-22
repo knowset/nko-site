@@ -15,7 +15,7 @@ export const EditButton: FC<EditButtonProps> = ({ id, path, isPostDetail = false
         <div>
             <Link
                 href={`${path}/edit/${id}`}
-                className={`bg-fuchsia-500 hover:bg-fuchsia-700 ${isPostDetail ? "h-16 w-16" : "h-8 w-8"} flex justify-center items-center text-white text-xl rounded`}
+                className={`bg-fuchsia-500 hover:bg-fuchsia-700 ${isPostDetail ? "h-16 w-16" : "h-8 w-8"} flex justify-center items-center text-white text-xl rounded transition-all duration-200`}
             >
                 <AiFillEdit />
             </Link>

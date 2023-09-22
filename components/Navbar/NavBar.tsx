@@ -1,25 +1,25 @@
 "use client";
 
 import { navlinks } from "@/constants";
-import { FC, useState } from "react";
+import { FC } from "react";
 import React from "react";
 import { NavLink } from "./NavLink";
 import { DropDownMenu } from "../DropDownMenu";
 import { usePathname } from "next/navigation";
 import { Layout } from "../Layout";
 import { ModeToogle } from "../ModeToggle";
-import { RxHamburgerMenu } from "react-icons/rx";
+import { AlignJustify } from "lucide-react";
 
 const mobileTriggerButton = (
-    <div className="h-12 w-12 md:h-8 md:w-8 flex justify-center items-center border rounded-md dark:border-zinc-600 hover:bg-gray-200 hover:dark:bg-zinc-600">
-        <RxHamburgerMenu className="h-[1.5rem] w-[1.5rem] rotate-0 transition-all" />
+    <div className="h-12 w-12 md:h-8 md:w-8 flex justify-center items-center border rounded-lg border-border-light dark:border-border-dark hover:border-black hover:dark:border-white transition-all duration-300">
+        <AlignJustify className="h-[1.5rem] w-[1.5rem] rotate-0 transition-all" />
     </div>
 );
 
 export const NavBar: FC<{}> = () => {
     const path = usePathname();
     return (
-        <nav className="flex w-full py-4 border-t border-b bg-gray-100 dark:bg-zinc-700 dark:border-zinc-600">
+        <nav className="flex w-full py-4 border-t border-b bg-secondary-light dark:bg-secondary-dark border-border-light dark:border-border-dark">
             <Layout>
                 <div className="flex justify-between items-center">
                     <div className="hidden md:flex md:flex-row justify-between items-center w-full">
@@ -61,14 +61,14 @@ export const NavBar: FC<{}> = () => {
                         <ModeToogle />
                     </div>
                 </div>
-                <div className="flex md:hidden items-center justify-between text-sm font-bold uppercase mt-0 py-2">
+                <div className="flex md:hidden items-center justify-between text-sm font-bold uppercase mt-0">
                     <DropDownMenu
                         title={mobileTriggerButton}
                         variant="fixedLeft"
                         contentWidth="mobile"
                     >
                         <Layout>
-                            <div className="grid grid-cols-2 gap-2 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white dark:bg-zinc-800 p-2">
+                            <div className="grid grid-cols-2 gap-2 rounded-lg shadow-lg border border-border-light border-border-dark bg-primary-light dark:bg-primary-dark p-2">
                                 {navlinks.map((section) => (
                                     <div
                                         key={"mddm-section-" + section.title}

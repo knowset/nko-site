@@ -1,5 +1,5 @@
-import { LoadingPostDetail } from "@/components/LoadingPostDetail";
+import { ProjectDetailSkeleton } from "@/components/Project/ProjectDetailSkeleton";
 
 export default function Loading() {
-    return <LoadingPostDetail />
+    return <ProjectDetailSkeleton />
 }

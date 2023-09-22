@@ -3,7 +3,7 @@ import { cva, VariantProps } from "class-variance-authority";
 import { Children, FC, ReactElement, ReactNode, HTMLAttributes } from "react";
 
 const cardVariants = cva(
-    "flex flex-col items-center overflow-hidden rounded-lg shadow-md ring-1 ring-black ring-opacity-5 bg-white dark:bg-zinc-700"
+    "flex flex-col items-center overflow-hidden rounded-lg shadow-lg border border-border-light dark:border-border-dark bg-primary-light dark:bg-primary-dark"
 );
 
 const cardContentVariants = cva("text-center");

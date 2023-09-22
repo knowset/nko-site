@@ -28,7 +28,7 @@ export const ProjectCard: FC<ProjectCardProps> = ({
     return (
         <Card className="h-full">
             <Card.Image>
-                <div className="relative w-full pb-[80%] bg-zinc-600 rounded-t">
+                <div className="relative w-full pb-[80%] rounded-t">
                     <Link href={`${path}/${post.data.id}`} className="w-full">
                         {post.data.images_ids.length > 0 ? (
                             <Image
@@ -41,7 +41,7 @@ export const ProjectCard: FC<ProjectCardProps> = ({
                                 height={1000}
                             />
                         ) : (
-                            <div className="flex justify-center items-center absolute w-full h-full object-cover rounded-t bg-zinc-600">
+                            <div className="flex justify-center items-center absolute w-full h-full object-cover rounded-t">
                                 <p className=" text-white text-xl uppercase">
                                     no image
                                 </p>
