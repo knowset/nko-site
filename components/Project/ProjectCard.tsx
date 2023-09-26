@@ -42,7 +42,7 @@ export const ProjectCard: FC<ProjectCardProps> = ({
                             />
                         ) : (
                             <div className="flex justify-center items-center absolute w-full h-full object-cover rounded-t">
-                                <p className=" text-white dark:text-black text-xl uppercase">
+                                <p className=" text-black dark:text-white text-xl uppercase">
                                     no image
                                 </p>
                             </div>

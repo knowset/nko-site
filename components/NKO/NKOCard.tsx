@@ -15,10 +15,7 @@ export type NKOCardProps = {
     isAdmin?: boolean;
 };
 
-export const NKOCard: FC<NKOCardProps> = ({
-    post,
-    isAdmin = false,
-}) => {
+export const NKOCard: FC<NKOCardProps> = ({ post, isAdmin = false }) => {
     const path = usePathname();
 
     const preview_url = `https://drive.google.com/thumbnail?id=${
@@ -42,7 +39,7 @@ export const NKOCard: FC<NKOCardProps> = ({
                             />
                         ) : (
                             <div className="flex justify-center items-center absolute w-full h-full object-cover rounded-t">
-                                <p className=" text-white dark:text-black text-xl uppercase">
+                                <p className="text-black dark:text-white text-xl uppercase">
                                     no image
                                 </p>
                             </div>
