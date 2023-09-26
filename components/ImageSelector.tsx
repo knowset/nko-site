@@ -8,6 +8,7 @@ import {
     AiOutlineCheckCircle,
     AiOutlineLoading3Quarters,
 } from "react-icons/ai";
+import { Plus } from "lucide-react";
 
 interface ImageSelectorProps {
     images: IMG[];
@@ -40,14 +41,14 @@ export const ImageSelector: FC<ImageSelectorProps> = ({
                         copy.push(item);
                     }
                 } else if (typeof file.image === "string") {
-                    if (file.image !== item.image) {
-                        copy.push(item);
-                    } else {
+                    if (file.image === item.image) {
                         item.state = ImageState.DELETED;
                     }
+                    copy.push(item);
                 }
             });
         }
+        console.log(copy);
         setImages(copy);
     };
 
@@ -59,14 +60,16 @@ export const ImageSelector: FC<ImageSelectorProps> = ({
                 {files.map((file: IMG, i) => (
                     <li
                         key={i}
-                        className="relative w-20 h-20 lg:w-28 lg:h-28 shadow-md rounded-md"
+                        className={`${
+                            file.state === ImageState.DELETED ? "hidden" : ""
+                        } relative w-20 h-20 lg:w-28 lg:h-28 shadow-md rounded-md`}
                     >
                         {!isLoading ? (
                             <div
                                 onClick={() => handleFileDelete(i)}
-                                className="cursor-pointer text-red-500 hover:text-red-600 text-4xl border h-8 w-8 flex justify-center items-center rounded-md bg-white hover:bg-zinc-200 absolute right-1 top-1"
+                                className="cursor-pointer text-red-500 hover:text-red-600 border h-8 w-8 flex justify-center items-center rounded-md bg-white hover:bg-zinc-200 bg-opacity-30 hover:bg-opacity-50 absolute right-0 top-0"
                             >
-                                <span>&times;</span>
+                                <Plus className="rotate-45" />
                             </div>
                         ) : null}
                         {file.state == ImageState.LOADING ? (
@@ -91,7 +94,7 @@ export const ImageSelector: FC<ImageSelectorProps> = ({
                         ) : (
                             <Image
                                 className={`${
-                                    file.state == ImageState.DELETED
+                                    file.state === ImageState.DELETED
                                         ? "hidden"
                                         : ""
                                 } w-full h-full border border-border-light dark:border-border-dark hover:border-black hover:dark:border-white transition-all duration-100 rounded-md shadow-md object-scale-down`}

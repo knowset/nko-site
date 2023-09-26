@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Image from "next/image";
-import { Layout } from "../Layout";
+import { Layout } from "../Layouts/Layout";
 import Link from "next/link";
 
 export const Logo: FC<{}> = () => {

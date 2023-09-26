@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { ProjectCardSkeleton } from "@/components/Project/ProjectCardSkeleton";
+import { PostCardSkeleton } from "./PostCardSkeleton";
 
-export const ProjectListSkeleton: FC<{}> = () => {
+export const PostListSkeleton: FC<{}> = () => {
     return (
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-8 xl:grid-cols-3">
             {[
@@ -9,7 +9,7 @@ export const ProjectListSkeleton: FC<{}> = () => {
                     .fill(null)
                     .map((_, i) => i + 1),
             ].map((item) => (
-                <ProjectCardSkeleton key={"project-card-skeleton-" + item} />
+                <PostCardSkeleton key={"project-card-skeleton-" + item} />
             ))}
         </div>
     );

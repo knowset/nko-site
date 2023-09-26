@@ -1,20 +1,19 @@
 "use client";
 
-import { notFound, usePathname, useSearchParams } from "next/navigation";
-import { FC, useEffect, useState } from "react";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale";
 import { ImageTabs } from "../ImageTabs";
-import { FaunadbPost, Project as ProjectType } from "@/types";
+import { FaunadbPost, GeneralPostProps, Project } from "@/types";
 import { EditButton } from "../CRUD/EditButton";
 import { DeleteButton } from "../CRUD/DeleteButton";
 import { useSession } from "next-auth/react";
+import { FC } from "react";
 
-interface Project {
-    post: FaunadbPost<ProjectType>;
+interface ProjectDetailProps {
+    post: FaunadbPost<Project & GeneralPostProps>;
 }
 
-export const ProjectDetail: FC<Project> = ({ post }) => {
+export const ProjectDetail: FC<ProjectDetailProps> = ({ post }) => {
     const { data: session } = useSession();
 
     let images_urls: string[] = [];
@@ -32,7 +31,7 @@ export const ProjectDetail: FC<Project> = ({ post }) => {
                         path="/project"
                         isPostDetail
                     />
-                    <DeleteButton post={post} path="project" isPostDetail />
+                    <DeleteButton post={post} path="/project" isPostDetail />
                 </div>
             ) : null}
             <section className="w-full max-w-3xl lg:px-4 sm:px-6 xl:max-w-5xl xl:px-0 mb-8">

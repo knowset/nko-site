@@ -1,5 +1,5 @@
-import { ProjectDetail } from "@/components/Project/ProjectDetail";
-import { FaunadbPostOrError, GeneralPostProps, Project } from "@/types";
+import { NKODetail } from "@/components/NKO/NKODetail";
+import { FaunadbPostOrError, GeneralPostProps, NKO } from "@/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -42,14 +42,13 @@ export async function generateMetadata({
 async function getProjectById(params: { id: string }) {
     if (!params.id) return null;
 
-    const res = await fetch(`${process.env.API_URL}/api/project/${params.id}`);
+    const res = await fetch(`${process.env.API_URL}/api/nko/${params.id}`);
 
     if (!res) {
         throw new Error("Невозможно получить пост");
     }
 
-    const data: FaunadbPostOrError<Project & GeneralPostProps> =
-        await res.json();
+    const data: FaunadbPostOrError<NKO & GeneralPostProps> = await res.json();
 
     return data;
 }
@@ -63,5 +62,5 @@ export default async function page({ params }: { params: { id: string } }) {
         return null;
     }
 
-    return <ProjectDetail post={data.post} />;
+    return <NKODetail post={data.post} />;
 }

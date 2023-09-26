@@ -1,7 +1,7 @@
 import { FC, Fragment } from "react";
 import { navlinks } from "@/constants";
 import Link from "next/link";
-import { Layout } from "./Layout";
+import { Layout } from "./Layouts/Layout";
 import { NavLink } from "./NavLink";
 
 export const Footer: FC<{}> = () => {

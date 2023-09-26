@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Card } from "../Card";
 
-export const ProjectCardSkeleton: FC<{}> = () => {
+export const PostCardSkeleton: FC<{}> = () => {
     return (
         <Card className="h-full">
             {/* <div className="flex flex-col justify-between h-full"> */}

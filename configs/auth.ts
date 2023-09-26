@@ -1,4 +1,5 @@
 import { getUserByEmail } from "@/faunadb/functions";
+import { UserResponse } from "@/types";
 import argon2 from "argon2";
 import type { AuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
@@ -25,8 +26,22 @@ export const authConfig: AuthOptions = {
                 },
             },
             async authorize(credentials) {
-                if (!credentials?.email || !credentials.password) {
-                    return null;
+                if (
+                    !credentials ||
+                    !credentials.email ||
+                    !credentials.password
+                ) {
+                    throw new Error(
+                        JSON.stringify({
+                            status: 500,
+                            errors: [
+                                {
+                                    field: "password",
+                                    message: "Что-то пошло не так",
+                                },
+                            ],
+                        })
+                    );
                 }
 
                 const userOrError = await getUserByEmail(credentials.email);
@@ -37,8 +52,19 @@ export const authConfig: AuthOptions = {
                         userOrError.user.password,
                         credentials.password
                     ))
-                )
-                    return null;
+                ) {
+                    throw new Error(
+                        JSON.stringify({
+                            status: 500,
+                            errors: [
+                                {
+                                    field: "email",
+                                    message: "Неверный email или пароль.",
+                                },
+                            ],
+                        })
+                    );
+                }
 
                 const user = userOrError.user;
 

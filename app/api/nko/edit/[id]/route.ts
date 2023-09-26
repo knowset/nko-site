@@ -1,5 +1,5 @@
 import { updatePostById } from "@/faunadb/functions";
-import { FaunadbPost, GeneralPostProps, Project } from "@/types";
+import { FaunadbPost, GeneralPostProps, NKO, Project } from "@/types";
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -8,9 +8,9 @@ export async function POST(req: NextRequest) {
 
     if (token && token.role === "admin") {
         const data = (await req.json()) as FaunadbPost<
-            Project & GeneralPostProps
+            NKO & GeneralPostProps
         >;
-        const postOrError = await updatePostById<Project>("project", {
+        const postOrError = await updatePostById<NKO>("nko", {
             ...data,
         });
         return NextResponse.json(postOrError);

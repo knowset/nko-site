@@ -7,7 +7,7 @@ import {
     GeneralPostProps,
     ImageState,
     IMG,
-    Project,
+    NKO,
 } from "@/types";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FC, FormEventHandler, useState } from "react";
@@ -15,23 +15,23 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Input } from "../../Input";
 import { FormLayout } from "../../../Layouts/FormLayout";
 
-interface EditProjectFormProps {
-    project: FaunadbPost<Project & GeneralPostProps>;
+interface EditNKOFormProps {
+    post: FaunadbPost<NKO & GeneralPostProps>;
 }
 
-export const EditProjectForm: FC<EditProjectFormProps> = ({ project }) => {
+export const EditNKOForm: FC<EditNKOFormProps> = ({ post }) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
     const [images, setImages] = useState<IMG[]>(
-        project.data.images_ids.map((item) => {
+        post.data.images_ids.map((item) => {
             return { state: ImageState.UPLOADED, image: item };
         })
     );
 
-    const [formValues, setFormValues] = useState<Project>({
-        ...project.data,
-        images_ids: project.data.images_ids,
+    const [formValues, setFormValues] = useState<NKO>({
+        ...post.data,
+        images_ids: post.data.images_ids,
     });
     const [error, setError] = useState("");
 
@@ -41,11 +41,11 @@ export const EditProjectForm: FC<EditProjectFormProps> = ({ project }) => {
         const images_ids = await uploadImage(images);
 
         try {
-            const res = await fetch(`/api/project/edit/${project.data.id}`, {
+            const res = await fetch(`/api/nko/edit/${post.data.id}`, {
                 method: "POST",
                 body: JSON.stringify({
-                    ref: project.ref,
-                    ts: project.ts,
+                    ref: post.ref,
+                    ts: post.ts,
                     data: { ...formValues, images_ids: images_ids },
                 }),
                 headers: {
@@ -56,7 +56,7 @@ export const EditProjectForm: FC<EditProjectFormProps> = ({ project }) => {
                 setError((await res.json()).message);
                 return;
             }
-            router.push(`/project`);
+            router.push(`/nko`);
         } catch (error: any) {
             setError(error);
             setIsLoading(false);
@@ -89,7 +89,7 @@ export const EditProjectForm: FC<EditProjectFormProps> = ({ project }) => {
                         item.image,
                         item.image.name + "-" + new Date()
                     );
-                    form.append("postType", "project");
+                    form.append("postType", "post");
                     form.append("title", formValues.title);
 
                     const res = await fetch("/api/image/upload", {
@@ -116,7 +116,7 @@ export const EditProjectForm: FC<EditProjectFormProps> = ({ project }) => {
     };
 
     return (
-        <FormLayout title="Редактирование проекта" onSubmit={handleSubmit}>
+        <FormLayout title="Редактирование статьи в разделе НКО" onSubmit={handleSubmit}>
             <Input
                 title="Название статьи"
                 value={formValues.title}
@@ -125,74 +125,69 @@ export const EditProjectForm: FC<EditProjectFormProps> = ({ project }) => {
                 type="text"
                 required
                 inputType="textarea"
-                height="h-24"
-            />
+            />{" "}
             <Input
-                title="Дополнительная информация"
-                value={formValues.sub_title}
+                title="Сокращенное название статьи"
+                value={formValues.abbreviation}
                 onChange={handleChange}
-                name="sub_title"
-                type="text"
-                inputType="textarea"
-                height="h-24"
-            />
-            <label className="font-semibold text-base mt-3">
-                Срок реализации
-            </label>
-            <div className="flex gap-4 mt-2 flex-col sm:flex-row">
-                <Input
-                    title="Начало"
-                    value={formValues.start_of_the_implementation_period}
-                    onChange={handleChange}
-                    name="start_of_the_implementation_period"
-                    type="date"
-                    inputType="date"
-                    required
-                />
-                <Input
-                    title="Конец"
-                    value={formValues.end_of_the_implementation_period}
-                    onChange={handleChange}
-                    name="end_of_the_implementation_period"
-                    type="date"
-                    inputType="date"
-                    required
-                />
-            </div>
-            <Input
-                title="Источник финансирования"
-                value={formValues.source_of_financing}
-                onChange={handleChange}
-                name="source_of_financing"
+                name="abbreviation"
                 type="text"
                 required
                 inputType="textarea"
-                height="h-24"
             />
             <Input
-                title="Объем субсидии"
-                value={formValues.amount_of_the_subsidy}
+                title="Директор организации"
+                value={formValues.director_of_the_organization}
                 onChange={handleChange}
-                name="amount_of_the_subsidy"
+                name="director_of_the_organization"
+                type="text"
+                inputType="textarea"
+            />
+            <Input
+                title="Основной вид деятельности"
+                value={formValues.main_activity}
+                onChange={handleChange}
+                name="main_activity"
                 type="text"
                 required
+                inputType="textarea"
             />
             <Input
-                title="Основные результаты"
-                value={formValues.main_results}
+                title="Сайт (необязательно)"
+                value={formValues.site}
                 onChange={handleChange}
-                name="main_results"
+                name="site"
+                type="text"
+            />
+            <Input
+                title="Социальные сети (необязательно)"
+                value={formValues.social_media}
+                onChange={handleChange}
+                name="social_media"
+                type="text"
+            />
+            <Input
+                title="Электронная почта (необязательно)"
+                value={formValues.email}
+                onChange={handleChange}
+                name="email"
+                inputType="textarea"
+            />
+            <Input
+                title="Проекты НКО, реализованные при методической и информационной поддержке Ресурсного центра"
+                value={formValues.NKO_projects}
+                onChange={handleChange}
+                name="NKO_projects"
                 required
-                className="flex items-center h-40 p-4 w-full mt-2 rounded focus:outline-none focus:ring-2"
                 inputType="textarea"
             />
             <label className="font-semibold text-base">Картинки</label>
             <ImageSelector
                 images={images}
-                isLoading={isLoading}
                 setImages={setImages}
+                isLoading={isLoading}
             />
-            <Button type="submit">
+            <Button>
                 {isLoading ? (
                     <AiOutlineLoading3Quarters className="animate-spin text-2xl" />
                 ) : (

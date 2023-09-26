@@ -6,7 +6,7 @@ import React from "react";
 import { NavLink } from "../NavLink";
 import { DropDownMenu } from "../DropDownMenu";
 import { usePathname } from "next/navigation";
-import { Layout } from "../Layout";
+import { Layout } from "../Layouts/Layout";
 import { ModeToogle } from "../ModeToggle";
 import { AlignJustify } from "lucide-react";
 import { Button } from "../Button";

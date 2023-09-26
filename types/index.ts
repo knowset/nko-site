@@ -8,8 +8,12 @@ export type PostError = {
     errors?: ErrorField[];
 };
 
-export type Project = {
+export type GeneralPostProps = {
     id: string;
+    date: string;
+};
+
+export type Project = {
     title: string;
     sub_title: string;
     start_of_the_implementation_period: string;
@@ -18,7 +22,18 @@ export type Project = {
     amount_of_the_subsidy: string;
     main_results: string;
     images_ids: string[];
-    date: string;
+};
+
+export type NKO = {
+    title: string;
+    abbreviation: string;
+    director_of_the_organization: string;
+    main_activity: string;
+    site: string;
+    social_media: string;
+    email: string;
+    NKO_projects: string;
+    images_ids: string[];
 };
 
 export type FaunadbPost<T> = {
@@ -54,4 +69,17 @@ export enum ImageState {
 export type IMG = {
     state: ImageState;
     image: File | string;
+};
+
+export type User = {
+    id: number;
+    email: string;
+    role: string;
+    password: string;
+};
+
+export type UserResponse = {
+    errors?: ErrorField[];
+    user?: User;
+    status: number;
 };

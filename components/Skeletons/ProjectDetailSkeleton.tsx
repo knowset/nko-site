@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-export const ProjectDetailSkeleton: FC<{}> = () => {
+export const PostDetailSkeleton: FC<{}> = () => {
     return (
         <section className="w-full max-w-3xl lg:px-4 sm:px-6 xl:max-w-5xl xl:px-0 mb-8">
             <div className="divide-y divide-border-light dark:divide-border-dark">

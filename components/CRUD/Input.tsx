@@ -9,12 +9,14 @@ const inputVariants = cva(
 type InputProps = {
     title: string;
     inputType?: string;
+    errorMessage?: string;
 } & InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> &
     VariantProps<typeof inputVariants>;
 
 export const Input: FC<InputProps> = ({
     title,
     inputType = "input",
+    errorMessage = "",
     className,
     ...props
 }) => {
@@ -61,33 +63,9 @@ export const Input: FC<InputProps> = ({
         <div className="flex flex-col gap-2">
             <label className="font-semibold text-base">{title}</label>
             {_input}
+            <div className="h-4 text-red-500">
+                {!!errorMessage ? errorMessage : null}
+            </div>
         </div>
     );
 };
-
-{
-    /* <div>
-    <label>Конец</label>
-    <input
-        value={formValues.end_of_the_implementation_period}
-        onChange={handleChange}
-        type="date"
-        name="end_of_the_implementation_period"
-        required
-        className="flex items-center h-12 px-4 w-full bg-gray-200 rounded focus:outline-none focus:ring-2"
-    />
-</div> */
-}
-
-// inputType == "input" ? (
-//     <input
-//         {...props}
-//         className="h-12 px-4 mt-2"
-//     />
-// ) : (
-//     <textarea
-//         {...props}
-//         className={`${height} p-4 rounded focus:outline-none focus:ring-2 text-lg`}
-//     />
-// )}
-// </div>

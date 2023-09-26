@@ -3,7 +3,9 @@ import {
     FaunadbPostOrError,
     FaunadbPosts,
     FaunadbPostsOrError,
+    GeneralPostProps,
     Project,
+    UserResponse,
 } from "@/types";
 import faunadb from "faunadb";
 import { v4 as uuid } from "uuid";
@@ -13,22 +15,9 @@ const client = new faunadb.Client({
     secret: "fnAFLkDLPdAAUTb14qMa2TZuIwnxPe9UGGaA97md",
 });
 
-interface User {
-    id: number;
-    email: string;
-    role: string;
-    password: string;
-}
-
 interface ErrorField {
     field: string;
     message: string;
-}
-
-interface UserResponse {
-    errors?: ErrorField[];
-    user?: User;
-    status: number;
 }
 
 interface FaunadbUserResponse {
@@ -50,16 +39,15 @@ export const getUserByEmail = async (email: string): Promise<UserResponse> => {
                 q.Filter(
                     q.Paginate(q.Match(q.Index("all_items"))),
                     q.Lambda((ref) =>
-                        q.ContainsStr(
-                            q.Select(["data", "email"], q.Get(ref)),
-                            email
-                        )
+                        q.Equals(q.Select(["data", "email"], q.Get(ref)), email)
                     )
                 ),
                 q.Lambda((ref) => q.Get(ref))
             )
         );
-
+        //     q.Lambda((ref) =>
+        //     q.Equals(q.Select(["data", "id"], q.Get(ref)), postId)
+        // )
         if (resData?.data.length == 0) {
             throw new Error(
                 JSON.stringify({
@@ -146,11 +134,11 @@ export const createUser = async (userData: {
     }
 };
 
-export const getAllPosts: (
+export const getAllPosts = async <T>(
     postType: string
-) => Promise<FaunadbPostsOrError<Project>> = async (postType: string) => {
+): Promise<FaunadbPostsOrError<T & GeneralPostProps>> => {
     try {
-        const res: FaunadbPosts<Project> = await client.query(
+        const res: FaunadbPosts<T & GeneralPostProps> = await client.query(
             q.Reverse(
                 q.Map(
                     q.Paginate(q.Documents(q.Collection(postType))),
@@ -184,12 +172,12 @@ export const getAllPosts: (
     }
 };
 
-export const getPostByID: (
+export const getPostByID = async <T, U = T & GeneralPostProps>(
     postType: string,
     postId: string
-) => Promise<FaunadbPostOrError<Project>> = async (postType, postId) => {
+): Promise<FaunadbPostOrError<U>> => {
     try {
-        const resData: FaunadbPosts<Project> = await client.query(
+        const resData: FaunadbPosts<U> = await client.query(
             q.Map(
                 q.Filter(
                     q.Paginate(q.Match(q.Index(postType + "_by_id"))),
@@ -230,79 +218,111 @@ export const getPostByID: (
     }
 };
 
-export const createPost = async (postType: string, data: Project) => {
+export const createPost = async <T>(postType: string, data: T) => {
     try {
-        const res = await client
-            .query(
-                q.Create(q.Collection(postType), {
-                    data: {
-                        ...data,
-                        id: uuid(),
-                        date: new Date().toString(),
-                    },
-                })
-            )
-            .then((ret) => console.log(ret))
-            .catch((err) =>
-                console.error(
-                    "Error: [%s] %s: %s",
-                    err.name,
-                    err.message,
-                    err.errors()[0].description
-                )
-            );
-        return { statusCode: 200, body: JSON.stringify({ res }) };
+        const resData: FaunadbPosts<T> = await client.query(
+            q.Create(q.Collection(postType), {
+                data: {
+                    ...data,
+                    id: uuid(),
+                    date: new Date().toString(),
+                },
+            })
+        );
+        const post = resData.data[0];
+        return {
+            post: post,
+            status: 200,
+        };
     } catch (err) {
-        return JSON.parse((err as Error).message);
+        const errorData: {
+            status: number;
+            error: { field: string; message: string };
+        } = JSON.parse((err as Error).message);
+
+        return {
+            ...errorData,
+        };
     }
 };
 
-export const updatePostById = async (
+export const updatePostById = async <T, U = T & GeneralPostProps>(
     postType: string,
-    data: FaunadbPost<Project>
+    data: FaunadbPost<U>
 ) => {
     try {
         const id = data.ref["@ref"].id;
+        console.log(data);
 
-        const res: FaunadbPosts<Project> = await client.query(
+        const resData: FaunadbPosts<U> = await client.query(
             q.Update(q.Ref(q.Collection(postType), id), {
                 data: data.data,
             })
         );
 
-        if (!res || !res?.data) {
-            throw new Error("Something went wrong");
+        if (!resData) {
+            throw new Error(
+                JSON.stringify({
+                    status: 500,
+                    error: {
+                        field: "",
+                        message: "Что-то пошло не так",
+                    },
+                })
+            );
         }
 
-        // NOTE: make the same response as other functions
+        const post = resData.data[0];
         return {
-            statusCode: 200,
-            body: JSON.stringify({ message: "Post successfully updated" }),
+            post: post,
+            status: 200,
         };
     } catch (err) {
-        return JSON.parse((err as Error).message);
+        const errorData: {
+            status: number;
+            error: { field: string; message: string };
+        } = JSON.parse((err as Error).message);
+
+        return {
+            ...errorData,
+        };
     }
 };
 
-export const deletePostById = async (
+export const deletePostById = async <T>(
     postType: string,
-    post: FaunadbPost<Project>
+    post: FaunadbPost<T>
 ) => {
     try {
         const faunaDBPostId = post.ref["@ref"].id;
-        const res = await client.query(
+        const resData: FaunadbPost<T> = await client.query(
             q.Delete(q.Ref(q.Collection(postType), faunaDBPostId))
         );
 
-        if (!res) {
-            throw new Error("Something went wrong");
+        if (!resData) {
+            throw new Error(
+                JSON.stringify({
+                    status: 500,
+                    error: {
+                        field: "",
+                        message: "Что-то пошло не так",
+                    },
+                })
+            );
         }
 
         return {
-            statusCode: 200,
-            body: JSON.stringify({ message: "Post successfully deleted" }),
+            post: resData.data,
+            status: 200,
         };
     } catch (err) {
-        return JSON.parse((err as Error).message);
+        const errorData: {
+            status: number;
+            error: { field: string; message: string };
+        } = JSON.parse((err as Error).message);
+
+        return {
+            ...errorData,
+        };
     }
 };

@@ -1,11 +1,15 @@
 import { FC, FormHTMLAttributes, ReactNode } from "react";
 
-type FormProps = {
+type FormLayoutProps = {
     title: string;
     children: ReactNode;
 } & FormHTMLAttributes<HTMLFormElement>;
 
-export const Form: FC<FormProps> = ({ children, title, ...props }) => {
+export const FormLayout: FC<FormLayoutProps> = ({
+    children,
+    title,
+    ...props
+}) => {
     return (
         <div className="flex justify-center w-full">
             <form

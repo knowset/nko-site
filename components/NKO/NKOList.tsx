@@ -1,16 +1,16 @@
 "use client";
 
-import { FaunadbPost, GeneralPostProps, Project } from "@/types";
+import { FaunadbPost, GeneralPostProps, NKO } from "@/types";
 import { useSession } from "next-auth/react";
 import { FC } from "react";
 import { CRUDLayout } from "../CRUD/CRUDLayout";
-import { ProjectCard } from "./ProjectCard";
+import { NKOCard } from "./NKOCard";
 
-interface ProjectListProps {
-    posts: FaunadbPost<Project & GeneralPostProps>[];
+interface NKOListProps {
+    posts: FaunadbPost<NKO & GeneralPostProps>[];
 }
 
-export const ProjectList: FC<ProjectListProps> = ({ posts }) => {
+export const NKOList: FC<NKOListProps> = ({ posts }) => {
     const { data: session } = useSession();
     const isAdmin = session?.user.role == "admin";
 
@@ -20,7 +20,7 @@ export const ProjectList: FC<ProjectListProps> = ({ posts }) => {
                 <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-4 xl:grid-cols-3">
                     {posts &&
                         posts.map((post) => (
-                            <ProjectCard
+                            <NKOCard
                                 key={post.data.id}
                                 post={post}
                                 isAdmin={isAdmin}

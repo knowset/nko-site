@@ -2,27 +2,28 @@
 
 import { Button } from "@/components/Button";
 import { ImageSelector } from "@/components/ImageSelector";
-import { ImageState, IMG, Project } from "@/types";
+import { ImageState, IMG, NKO } from "@/types";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FC, FormEvent, useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Input } from "../../Input";
 import { FormLayout } from "../../../Layouts/FormLayout";
 
-export const CreateProjectForm: FC<{}> = () => {
+export const CreateNKOForm: FC<{}> = () => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
     const [images, setImages] = useState<IMG[]>([]);
 
-    const [formValues, setFormValues] = useState<Project>({
+    const [formValues, setFormValues] = useState<NKO>({
         title: "",
-        sub_title: "",
-        start_of_the_implementation_period: "",
-        end_of_the_implementation_period: "",
-        source_of_financing: "",
-        amount_of_the_subsidy: "",
-        main_results: "",
+        abbreviation: "",
+        director_of_the_organization: "",
+        main_activity: "",
+        site: "",
+        social_media: "",
+        email: "",
+        NKO_projects: "",
         images_ids: [],
     });
     const [error, setError] = useState("");
@@ -35,7 +36,7 @@ export const CreateProjectForm: FC<{}> = () => {
 
         const images_ids = await uploadImage(images);
         try {
-            const res = await fetch(`/api/project/new`, {
+            const res = await fetch(`/api/nko/new`, {
                 method: "POST",
                 body: JSON.stringify({ ...formValues, images_ids: images_ids }),
                 headers: {
@@ -46,7 +47,7 @@ export const CreateProjectForm: FC<{}> = () => {
                 setError((await res.json()).message);
                 return;
             }
-            router.push(`/project`);
+            router.push(`/nko`);
         } catch (error: any) {
             setError(error);
         } finally {
@@ -82,7 +83,7 @@ export const CreateProjectForm: FC<{}> = () => {
                         item.image,
                         item.image.name + "-" + new Date()
                     );
-                    form.append("postType", "project");
+                    form.append("postType", "nko");
                     form.append("title", formValues.title);
 
                     const res = await fetch("/api/image/upload", {
@@ -99,7 +100,10 @@ export const CreateProjectForm: FC<{}> = () => {
     };
 
     return (
-        <FormLayout title="Создание нового проекта" onSubmit={handleSubmit}>
+        <FormLayout
+            title="Создание новой статьи в разделе НКО"
+            onSubmit={handleSubmit}
+        >
             <Input
                 title="Название статьи"
                 value={formValues.title}
@@ -108,60 +112,59 @@ export const CreateProjectForm: FC<{}> = () => {
                 type="text"
                 required
                 inputType="textarea"
-            />
+            />{" "}
             <Input
-                title="Дополнительная информация"
-                value={formValues.sub_title}
+                title="Сокращенное название статьи"
+                value={formValues.abbreviation}
                 onChange={handleChange}
-                name="sub_title"
-                type="text"
-                inputType="textarea"
-            />
-            <label className="font-semibold text-base mt-3">
-                Срок реализации
-            </label>
-            <div className="flex gap-4 mt-2 flex-col sm:flex-row">
-                <Input
-                    title="Начало"
-                    value={formValues.start_of_the_implementation_period}
-                    onChange={handleChange}
-                    name="start_of_the_implementation_period"
-                    type="date"
-                    inputType="date"
-                    required
-                />
-                <Input
-                    title="Конец"
-                    value={formValues.end_of_the_implementation_period}
-                    onChange={handleChange}
-                    name="end_of_the_implementation_period"
-                    type="date"
-                    inputType="date"
-                    required
-                />
-            </div>
-            <Input
-                title="Источник финансирования"
-                value={formValues.source_of_financing}
-                onChange={handleChange}
-                name="source_of_financing"
+                name="abbreviation"
                 type="text"
                 required
                 inputType="textarea"
             />
             <Input
-                title="Объем субсидии"
-                value={formValues.amount_of_the_subsidy}
+                title="Директор организации"
+                value={formValues.director_of_the_organization}
                 onChange={handleChange}
-                name="amount_of_the_subsidy"
+                name="director_of_the_organization"
                 type="text"
-                required
+                inputType="textarea"
             />
             <Input
-                title="Основные результаты"
-                value={formValues.main_results}
+                title="Основной вид деятельности"
+                value={formValues.main_activity}
                 onChange={handleChange}
-                name="main_results"
+                name="main_activity"
+                type="text"
+                required
+                inputType="textarea"
+            />
+            <Input
+                title="Сайт (необязательно)"
+                value={formValues.site}
+                onChange={handleChange}
+                name="site"
+                type="text"
+            />
+            <Input
+                title="Социальные сети (необязательно)"
+                value={formValues.social_media}
+                onChange={handleChange}
+                name="social_media"
+                type="text"
+            />
+            <Input
+                title="Электронная почта (необязательно)"
+                value={formValues.email}
+                onChange={handleChange}
+                name="email"
+                inputType="textarea"
+            />
+            <Input
+                title="Проекты НКО, реализованные при методической и информационной поддержке Ресурсного центра"
+                value={formValues.NKO_projects}
+                onChange={handleChange}
+                name="NKO_projects"
                 required
                 inputType="textarea"
             />

@@ -5,17 +5,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DeleteButton } from "../CRUD/DeleteButton";
 import { EditButton } from "../CRUD/EditButton";
-import { FaunadbPost, Project, GeneralPostProps } from "@/types";
+import { FaunadbPost, GeneralPostProps, NKO } from "@/types";
 import Image from "next/image";
 import { Card } from "../Card";
 import { BsArrowRight } from "react-icons/bs";
 
-export type ProjectCardProps = {
-    post: FaunadbPost<Project & GeneralPostProps>;
+export type NKOCardProps = {
+    post: FaunadbPost<NKO & GeneralPostProps>;
     isAdmin?: boolean;
 };
 
-export const ProjectCard: FC<ProjectCardProps> = ({
+export const NKOCard: FC<NKOCardProps> = ({
     post,
     isAdmin = false,
 }) => {
@@ -55,10 +55,9 @@ export const ProjectCard: FC<ProjectCardProps> = ({
                     <div className="text-center">
                         <h1 className="text-main text-xl font-bold leading-6">
                             <Link href={`${path}/${post.data.id}`}>
-                                {post.data.title}
+                                {post.data.abbreviation}
                             </Link>
                         </h1>
-                        <p className="text-base">{post.data.sub_title}</p>
                     </div>
                 </div>
                 <div className="flex justify-between mt-auto px-4 pt-2 pb-4">

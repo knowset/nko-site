@@ -1,5 +1,5 @@
 import { Header } from "@/components/Header/Header";
-import { Layout } from "@/components/Layout";
+import { Layout } from "@/components/Layouts/Layout";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { Footer } from "@/components/Footer";

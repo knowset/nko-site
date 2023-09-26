@@ -40,10 +40,10 @@ export const navlinks: {
     },
     {
         title: "Календарь",
-        // links: [
-        //     { title: "Студентам", href: "/for_students" },
-        //     { title: "Нко", href: "/nko" },
-        // ],
+        links: [
+            //     { title: "Студентам", href: "/for_students" },
+            { title: "Нко", href: "/nko" },
+        ],
     },
 ];
 

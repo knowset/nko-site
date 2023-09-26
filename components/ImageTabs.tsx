@@ -32,26 +32,27 @@ export const ImageTabs: FC<ImageTabsProps> = ({ images_urls }) => {
                 </TabsContent>
             ))}
             <TabsList className="h-full xl:w-[75%] mt-8 gap-4 xl:mx-[12.5%] overflow-x-scroll flex justify-start image-selector pb-6">
-                {images_urls.map((image_url) => (
-                    <TabsTrigger
-                        key={"image-tab-" + image_url}
-                        value={"image-tab-" + image_url}
-                        className="rounded-md shadow-md border border-border-light dark:border-border-dark data-[state=active]:border-main data-[state=active]:dark:border-main"
-                    >
-                        <div className="flex justify-center px-12 relative pb-[100%] rounded-md">
-                            <Image
-                                className="absolute w-full h-full transition-all duration-100 rounded-md object-scale-down"
-                                src={image_url}
-                                alt=""
-                                placeholder="blur"
-                                blurDataURL={image_url}
-                                width={1000}
-                                height={1000}
-                                quality={100}
-                            />
-                        </div>
-                    </TabsTrigger>
-                ))}
+                {images_urls.length > 1 &&
+                    images_urls.map((image_url) => (
+                        <TabsTrigger
+                            key={"image-tab-" + image_url}
+                            value={"image-tab-" + image_url}
+                            className="rounded-md shadow-md border border-border-light dark:border-border-dark data-[state=active]:border-main data-[state=active]:dark:border-main"
+                        >
+                            <div className="flex justify-center px-12 relative pb-[100%] rounded-md">
+                                <Image
+                                    className="absolute w-full h-full transition-all duration-100 rounded-md object-scale-down"
+                                    src={image_url}
+                                    alt=""
+                                    placeholder="blur"
+                                    blurDataURL={image_url}
+                                    width={1000}
+                                    height={1000}
+                                    quality={100}
+                                />
+                            </div>
+                        </TabsTrigger>
+                    ))}
             </TabsList>
         </Tabs>
     );
