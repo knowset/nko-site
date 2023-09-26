@@ -39,7 +39,7 @@ export const NKODetail: FC<NKODetailProps> = ({ post }) => {
             ) : null}
             <section className="w-full max-w-3xl lg:px-4 sm:px-6 xl:max-w-5xl xl:px-0 mb-8">
                 <div className="divide-y divide-border-light dark:divide-border-dark">
-                    <header className="pt-6 xl:pb-6">
+                    <header className="pt-6 pb-4">
                         <div className="space-y-1 text-center">
                             <div>
                                 <h1 className="text-2xl font-extrabold leading-8 tracking-tight sm:text-4xl sm:leading-10 md:leading-14 text-main">
@@ -49,7 +49,11 @@ export const NKODetail: FC<NKODetailProps> = ({ post }) => {
                         </div>
                     </header>
                     <ImageTabs images_urls={images_urls} />
-                    <div className="flex flex-col gap-2 py-4 xl:p-4 text-lg mt-4 min-w-fit min-h-[16rem]">
+                    <div
+                        className={`flex flex-col ${
+                            images_urls.length < 2 ? "mt-8" : "mt-4"
+                        } gap-2 py-4 xl:p-4 text-lg min-w-fit min-h-[16rem]`}
+                    >
                         <p>
                             <span className="font-bold">
                                 Директор организации:{" "}

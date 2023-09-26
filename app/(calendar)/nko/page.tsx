@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     },
 };
 
-async function getProjects() {
+async function getNKO() {
     const res = await fetch(`${process.env.API_URL}/api/nko`);
 
     if (!res.ok) {
@@ -37,7 +37,7 @@ async function getProjects() {
 }
 
 export default async function Page() {
-    const data = await getProjects();
+    const data = await getNKO();
 
     if (!data) return null;
 

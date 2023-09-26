@@ -31,9 +31,9 @@ export const ImageTabs: FC<ImageTabsProps> = ({ images_urls }) => {
                     </div>
                 </TabsContent>
             ))}
-            <TabsList className="h-full xl:w-[75%] mt-8 gap-4 xl:mx-[12.5%] overflow-x-scroll flex justify-start image-selector pb-6">
-                {images_urls.length > 1 &&
-                    images_urls.map((image_url) => (
+            {images_urls.length > 1 && (
+                <TabsList className="h-full xl:w-[75%] mt-8 gap-4 xl:mx-[12.5%] overflow-x-scroll flex justify-start image-selector pb-6">
+                    {images_urls.map((image_url) => (
                         <TabsTrigger
                             key={"image-tab-" + image_url}
                             value={"image-tab-" + image_url}
@@ -53,7 +53,8 @@ export const ImageTabs: FC<ImageTabsProps> = ({ images_urls }) => {
                             </div>
                         </TabsTrigger>
                     ))}
-            </TabsList>
+                </TabsList>
+            )}
         </Tabs>
     );
 };

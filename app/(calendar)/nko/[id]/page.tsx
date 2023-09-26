@@ -10,7 +10,7 @@ export async function generateMetadata({
 }: {
     params: { id: string };
 }): Promise<Metadata> {
-    const data = await getProjectById(params);
+    const data = await getNKOById(params);
 
     let title: string = "";
     let preview_url: string = "";
@@ -39,7 +39,7 @@ export async function generateMetadata({
     };
 }
 
-async function getProjectById(params: { id: string }) {
+async function getNKOById(params: { id: string }) {
     if (!params.id) return null;
 
     const res = await fetch(`${process.env.API_URL}/api/nko/${params.id}`);
@@ -54,7 +54,7 @@ async function getProjectById(params: { id: string }) {
 }
 
 export default async function page({ params }: { params: { id: string } }) {
-    const data = await getProjectById(params);
+    const data = await getNKOById(params);
 
     if (!data || !data.post) return notFound();
 
