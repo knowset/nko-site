@@ -116,7 +116,7 @@ export const EditProjectForm: FC<EditProjectFormProps> = ({ project }) => {
     };
 
     return (
-        <FormLayout title="Редактирование проекта" onSubmit={handleSubmit}>
+        <FormLayout title="Редактирование статьи в разделе Проекты" onSubmit={handleSubmit}>
             <Input
                 title="Название статьи"
                 value={formValues.title}

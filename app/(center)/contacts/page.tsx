@@ -1,3 +1,4 @@
+import { PageLayout } from "@/components/Layouts/PageLayout";
 import { H1 } from "@/components/Text/H1";
 import { H2 } from "@/components/Text/H2";
 import { Metadata } from "next";
@@ -21,7 +22,6 @@ export const metadata: Metadata = {
         ],
     },
     twitter: {
-        
         title: "Контакты",
         card: "summary_large_image",
         description:
@@ -34,11 +34,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
     return (
-        <div className="flex flex-col gap-10 mb-auto">
-            <div>
-                <H1 textsize="text-4xl">Контакты</H1>
-                <hr className="mt-4 border-border-light dark:border-border-dark" />
-            </div>
+        <PageLayout pageName="Контакты">
             <div className="flex flex-col gap-4">
                 <H2>
                     Автономная некоммерческая организация «Ресурсный центр
@@ -49,7 +45,13 @@ export default async function Page() {
             </div>
             <div className="flex flex-col gap-4">
                 <H1>
-                    Реквизиты центра <a className="underline" href="https://drive.google.com/uc?export=view&id=1MDQqwfobMmVQBihDIrLsOFvWRY9Q30JJ">(скачать .doc)</a>
+                    Реквизиты центра{" "}
+                    <a
+                        className="underline"
+                        href="https://drive.google.com/uc?export=view&id=1MDQqwfobMmVQBihDIrLsOFvWRY9Q30JJ"
+                    >
+                        (скачать .doc)
+                    </a>
                 </H1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                     <div className="flex flex-col items-center p-8">
@@ -88,6 +90,6 @@ export default async function Page() {
                     </div>
                 </div>
             </div>
-        </div>
+        </PageLayout>
     );
 }

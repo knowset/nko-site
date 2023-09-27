@@ -1,26 +1,26 @@
 "use client";
 
-import { FaunadbPost, GeneralPostProps, Project } from "@/types";
+import { FaunadbPost, Partner } from "@/types";
 import { useSession } from "next-auth/react";
 import { FC } from "react";
 import { CardList } from "../CardList";
-import { ProjectCard } from "./ProjectCard";
+import { PartnerCard } from "./PartnerCard";
 
-interface ProjectListProps {
-    posts: FaunadbPost<Project & GeneralPostProps>[];
+interface PartnerListProps {
+    posts: FaunadbPost<Partner>[];
 }
 
-export const ProjectList: FC<ProjectListProps> = ({ posts }) => {
+export const PartnerList: FC<PartnerListProps> = ({ posts }) => {
     const { data: session } = useSession();
     const isAdmin = session?.user.role == "admin";
 
     return (
         <CardList>
             {posts.map((post) => (
-                <ProjectCard
-                    key={"project-card-" + post.data.id}
-                    post={post}
+                <PartnerCard
+                    key={"partner-card-" + post.data.id}
                     isAdmin={isAdmin}
+                    post={post}
                 />
             ))}
         </CardList>

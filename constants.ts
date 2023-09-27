@@ -24,7 +24,7 @@ export const navlinks: {
         title: "НКО",
         links: [
             { title: "Обучение служением", href: "/service_learning" },
-            //     { title: "Партнеры", href: "/partners" },
+            { title: "Партнеры", href: "/partner" },
         ],
     },
     {
@@ -40,10 +40,10 @@ export const navlinks: {
     },
     {
         title: "Календарь",
-        links: [
-            //     { title: "Студентам", href: "/for_students" },
-            { title: "Нко", href: "/nko" },
-        ],
+        // links: [
+        //     { title: "Студентам", href: "/for_students" },
+        // { title: "Нко", href: "/nko" },
+        // ],
     },
 ];
 

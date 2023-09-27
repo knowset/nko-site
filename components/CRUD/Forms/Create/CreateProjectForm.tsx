@@ -99,7 +99,7 @@ export const CreateProjectForm: FC<{}> = () => {
     };
 
     return (
-        <FormLayout title="Создание нового проекта" onSubmit={handleSubmit}>
+        <FormLayout title="Создание новой статьи в разделе Проекты" onSubmit={handleSubmit}>
             <Input
                 title="Название статьи"
                 value={formValues.title}

@@ -2,13 +2,7 @@
 
 import { Button } from "@/components/Button";
 import { ImageSelector } from "@/components/ImageSelector";
-import {
-    FaunadbPost,
-    GeneralPostProps,
-    ImageState,
-    IMG,
-    NKO,
-} from "@/types";
+import { FaunadbPost, ImageState, IMG, Partner } from "@/types";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FC, FormEventHandler, useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -16,10 +10,10 @@ import { Input } from "../../Input";
 import { FormLayout } from "../../../Layouts/FormLayout";
 
 interface EditNKOFormProps {
-    post: FaunadbPost<NKO & GeneralPostProps>;
+    post: FaunadbPost<Partner>;
 }
 
-export const EditNKOForm: FC<EditNKOFormProps> = ({ post }) => {
+export const EditPartnerForm: FC<EditNKOFormProps> = ({ post }) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
@@ -29,7 +23,7 @@ export const EditNKOForm: FC<EditNKOFormProps> = ({ post }) => {
         })
     );
 
-    const [formValues, setFormValues] = useState<NKO>({
+    const [formValues, setFormValues] = useState<Partner>({
         ...post.data,
         images_ids: post.data.images_ids,
     });
@@ -41,7 +35,7 @@ export const EditNKOForm: FC<EditNKOFormProps> = ({ post }) => {
         const images_ids = await uploadImage(images);
 
         try {
-            const res = await fetch(`/api/nko/edit/${post.data.id}`, {
+            const res = await fetch(`/api/partner/edit/${post.data.id}`, {
                 method: "POST",
                 body: JSON.stringify({
                     ref: post.ref,
@@ -56,7 +50,7 @@ export const EditNKOForm: FC<EditNKOFormProps> = ({ post }) => {
                 setError((await res.json()).message);
                 return;
             }
-            router.push(`/nko`);
+            router.push(`/partner`);
         } catch (error: any) {
             setError(error);
             setIsLoading(false);
@@ -116,7 +110,10 @@ export const EditNKOForm: FC<EditNKOFormProps> = ({ post }) => {
     };
 
     return (
-        <FormLayout title="Редактирование статьи в разделе НКО" onSubmit={handleSubmit}>
+        <FormLayout
+            title="Редактирование статьи в разделе Партнеры"
+            onSubmit={handleSubmit}
+        >
             <Input
                 title="Название статьи"
                 value={formValues.title}

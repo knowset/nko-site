@@ -5,17 +5,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DeleteButton } from "../CRUD/DeleteButton";
 import { EditButton } from "../CRUD/EditButton";
-import { FaunadbPost, GeneralPostProps, NKO } from "@/types";
+import { FaunadbPost, Partner } from "@/types";
 import Image from "next/image";
 import { Card } from "../Card";
 import { BsArrowRight } from "react-icons/bs";
 
-export type NKOCardProps = {
-    post: FaunadbPost<NKO & GeneralPostProps>;
+export type PartnerCardProps = {
+    post: FaunadbPost<Partner>;
     isAdmin?: boolean;
 };
 
-export const NKOCard: FC<NKOCardProps> = ({ post, isAdmin = false }) => {
+export const PartnerCard: FC<PartnerCardProps> = ({ post, isAdmin = false }) => {
     const path = usePathname();
 
     const preview_url = `https://drive.google.com/thumbnail?id=${

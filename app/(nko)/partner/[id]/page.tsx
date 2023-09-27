@@ -1,5 +1,5 @@
-import { NKODetail } from "@/components/NKO/NKODetail";
-import { FaunadbPostOrError, GeneralPostProps, NKO } from "@/types";
+import { PartnerDetail } from "@/components/Partner/PartnerDetail";
+import { FaunadbPostOrError, Partner } from "@/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -10,7 +10,7 @@ export async function generateMetadata({
 }: {
     params: { id: string };
 }): Promise<Metadata> {
-    const data = await getNKOById(params);
+    const data = await getParnersById(params);
 
     let title: string = "";
     let preview_url: string = "";
@@ -39,22 +39,22 @@ export async function generateMetadata({
     };
 }
 
-async function getNKOById(params: { id: string }) {
+async function getParnersById(params: { id: string }) {
     if (!params.id) return null;
 
-    const res = await fetch(`${process.env.API_URL}/api/nko/${params.id}`);
+    const res = await fetch(`${process.env.API_URL}/api/partner/${params.id}`);
 
     if (!res) {
         throw new Error("Невозможно получить пост");
     }
 
-    const data: FaunadbPostOrError<NKO & GeneralPostProps> = await res.json();
+    const data: FaunadbPostOrError<Partner> = await res.json();
 
     return data;
 }
 
 export default async function page({ params }: { params: { id: string } }) {
-    const data = await getNKOById(params);
+    const data = await getParnersById(params);
 
     if (!data || !data.post) return notFound();
 
@@ -62,5 +62,5 @@ export default async function page({ params }: { params: { id: string } }) {
         return null;
     }
 
-    return <NKODetail post={data.post} />;
+    return <PartnerDetail post={data.post} />;
 }

@@ -1,6 +1,8 @@
+import { PageLayout } from "@/components/Layouts/PageLayout";
 import { ProjectList } from "@/components/Project/ProjectList";
 import { FaunadbPostsOrError, GeneralPostProps, Project } from "@/types";
 import { Metadata } from "next";
+import Loading from "./loading";
 
 export const dynamic = "force-dynamic";
 
@@ -31,7 +33,8 @@ async function getProjects() {
         throw new Error("Невозможно получить посты");
     }
 
-    const data: FaunadbPostsOrError<Project & GeneralPostProps> = await res.json();
+    const data: FaunadbPostsOrError<Project & GeneralPostProps> =
+        await res.json();
 
     return data;
 }
@@ -42,6 +45,9 @@ export default async function Page() {
     if (!data) return null;
 
     if (!data.posts) return null;
-
-    return <ProjectList posts={data.posts} />;
+    return (
+        <PageLayout pageName="Проекты">
+            <ProjectList posts={data.posts} />
+        </PageLayout>
+    );
 }

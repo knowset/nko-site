@@ -1,3 +1,4 @@
+import { PageLayout } from "@/components/Layouts/PageLayout";
 import { H1 } from "@/components/Text/H1";
 import { H2 } from "@/components/Text/H2";
 import { checklists } from "@/constants";
@@ -25,11 +26,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
     return (
-        <div className="flex flex-col gap-10 w-full">
-            <div>
-                <H1 textsize="text-4xl">Чек-листы</H1>
-                <hr className="mt-4 border-border-light dark:border-border-dark" />
-            </div>
+        <PageLayout pageName="Чек-листы">
             <div className="flex flex-col gap-4">
                 {checklists.map((item) => (
                     <div>
@@ -48,6 +45,6 @@ export default function Page() {
                     </div>
                 ))}
             </div>
-        </div>
+        </PageLayout>
     );
 }

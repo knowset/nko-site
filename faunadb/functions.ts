@@ -3,8 +3,6 @@ import {
     FaunadbPostOrError,
     FaunadbPosts,
     FaunadbPostsOrError,
-    GeneralPostProps,
-    Project,
     UserResponse,
 } from "@/types";
 import faunadb from "faunadb";
@@ -14,11 +12,6 @@ const q = faunadb.query;
 const client = new faunadb.Client({
     secret: "fnAFLkDLPdAAUTb14qMa2TZuIwnxPe9UGGaA97md",
 });
-
-interface ErrorField {
-    field: string;
-    message: string;
-}
 
 interface FaunadbUserResponse {
     data: {
@@ -45,9 +38,6 @@ export const getUserByEmail = async (email: string): Promise<UserResponse> => {
                 q.Lambda((ref) => q.Get(ref))
             )
         );
-        //     q.Lambda((ref) =>
-        //     q.Equals(q.Select(["data", "id"], q.Get(ref)), postId)
-        // )
         if (resData?.data.length == 0) {
             throw new Error(
                 JSON.stringify({
@@ -136,9 +126,9 @@ export const createUser = async (userData: {
 
 export const getAllPosts = async <T>(
     postType: string
-): Promise<FaunadbPostsOrError<T & GeneralPostProps>> => {
+): Promise<FaunadbPostsOrError<T>> => {
     try {
-        const res: FaunadbPosts<T & GeneralPostProps> = await client.query(
+        const res: FaunadbPosts<T> = await client.query(
             q.Reverse(
                 q.Map(
                     q.Paginate(q.Documents(q.Collection(postType))),
@@ -172,12 +162,12 @@ export const getAllPosts = async <T>(
     }
 };
 
-export const getPostByID = async <T, U = T & GeneralPostProps>(
+export const getPostByID = async <T>(
     postType: string,
     postId: string
-): Promise<FaunadbPostOrError<U>> => {
+): Promise<FaunadbPostOrError<T>> => {
     try {
-        const resData: FaunadbPosts<U> = await client.query(
+        const resData: FaunadbPosts<T> = await client.query(
             q.Map(
                 q.Filter(
                     q.Paginate(q.Match(q.Index(postType + "_by_id"))),
@@ -246,15 +236,15 @@ export const createPost = async <T>(postType: string, data: T) => {
     }
 };
 
-export const updatePostById = async <T, U = T & GeneralPostProps>(
+export const updatePostById = async <T>(
     postType: string,
-    data: FaunadbPost<U>
+    data: FaunadbPost<T>
 ) => {
     try {
         const id = data.ref["@ref"].id;
         console.log(data);
 
-        const resData: FaunadbPosts<U> = await client.query(
+        const resData: FaunadbPosts<T> = await client.query(
             q.Update(q.Ref(q.Collection(postType), id), {
                 data: data.data,
             })

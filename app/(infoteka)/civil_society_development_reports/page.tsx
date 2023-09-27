@@ -1,3 +1,4 @@
+import { PageLayout } from "@/components/Layouts/PageLayout";
 import { H1 } from "@/components/Text/H1";
 import { H2 } from "@/components/Text/H2";
 import { civil_society_development_reports } from "@/constants";
@@ -25,13 +26,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
     return (
-        <div className="flex flex-col gap-10 w-full">
-            <div>
-                <H1 textsize="text-4xl">
-                    Доклады о развитии гражданского общества
-                </H1>
-                <hr className="mt-4 border-border-light dark:border-border-dark" />
-            </div>
+        <PageLayout pageName="Доклады о развитии гражданского общества">
             <div className="flex flex-col gap-4">
                 <H2>
                     Информационно-аналитические доклады подготовлены АНО
@@ -59,6 +54,6 @@ export default function Page() {
                     </div>
                 ))}
             </div>
-        </div>
+        </PageLayout>
     );
 }

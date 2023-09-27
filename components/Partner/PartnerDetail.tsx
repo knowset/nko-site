@@ -1,26 +1,18 @@
 "use client";
 
-import { notFound, usePathname, useSearchParams } from "next/navigation";
-import { FC, useEffect, useState } from "react";
-import { format } from "date-fns";
-import { ru } from "date-fns/locale";
+import { FC } from "react";
 import { ImageTabs } from "../ImageTabs";
-import {
-    FaunadbPost,
-    GeneralPostProps,
-    NKO,
-    Project as ProjectType,
-} from "@/types";
+import { FaunadbPost, Partner } from "@/types";
 import { EditButton } from "../CRUD/EditButton";
 import { DeleteButton } from "../CRUD/DeleteButton";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
-interface NKODetailProps {
-    post: FaunadbPost<NKO & GeneralPostProps>;
+interface PartnerDetailProps {
+    post: FaunadbPost<Partner>;
 }
 
-export const NKODetail: FC<NKODetailProps> = ({ post }) => {
+export const PartnerDetail: FC<PartnerDetailProps> = ({ post }) => {
     const { data: session } = useSession();
 
     let images_urls: string[] = [];
@@ -33,8 +25,12 @@ export const NKODetail: FC<NKODetailProps> = ({ post }) => {
         <>
             {session?.user.role == "admin" ? (
                 <div className="fixed right-4 bottom-4 flex gap-4 z-50">
-                    <EditButton id={post.data.id} path="/nko" isPostDetail />
-                    <DeleteButton post={post} path="/nko" isPostDetail />
+                    <EditButton
+                        id={post.data.id}
+                        path="/partner"
+                        isPostDetail
+                    />
+                    <DeleteButton post={post} path="/Partner" isPostDetail />
                 </div>
             ) : null}
             <section className="w-full max-w-3xl lg:px-4 sm:px-6 xl:max-w-5xl xl:px-0 mb-8">

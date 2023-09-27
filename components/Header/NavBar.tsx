@@ -6,7 +6,7 @@ import React from "react";
 import { NavLink } from "../NavLink";
 import { DropDownMenu } from "../DropDownMenu";
 import { usePathname } from "next/navigation";
-import { Layout } from "../Layouts/Layout";
+import { GlobalLayout } from "../Layouts/GlobalLayout";
 import { ModeToogle } from "../ModeToggle";
 import { AlignJustify } from "lucide-react";
 import { Button } from "../Button";
@@ -103,7 +103,7 @@ export const NavBar: FC<{}> = () => {
                                 </div>
                             </DropDownMenu.Trigger>
                             <DropDownMenu.Content>
-                                <Layout>
+                                <GlobalLayout>
                                     <div className="grid grid-cols-2 gap-2 rounded-lg shadow-lg border border-border-light border-border-dark bg-primary-light dark:bg-primary-dark p-2">
                                         {navlinks.map((section) => (
                                             <div
@@ -149,7 +149,7 @@ export const NavBar: FC<{}> = () => {
                                             <NavLink href="/">Главная</NavLink>
                                         </div>
                                     </div>
-                                </Layout>
+                                </GlobalLayout>
                             </DropDownMenu.Content>
                         </DropDownMenu>
                         <ModeToogle variant="right" />

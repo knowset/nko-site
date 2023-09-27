@@ -1,3 +1,4 @@
+import { PageLayout } from "@/components/Layouts/PageLayout";
 import { H1 } from "@/components/Text/H1";
 import { H2 } from "@/components/Text/H2";
 import { documentation } from "@/constants";
@@ -31,11 +32,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
     return (
-        <div className="flex flex-col gap-10">
-            <div>
-                <H1 textsize="text-4xl">Документы</H1>
-                <hr className="mt-4 border-border-light dark:border-border-dark" />
-            </div>
+        <PageLayout pageName="Документы">
             <div className="flex flex-col gap-4">
                 <H1>ПОЛНОЕ НАИМЕНОВАНИЕ ЦЕНТРА</H1>
                 <H2>
@@ -52,13 +49,16 @@ export default async function Page() {
                     {section.links.map((link) => (
                         <H2>
                             {link.title}{" "}
-                            <a className="text-main hover:text-main-hover" href={link.href}>
+                            <a
+                                className="text-main hover:text-main-hover"
+                                href={link.href}
+                            >
                                 (скачать .pdf)
                             </a>
                         </H2>
                     ))}
                 </div>
             ))}
-        </div>
+        </PageLayout>
     );
 }

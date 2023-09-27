@@ -1,5 +1,5 @@
 import { Header } from "@/components/Header/Header";
-import { Layout } from "@/components/Layouts/Layout";
+import { GlobalLayout } from "@/components/Layouts/GlobalLayout";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { Footer } from "@/components/Footer";
@@ -48,11 +48,11 @@ export default function RootLayout({
                     disableTransitionOnChange
                 >
                     <Header />
-                    <Layout isContent>
+                    <GlobalLayout isContent>
                         <div className="pt-12 pb-20 flex-grow h-full flex flex-col justify-center items-center">
                             {children}
                         </div>
-                    </Layout>
+                    </GlobalLayout>
                     <Footer />
                 </Providers>
             </body>

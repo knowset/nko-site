@@ -1,22 +1,23 @@
-import { NKOList } from "@/components/NKO/NKOList";
-import { FaunadbPostsOrError, GeneralPostProps, NKO } from "@/types";
+import { PageLayout } from "@/components/Layouts/PageLayout";
+import { PartnerList } from "@/components/Partner/PartnerList";
+import { FaunadbPostsOrError, Partner } from "@/types";
 import { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
-    title: "НКО",
+    title: "Партнеры",
     openGraph: {
         url: "https://initsiativa.vercel.app/project",
         type: "website",
-        title: "НКО",
+        title: "Партнеры",
         images: [
             "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
         ],
     },
     twitter: {
-        title: "НКО",
+        title: "Партнеры",
         card: "summary_large_image",
         images: [
             "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
@@ -24,24 +25,28 @@ export const metadata: Metadata = {
     },
 };
 
-async function getNKO() {
-    const res = await fetch(`${process.env.API_URL}/api/nko`);
+async function getPartners() {
+    const res = await fetch(`${process.env.API_URL}/api/partner`);
 
     if (!res.ok) {
         throw new Error("Невозможно получить посты");
     }
 
-    const data: FaunadbPostsOrError<NKO & GeneralPostProps> = await res.json();
+    const data: FaunadbPostsOrError<Partner> = await res.json();
 
     return data;
 }
 
 export default async function Page() {
-    const data = await getNKO();
+    const data = await getPartners();
 
     if (!data) return null;
 
     if (!data.posts) return null;
 
-    return <NKOList posts={data.posts} />;
+    return (
+        <PageLayout pageName="Партнеры">
+            <PartnerList posts={data.posts} />
+        </PageLayout>
+    );
 }

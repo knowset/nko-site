@@ -1,11 +1,11 @@
 import { FC, ReactNode } from "react";
 
-interface LayoutProps {
+interface GlobalLayoutProps {
     children: ReactNode;
     isContent?: boolean;
 }
 
-export const Layout: FC<LayoutProps> = ({ children, isContent = false }) => {
+export const GlobalLayout: FC<GlobalLayoutProps> = ({ children, isContent = false }) => {
     return (
         <div
             className={`${

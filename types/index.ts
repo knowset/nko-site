@@ -24,7 +24,7 @@ export type Project = {
     images_ids: string[];
 };
 
-export type NKO = {
+export type Partner = {
     title: string;
     abbreviation: string;
     director_of_the_organization: string;
@@ -39,7 +39,10 @@ export type NKO = {
 export type FaunadbPost<T> = {
     ref: any;
     ts: any;
-    data: T;
+    data: {
+        id: string;
+        date: string;
+    } & T;
 };
 
 export type FaunadbPosts<T> = {

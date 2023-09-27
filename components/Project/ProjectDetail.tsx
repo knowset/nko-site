@@ -38,17 +38,6 @@ export const ProjectDetail: FC<ProjectDetailProps> = ({ post }) => {
                 <div className="divide-y divide-border-light dark:divide-border-dark">
                     <header className="pt-6 xl:pb-6 h-[6.25rem]">
                         <div className="space-y-1 text-center">
-                            <dl className="space-y-10">
-                                <p className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                                    {format(
-                                        new Date(post.data.date),
-                                        "d MMMM yyyy",
-                                        {
-                                            locale: ru,
-                                        }
-                                    )}
-                                </p>
-                            </dl>
                             <div>
                                 <h1 className="text-2xl font-extrabold leading-8 tracking-tight sm:text-4xl sm:leading-10 md:leading-14 text-main">
                                     {post.data.title}

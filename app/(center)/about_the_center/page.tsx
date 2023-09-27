@@ -1,4 +1,5 @@
 import { Card } from "@/components/Card";
+import { PageLayout } from "@/components/Layouts/PageLayout";
 import { H1 } from "@/components/Text/H1";
 import { H2 } from "@/components/Text/H2";
 import { directions_of_work_of_the_center, team } from "@/constants";
@@ -33,11 +34,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
     return (
-        <div className="flex flex-col gap-10 mb-auto">
-            <div>
-                <H1 textsize="text-4xl">О центре</H1>
-                <hr className="mt-4 border-border-light dark:border-border-dark" />
-            </div>
+        <PageLayout pageName="О центре">
             <div className="flex flex-col gap-4">
                 <H2>
                     Автономная некоммерческая организация «Ресурсный центр
@@ -135,6 +132,6 @@ export default async function Page() {
                     </H2>
                 </div>
             </div>
-        </div>
+        </PageLayout>
     );
 }

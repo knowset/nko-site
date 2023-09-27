@@ -2,20 +2,20 @@
 
 import { Button } from "@/components/Button";
 import { ImageSelector } from "@/components/ImageSelector";
-import { ImageState, IMG, NKO } from "@/types";
+import { ImageState, IMG, Partner } from "@/types";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FC, FormEvent, useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Input } from "../../Input";
 import { FormLayout } from "../../../Layouts/FormLayout";
 
-export const CreateNKOForm: FC<{}> = () => {
+export const CreatePartnerForm: FC<{}> = () => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
     const [images, setImages] = useState<IMG[]>([]);
 
-    const [formValues, setFormValues] = useState<NKO>({
+    const [formValues, setFormValues] = useState<Partner>({
         title: "",
         abbreviation: "",
         director_of_the_organization: "",
@@ -36,7 +36,7 @@ export const CreateNKOForm: FC<{}> = () => {
 
         const images_ids = await uploadImage(images);
         try {
-            const res = await fetch(`/api/nko/new`, {
+            const res = await fetch(`/api/partner/new`, {
                 method: "POST",
                 body: JSON.stringify({ ...formValues, images_ids: images_ids }),
                 headers: {
@@ -47,7 +47,7 @@ export const CreateNKOForm: FC<{}> = () => {
                 setError((await res.json()).message);
                 return;
             }
-            router.push(`/nko`);
+            router.push(`/partner`);
         } catch (error: any) {
             setError(error);
         } finally {
@@ -83,7 +83,7 @@ export const CreateNKOForm: FC<{}> = () => {
                         item.image,
                         item.image.name + "-" + new Date()
                     );
-                    form.append("postType", "nko");
+                    form.append("postType", "partner");
                     form.append("title", formValues.title);
 
                     const res = await fetch("/api/image/upload", {
@@ -101,7 +101,7 @@ export const CreateNKOForm: FC<{}> = () => {
 
     return (
         <FormLayout
-            title="Создание новой статьи в разделе НКО"
+            title="Создание новой статьи в разделе Партнеры"
             onSubmit={handleSubmit}
         >
             <Input

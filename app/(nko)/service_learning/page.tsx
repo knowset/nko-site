@@ -1,4 +1,5 @@
 import { Card } from "@/components/Card";
+import { PageLayout } from "@/components/Layouts/PageLayout";
 import { H1 } from "@/components/Text/H1";
 import { H2 } from "@/components/Text/H2";
 import { service_learning } from "@/constants";
@@ -26,11 +27,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
     return (
-        <div className="flex flex-col gap-10 w-full">
-            <div>
-                <H1 textsize="text-4xl">Обучение служением</H1>
-                <hr className="mt-4 border-border-light dark:border-border-dark" />
-            </div>
+        <PageLayout pageName="Обучение служением">
             <div className="flex flex-col gap-4">
                 <H2>
                     «
@@ -89,6 +86,6 @@ export default function Page() {
                 </div>
             </div>
             <div className="flex flex-col gap-4"></div>
-        </div>
+        </PageLayout>
     );
 }

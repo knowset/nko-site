@@ -1,25 +1,25 @@
-import { EditNKOForm } from "@/components/CRUD/Forms/Edit/EditNKOForm";
-import { FaunadbPostOrError, GeneralPostProps, NKO } from "@/types";
+import { EditPartnerForm } from "@/components/CRUD/Forms/Edit/EditPartnerForm";
+import { FaunadbPostOrError, GeneralPostProps, Partner } from "@/types";
 import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
-async function getProjectById(params: { id: string }) {
+async function getPartnerById(params: { id: string }) {
     if (!params.id) return null;
 
-    const res = await fetch(`${process.env.API_URL}/api/nko/${params.id}`);
+    const res = await fetch(`${process.env.API_URL}/api/partner/${params.id}`);
 
     if (!res) {
         throw new Error("Невозможно получить пост");
     }
 
-    const data: FaunadbPostOrError<NKO & GeneralPostProps> = await res.json();
+    const data: FaunadbPostOrError<Partner> = await res.json();
 
     return data;
 }
 
 export default async function Edit({ params }: { params: { id: string } }) {
-    const data = await getProjectById(params);
+    const data = await getPartnerById(params);
 
     if (!data || !data.post) return notFound();
 
@@ -27,5 +27,5 @@ export default async function Edit({ params }: { params: { id: string } }) {
         throw new Error(JSON.stringify({ errors: data.errors }));
     }
 
-    return <EditNKOForm post={data.post} />;
+    return <EditPartnerForm post={data.post} />;
 }

@@ -1,3 +1,4 @@
+import { PageLayout } from "@/components/Layouts/PageLayout";
 import { H1 } from "@/components/Text/H1";
 import { infographics } from "@/constants";
 import { Metadata } from "next";
@@ -25,11 +26,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
     return (
-        <div className="flex flex-col gap-12">
-            <div>
-                <H1 textsize="text-4xl">Инфографика</H1>
-                <hr className="mt-4 border-border-light dark:border-border-dark border-border-light dark:border-border-dark" />
-            </div>
+        <PageLayout pageName="Инфографика">
             {infographics.map((item) => (
                 <div
                     key={"infographics-item-" + item.fileName}
@@ -59,6 +56,6 @@ export default function Page() {
                     </div>
                 </div>
             ))}
-        </div>
+        </PageLayout>
     );
 }

@@ -1,12 +1,12 @@
 import { FC } from "react";
 import Image from "next/image";
-import { Layout } from "../Layouts/Layout";
+import { GlobalLayout } from "../Layouts/GlobalLayout";
 import Link from "next/link";
 
 export const Logo: FC<{}> = () => {
     return (
         <>
-            <Layout>
+            <GlobalLayout>
                 <nav className="hidden h-[90px] md:flex items-center justify-between text-gray-600 dark:text-gray-400">
                     <div className="w-full  md:flex md:items-center">
                         <span className="mx-1 text-lg">
@@ -58,7 +58,7 @@ export const Logo: FC<{}> = () => {
                         </h1>
                     </div>
                 </nav>
-            </Layout>
+            </GlobalLayout>
         </>
     );
 };
