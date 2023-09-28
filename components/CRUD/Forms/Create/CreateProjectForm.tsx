@@ -46,7 +46,7 @@ export const CreateProjectForm: FC<{}> = () => {
                 setError((await res.json()).message);
                 return;
             }
-            router.push(`/project`);
+            router.push(`/center/project`);
         } catch (error: any) {
             setError(error);
         } finally {
@@ -99,7 +99,10 @@ export const CreateProjectForm: FC<{}> = () => {
     };
 
     return (
-        <FormLayout title="Создание новой статьи в разделе Проекты" onSubmit={handleSubmit}>
+        <FormLayout
+            title="Создание новой статьи в разделе Проекты"
+            onSubmit={handleSubmit}
+        >
             <Input
                 title="Название статьи"
                 value={formValues.title}

@@ -50,7 +50,7 @@ export const EditPartnerForm: FC<EditNKOFormProps> = ({ post }) => {
                 setError((await res.json()).message);
                 return;
             }
-            router.push(`/partner`);
+            router.push(`/nko/partner`);
         } catch (error: any) {
             setError(error);
             setIsLoading(false);

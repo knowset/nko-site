@@ -47,7 +47,7 @@ export const CreatePartnerForm: FC<{}> = () => {
                 setError((await res.json()).message);
                 return;
             }
-            router.push(`/partner`);
+            router.push(`/nko/partner`);
         } catch (error: any) {
             setError(error);
         } finally {

@@ -27,10 +27,10 @@ export const PartnerDetail: FC<PartnerDetailProps> = ({ post }) => {
                 <div className="fixed right-4 bottom-4 flex gap-4 z-50">
                     <EditButton
                         id={post.data.id}
-                        path="/partner"
+                        path="/nko/partner"
                         isPostDetail
                     />
-                    <DeleteButton post={post} path="/Partner" isPostDetail />
+                    <DeleteButton post={post} path="/partner" isPostDetail />
                 </div>
             ) : null}
             <section className="w-full max-w-3xl lg:px-4 sm:px-6 xl:max-w-5xl xl:px-0 mb-8">

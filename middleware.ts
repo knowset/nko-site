@@ -12,8 +12,8 @@ export async function middleware(req: NextRequest) {
 // FIXME: добавить /nko (/partner)
 export const config = {
     matcher: [
-        "/project/new",
-        "/project/edit",
+        "/center/project/new",
+        "/center/project/edit",
         "/partners/new",
         "/partners/edit",
     ],

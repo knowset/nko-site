@@ -56,7 +56,7 @@ export const EditProjectForm: FC<EditProjectFormProps> = ({ project }) => {
                 setError((await res.json()).message);
                 return;
             }
-            router.push(`/project`);
+            router.push(`/center/project`);
         } catch (error: any) {
             setError(error);
             setIsLoading(false);
