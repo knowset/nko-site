@@ -52,11 +52,11 @@ export default async function Page() {
                             />
                         </Card.Image>
                         <Card.Content>
-                            <H2 size="big">{item.title}</H2>
+                            <H2 className="text-xl font-bold">{item.title}</H2>
                             <ul className="mt-4 flex flex-col gap-2 sm:p-4">
                                 {item.list_items.map((list_item) => (
                                     <H2>
-                                        <li className="before:list-disc before:text-main inline-flex before:content-['•']">
+                                        <li className="before:list-disc before:text-main inline-flex before:content-['•'] w-full gap-4 text-left">
                                             {list_item}
                                         </li>
                                     </H2>

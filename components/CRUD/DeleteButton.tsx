@@ -11,7 +11,7 @@ interface DeleteButtonProps {
     path: string;
     isPostDetail?: boolean;
 }
-
+// FIXME: add apiPath
 export const DeleteButton: FC<DeleteButtonProps> = ({
     post,
     path,

@@ -5,11 +5,11 @@ import { FC, ReactNode, AllHTMLAttributes } from "react";
 const h2Variants = cva("", {
     variants: {
         size: {
-            default: "text-lg sm:text-xl",
-            big: "text-xl text-2xl",
+            medium: "text-lg",
+            big: "text-xl",
         },
         defaultVariants: {
-            size: "default",
+            size: "medium",
         },
     },
 });
@@ -21,7 +21,7 @@ interface H2Props extends VariantProps<typeof h2Variants> {
 
 export const H2: FC<H2Props> = ({
     children,
-    size = "default",
+    size = "medium",
     className = "",
 }) => {
     return (

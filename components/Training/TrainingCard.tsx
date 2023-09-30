@@ -5,17 +5,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DeleteButton } from "../CRUD/DeleteButton";
 import { EditButton } from "../CRUD/EditButton";
-import { FaunadbPost, Project, GeneralPostProps } from "@/types";
+import { FaunadbPost, Training, GeneralPostProps } from "@/types";
 import Image from "next/image";
 import { Card } from "../Card";
 import { BsArrowRight } from "react-icons/bs";
 
-export type ProjectCardProps = {
-    post: FaunadbPost<Project>;
+export type TrainingCardProps = {
+    post: FaunadbPost<Training>;
     isAdmin?: boolean;
 };
 
-export const ProjectCard: FC<ProjectCardProps> = ({
+export const TrainingCard: FC<TrainingCardProps> = ({
     post,
     isAdmin = false,
 }) => {
@@ -32,7 +32,7 @@ export const ProjectCard: FC<ProjectCardProps> = ({
                     <Link href={`${path}/${post.data.id}`} className="w-full">
                         {post.data.images_ids.length > 0 ? (
                             <Image
-                                className="absolute h-full w-full object-cover rounded-t"
+                                className="absolute h-full w-full object-scale-down rounded-t p-8"
                                 src={preview_url}
                                 alt=""
                                 placeholder="blur"
@@ -58,7 +58,6 @@ export const ProjectCard: FC<ProjectCardProps> = ({
                                 {post.data.title}
                             </Link>
                         </h1>
-                        <p className="text-base">{post.data.sub_title}</p>
                     </div>
                 </div>
                 <div className="flex justify-between mt-auto px-4 pt-2 pb-4">

@@ -15,7 +15,7 @@ export const navlinks: {
         title: "Студентам",
         links: [
             { title: "Услуги", href: "/for_students/services" },
-            //     { title: "Тренинги", href: "/for_students/trainings" },
+            { title: "Тренинги", href: "/for_students/training" },
             //     { title: "Истории успеха", href: "/for_students/success_stories" },
             //     { title: "Кейсы", href: "/for_students/cases" },
         ],
