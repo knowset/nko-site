@@ -1,4 +1,5 @@
 import { PageLayout } from "@/components/Layouts/PageLayout";
+import { LinkToFile } from "@/components/LinkToFile";
 import { H1 } from "@/components/Text/H1";
 import { H2 } from "@/components/Text/H2";
 import { checklists } from "@/constants";
@@ -30,18 +31,11 @@ export default function Page() {
             <div className="flex flex-col gap-4">
                 {checklists.map((item) => (
                     <div>
-                        <H2>
-                            {item.fileName}{" "}
-                            <a
-                                className="text-main"
-                                href={
-                                    "https://drive.google.com/uc?export=view&id=" +
-                                    item.fileGoogleId
-                                }
-                            >
-                                (Скачать .pdf)
-                            </a>
-                        </H2>
+                        <LinkToFile
+                            text={item.fileName}
+                            href={item.fileGoogleId}
+                            fileFormat=".pdf"
+                        />
                     </div>
                 ))}
             </div>

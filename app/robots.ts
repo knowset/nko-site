@@ -5,7 +5,16 @@ export default function robots(): MetadataRoute.Robots {
         rules: {
             userAgent: "*",
             allow: "/",
-            disallow: ["/project/*", "/project/"],
+            disallow: [
+                "/center/project/*",
+                "/center/project/",
+                "/for_students/training/*",
+                "/for_students/training/",
+                "/for_students/cases/*",
+                "/for_students/cases/",
+                "/nko/partner/*",
+                "/nko/partner/",
+            ],
         },
     };
 }

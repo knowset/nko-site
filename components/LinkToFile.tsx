@@ -5,16 +5,23 @@ type LinkToFileProps = {
     text: string;
     fileFormat: string;
     href: string;
+    className?: string;
 };
 
-export const LinkToFile: FC<LinkToFileProps> = ({ text, fileFormat, href }) => {
+export const LinkToFile: FC<LinkToFileProps> = ({
+    text,
+    fileFormat,
+    href,
+    className = "",
+}) => {
     return (
-        <H2>
-            {text}{" "}
+        <H2 className={className}>
+            {text}
             <a
                 className="text-main hover:text-main-hover"
                 href={"https://drive.google.com/uc?export=view&id=" + href}
             >
+                {" "}
                 (скачать {fileFormat})
             </a>
         </H2>

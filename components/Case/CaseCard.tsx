@@ -10,6 +10,7 @@ import Image from "next/image";
 import { Card } from "../Card";
 import { BsArrowRight } from "react-icons/bs";
 import { H2 } from "../Text/H2";
+import { LinkToFile } from "../LinkToFile";
 
 export type CaseCardProps = {
     post: FaunadbPost<Case>;
@@ -23,8 +24,13 @@ export const CaseCard: FC<CaseCardProps> = ({ post, isAdmin = false }) => {
         <Card className="flex md:flex-row p-8 gap-8 min-h-[300px] md:min-h-[200px]">
             <Card.Content className="flex flex-col justify-between h-full w-full">
                 <div className="flex flex-col w-full gap-4 text-left">
-                    <h1 className="text-main text-xl font-bold leading-6">
-                        {post.data.title}
+                    <h1 className="text-main text-xl font-bold leading-6 flex gap-2">
+                        <LinkToFile
+                            text={post.data.title}
+                            href={post.data.google_file_id}
+                            fileFormat=".pdf"
+                            className="text-xl"
+                        />
                     </h1>
                     <H2>Заказчик: {post.data.customer}</H2>
                     <H2>Описание: {post.data.description}</H2>
