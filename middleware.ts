@@ -16,5 +16,10 @@ export const config = {
         "/center/project/edit",
         "/partners/new",
         "/partners/edit",
+        "/for_students/training/new",
+        "/for_students/training/edit",
+        "/for_students/cases/new",
+        "/for_students/cases/edit",
+        "/auth/register",
     ],
 };

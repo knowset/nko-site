@@ -1,8 +1,8 @@
 import { PageLayout } from "@/components/Layouts/PageLayout";
+import { H2 } from "@/components/Text/H2";
 import { TrainingList } from "@/components/Training/TrainingList";
 import { FaunadbPostsOrError, Training } from "@/types";
 import { Metadata } from "next";
-import Loading from "./loading";
 
 export const dynamic = "force-dynamic";
 
@@ -46,6 +46,17 @@ export default async function Page() {
     if (!data.posts) return null;
     return (
         <PageLayout pageName="Тренинги">
+            <div>
+                <H2 size="big">
+                    Ресурсный центр «Инициатива» оказывает услуги по организации
+                    обучающих программ по социальному проектированию для
+                    студентов и членов НКО; практические занятия: акселераторы
+                    для молодежи, тренинги по социальному проектированию, а
+                    также индивидуальные консультации по доработке проектов для
+                    участников молодежных грантовых конкурсов.
+                </H2>
+                <hr className="mt-12 border-border-light dark:border-border-dark" />
+            </div>
             <TrainingList posts={data.posts} />
         </PageLayout>
     );

@@ -44,6 +44,13 @@ export type Training = {
     images_ids: string[];
 };
 
+export type Case = {
+    title: string;
+    description: string;
+    customer: string;
+    google_file_id: string;
+};
+
 export type FaunadbPost<T> = {
     ref: any;
     ts: any;

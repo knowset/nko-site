@@ -9,6 +9,7 @@ import { FaunadbPost, Training, GeneralPostProps } from "@/types";
 import Image from "next/image";
 import { Card } from "../Card";
 import { BsArrowRight } from "react-icons/bs";
+import { H2 } from "../Text/H2";
 
 export type TrainingCardProps = {
     post: FaunadbPost<Training>;
@@ -53,15 +54,15 @@ export const TrainingCard: FC<TrainingCardProps> = ({
                     <h1 className="text-main text-xl font-bold leading-6">
                         {post.data.title}
                     </h1>
-                    <p>{post.data.description}</p>
-                    <p>Продолжительность: {post.data.duration}</p>
+                    <H2>{post.data.description}</H2>
+                    <H2>Продолжительность: {post.data.duration}</H2>
                 </div>
-                <div className="flex justify-between mt-auto pt-2 pb-4 gap-4">
+                <div className="flex justify-between pt-2">
                     <Link
                         href={post.data.link_to_google_form}
                         className="flex items-center justify-center mt-4 h-12 px-6 w-full rounded font-semibold text-sm text-white bg-main hover:bg-main-hover"
                     >
-                        Записаться на тренинг
+                        <H2>Записаться на тренинг</H2>
                     </Link>
                 </div>
                 {isAdmin ? (

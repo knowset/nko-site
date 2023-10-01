@@ -20,9 +20,15 @@ const postListSkeletonVariants = cva("", {
     },
 });
 
-export const PostListSkeleton: FC<
-    VariantProps<typeof postListSkeletonVariants>
-> = ({ listVariants = "little", cardVariants = "little" }) => {
+type PostListSkeletonProps = {
+    withImage?: boolean;
+} & VariantProps<typeof postListSkeletonVariants>;
+
+export const PostListSkeleton: FC<PostListSkeletonProps> = ({
+    listVariants = "little",
+    cardVariants = "little",
+    withImage = true,
+}) => {
     return (
         <div className="flex flex-col gap-10 mb-auto w-full">
             <div>
@@ -36,6 +42,7 @@ export const PostListSkeleton: FC<
                         .map((_, i) => i + 1),
                 ].map((item) => (
                     <PostCardSkeleton
+                        withImage={withImage}
                         size={cardVariants}
                         key={"project-card-skeleton-" + item}
                     />

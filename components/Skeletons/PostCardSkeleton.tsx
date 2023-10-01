@@ -6,7 +6,7 @@ import { Card } from "../Card";
 const postCardSkeletonVariants = cva("", {
     variants: {
         size: {
-            big: "flex md:flex-row p-8 gap-8 min-h-[700px] md:min-h-[400px]",
+            big: "flex md:flex-row p-8 md:gap-8 min-h-[700px] md:min-h-[400px]",
             little: "h-full",
         },
     },
@@ -15,22 +15,31 @@ const postCardSkeletonVariants = cva("", {
     },
 });
 
-export const PostCardSkeleton: FC<
-    VariantProps<typeof postCardSkeletonVariants>
-> = ({ size = "little" }) => {
+type PostCardSkeletonProps = {
+    withImage?: boolean;
+} & VariantProps<typeof postCardSkeletonVariants>;
+
+export const PostCardSkeleton: FC<PostCardSkeletonProps> = ({
+    size = "little",
+    withImage = true,
+}) => {
     return (
         <Card className={cn(postCardSkeletonVariants({ size: size }))}>
-            <Card.Image>
-                {size === "little" ? (
-                    <div className="relative w-full pb-[80%] rounded-t">
-                        <div className="animate-pulse flex justify-center items-center absolute w-full h-full object-cover rounded-t bg-secondary-light dark:bg-secondary-dark"></div>
-                    </div>
-                ) : (
-                    <div className="h-full flex felx-col justify-start items-start">
-                        <div className="w-48 h-48 animate-pulse bg-secondary-light dark:bg-secondary-dark rounded"></div>
-                    </div>
-                )}
-            </Card.Image>
+            {withImage ? (
+                <Card.Image>
+                    {size === "little" ? (
+                        <div className="relative w-full pb-[80%] rounded-t">
+                            <div className="animate-pulse flex justify-center items-center absolute w-full h-full object-cover rounded-t bg-secondary-light dark:bg-secondary-dark"></div>
+                        </div>
+                    ) : (
+                        <div className="w-full md:w-auto md:h-full flex flex-col justify-start items-start mb-4 md:m-0">
+                            <div className="w-full md:w-48 h-48 animate-pulse bg-secondary-light dark:bg-secondary-dark rounded"></div>
+                        </div>
+                    )}
+                </Card.Image>
+            ) : (
+                <></>
+            )}
             <Card.Content
                 className={`flex flex-col ${
                     size === "little"
@@ -52,8 +61,8 @@ export const PostCardSkeleton: FC<
                         <div className="w-full h-[2rem] flex justify-center">
                             <div className="w-full h-[2rem] rounded animate-pulse bg-secondary-light dark:bg-secondary-dark"></div>
                         </div>
-                        <div className="w-full h-[10rem] flex justify-center">
-                            <div className="w-full h-[10rem] rounded animate-pulse bg-secondary-light dark:bg-secondary-dark"></div>
+                        <div className="w-full h-full flex justify-center">
+                            <div className="w-full h-full rounded animate-pulse bg-secondary-light dark:bg-secondary-dark"></div>
                         </div>
 
                         <div className="w-full h-[4rem] mt-auto flex justify-center">
