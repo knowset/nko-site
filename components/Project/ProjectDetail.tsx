@@ -31,7 +31,12 @@ export const ProjectDetail: FC<ProjectDetailProps> = ({ post }) => {
                         path="/center/project"
                         isPostDetail
                     />
-                    <DeleteButton post={post} path="/project" isPostDetail />
+                    <DeleteButton
+                        post={post}
+                        redirectPath="/center/project/"
+                        apiPath="/project"
+                        isPostDetail
+                    />
                 </div>
             ) : null}
             <section className="w-full max-w-3xl lg:px-4 sm:px-6 xl:max-w-5xl xl:px-0 mb-8">

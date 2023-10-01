@@ -8,24 +8,26 @@ import { RxCross2 } from "react-icons/rx";
 
 interface DeleteButtonProps {
     post: FaunadbPost<any>;
-    path: string;
+    redirectPath: string;
+    apiPath: string;
     isPostDetail?: boolean;
 }
 // FIXME: add apiPath
 export const DeleteButton: FC<DeleteButtonProps> = ({
     post,
-    path,
+    redirectPath,
+    apiPath,
     isPostDetail = false,
 }) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const handleClick = async () => {
         setIsLoading(true);
-        const res = await fetch(`/api${path}/delete`, {
+        const res = await fetch(`/api/${apiPath}/delete`, {
             method: "POST",
             body: JSON.stringify(post),
         });
-        router.push(path);
+        router.push(redirectPath);
         setIsLoading(false);
     };
 

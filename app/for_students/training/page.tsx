@@ -2,6 +2,7 @@ import { PageLayout } from "@/components/Layouts/PageLayout";
 import { TrainingList } from "@/components/Training/TrainingList";
 import { FaunadbPostsOrError, Training } from "@/types";
 import { Metadata } from "next";
+import Loading from "./loading";
 
 export const dynamic = "force-dynamic";
 
@@ -43,7 +44,6 @@ export default async function Page() {
     if (!data) return null;
 
     if (!data.posts) return null;
-
     return (
         <PageLayout pageName="Тренинги">
             <TrainingList posts={data.posts} />

@@ -30,7 +30,12 @@ export const PartnerDetail: FC<PartnerDetailProps> = ({ post }) => {
                         path="/nko/partner"
                         isPostDetail
                     />
-                    <DeleteButton post={post} path="/partner" isPostDetail />
+                    <DeleteButton
+                        post={post}
+                        redirectPath="/nko/partner"
+                        apiPath="/partner"
+                        isPostDetail
+                    />
                 </div>
             ) : null}
             <section className="w-full max-w-3xl lg:px-4 sm:px-6 xl:max-w-5xl xl:px-0 mb-8">

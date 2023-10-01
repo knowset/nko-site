@@ -76,7 +76,11 @@ export const ProjectCard: FC<ProjectCardProps> = ({
                     {isAdmin ? (
                         <div className="flex gap-2">
                             <EditButton id={post.data.id} path={path} />
-                            <DeleteButton post={post} path={path} />
+                            <DeleteButton
+                                post={post}
+                                redirectPath={path}
+                                apiPath="/project"
+                            />
                         </div>
                     ) : null}
                 </div>

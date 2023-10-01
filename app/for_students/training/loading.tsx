@@ -1,5 +1,5 @@
 import { PostListSkeleton } from "@/components/Skeletons/PostListSkeleton";
 
 export default function Loading() {
-    return <PostListSkeleton />;
+    return <PostListSkeleton listVariants="big" cardVariants="big" />;
 }

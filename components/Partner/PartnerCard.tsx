@@ -15,7 +15,10 @@ export type PartnerCardProps = {
     isAdmin?: boolean;
 };
 
-export const PartnerCard: FC<PartnerCardProps> = ({ post, isAdmin = false }) => {
+export const PartnerCard: FC<PartnerCardProps> = ({
+    post,
+    isAdmin = false,
+}) => {
     const path = usePathname();
 
     const preview_url = `https://drive.google.com/thumbnail?id=${
@@ -72,7 +75,11 @@ export const PartnerCard: FC<PartnerCardProps> = ({ post, isAdmin = false }) => 
                     {isAdmin ? (
                         <div className="flex gap-2">
                             <EditButton id={post.data.id} path={path} />
-                            <DeleteButton post={post} path={path} />
+                            <DeleteButton
+                                post={post}
+                                redirectPath={path}
+                                apiPath="/partner"
+                            />
                         </div>
                     ) : null}
                 </div>
