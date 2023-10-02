@@ -49,7 +49,7 @@ export default async function Page() {
     if (!data.posts) return null;
 
     return (
-        <PageLayout pageName="Тренинги">
+        <PageLayout pageName={["Студентам", "Тренинги"]}>
             <div>
                 <H2 size="big">
                     Ресурсный центр «Инициатива» оказывает услуги по организации

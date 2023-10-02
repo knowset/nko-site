@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
     return (
-        <PageLayout pageName="Документы">
+        <PageLayout pageName={["Центр", "Документы"]}>
             <div className="flex flex-col gap-4">
                 <H1>ПОЛНОЕ НАИМЕНОВАНИЕ ЦЕНТРА</H1>
                 <H2>

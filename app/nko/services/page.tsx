@@ -2,19 +2,19 @@ import { Card } from "@/components/Card";
 import { CardList } from "@/components/CardList";
 import { PageLayout } from "@/components/Layouts/PageLayout";
 import { H2 } from "@/components/Text/H2";
-import { for_students_services_page_items } from "@/constants";
+import { nko_services_page_items } from "@/constants";
 import { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
-    title: "Студентам. Услуги",
+    title: "НКО. Услуги",
     description:
         "Преобразуем инициативы в проекты\nМы готовы поддержать твою самую смелую идею Действуй уже сегодня!",
     openGraph: {
         url: "https://initsiativa.vercel.app",
         type: "website",
-        title: "Студентам. Услуги",
+        title: "НКО. Услуги",
         description:
             "Автономная некоммерческая организация «Ресурсный центр поддержки социально ориентированных некоммерческих организаций «Инициатива» Вологодского государственного университета» зарегистрирована 10 января 2020 года.",
         images: [
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
         ],
     },
     twitter: {
-        title: "Студентам. Услуги",
+        title: "НКО. Услуги",
         card: "summary_large_image",
         description:
             "Автономная некоммерческая организация «Ресурсный центр поддержки социально ориентированных некоммерческих организаций «Инициатива» Вологодского государственного университета» зарегистрирована 10 января 2020 года.",
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
 
 export default async function Page() {
     return (
-        <PageLayout pageName={["Студентам", "Услуги"]}>
+        <PageLayout pageName={["НКО", "Услуги"]}>
             <CardList size="medium">
-                {for_students_services_page_items.map((item) => (
+                {nko_services_page_items.map((item) => (
                     <Card className="p-8 md:p-8 2xl:p-8 gap-4">
                         <Card.Image>
                             <Image

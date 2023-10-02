@@ -48,7 +48,7 @@ export default async function Page() {
     if (!data.posts) return null;
 
     return (
-        <PageLayout pageName="Истории успеха">
+        <PageLayout pageName={["Студентам", "Истории успеха"]}>
             <div>
                 <H2 size="big">
                     Ресурсный центр оказывает методическую, организационную и

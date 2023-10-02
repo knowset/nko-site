@@ -47,7 +47,7 @@ export default async function Page() {
 
     if (!data.posts) return null;
     return (
-        <PageLayout pageName="Проекты">
+        <PageLayout pageName={["Центр", "Проекты"]}>
             <ProjectList posts={data.posts} />
         </PageLayout>
     );

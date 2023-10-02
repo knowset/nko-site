@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
     return (
-        <PageLayout pageName="Инфографика">
+        <PageLayout pageName={["Инфотека", "Инфографика"]}>
             {infographics.map((item) => (
                 <div
                     key={"infographics-item-" + item.fileName}

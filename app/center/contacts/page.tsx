@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
     return (
-        <PageLayout pageName="Контакты">
+        <PageLayout pageName={["Центр", "Контакты"]}>
             <div className="flex flex-col gap-4">
                 <H2>
                     Автономная некоммерческая организация «Ресурсный центр

@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
     return (
-        <PageLayout pageName="Обучение служением">
+        <PageLayout pageName={["НКО", "Обучение служением"]}>
             <div className="flex flex-col gap-8">
                 <H2>
                     «
@@ -78,9 +78,7 @@ export default function Page() {
                                 />
                             </Card.Image>
                             <Card.Content>
-                                <H2>
-                                    {item.text}
-                                </H2>
+                                <H2>{item.text}</H2>
                             </Card.Content>
                         </Card>
                     ))}

@@ -48,7 +48,12 @@ export default async function Page() {
 
     if (!data.posts) return null;
     return (
-        <PageLayout pageName="Кейсы некоммерческих организаций - партнеров">
+        <PageLayout
+            pageName={[
+                "Студентам",
+                "Кейсы некоммерческих организаций - партнеров",
+            ]}
+        >
             <div className="flex flex-col gap-4">
                 <H2 size="big">
                     - формат вовлечения студентов в работу некоммерческих

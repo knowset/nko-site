@@ -20,6 +20,8 @@ export const config = {
         "/for_students/training/edit",
         "/for_students/cases/new",
         "/for_students/cases/edit",
+        "/for_students/success_stories/new",
+        "/for_students/success_stories/edit",
         "/auth/register",
     ],
 };

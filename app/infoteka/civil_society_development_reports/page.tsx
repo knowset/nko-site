@@ -27,7 +27,9 @@ export const metadata: Metadata = {
 
 export default function Page() {
     return (
-        <PageLayout pageName="Доклады о развитии гражданского общества">
+        <PageLayout
+            pageName={["Инфотека", "Доклады о развитии гражданского общества"]}
+        >
             <div className="flex flex-col gap-4">
                 <H2>
                     Информационно-аналитические доклады подготовлены АНО
