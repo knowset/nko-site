@@ -2,7 +2,6 @@ import { PageLayout } from "@/components/Layouts/PageLayout";
 import { ProjectList } from "@/components/Project/ProjectList";
 import { FaunadbPostsOrError, GeneralPostProps, Project } from "@/types";
 import { Metadata } from "next";
-import Loading from "./loading";
 
 export const dynamic = "force-dynamic";
 
@@ -27,7 +26,9 @@ export const metadata: Metadata = {
 };
 
 async function getProjects() {
-    const res = await fetch(`${process.env.API_URL}/api/project`);
+    const res = await fetch(`${process.env.API_URL}/api/project`, {
+        next: { revalidate: 43200 },
+    });
 
     if (!res.ok) {
         throw new Error("Невозможно получить посты");

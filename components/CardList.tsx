@@ -13,7 +13,7 @@ const cardListVariants = cva("w-full grid grid-cols-1", {
         size: {
             little: "sm:grid-cols-2 gap-8 lg:gap-4 xl:grid-cols-3",
             medium: "md:grid-cols-2 gap-8 sm:px-16 md:px-0 lg:px-8 2xl:px-24",
-            big: "grid-cols-1 gap-8"
+            big: "grid-cols-1 gap-8",
         },
     },
     defaultVariants: {
@@ -29,7 +29,7 @@ type CardListProps = {
 
 export const CardList: FC<CardListProps> = ({
     children,
-    isDynamicPage = true,
+    isDynamicPage = false,
     size = "little",
     className = "",
 }) => {

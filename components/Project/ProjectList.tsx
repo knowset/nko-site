@@ -15,7 +15,7 @@ export const ProjectList: FC<ProjectListProps> = ({ posts }) => {
     const isAdmin = session?.user.role == "admin";
 
     return (
-        <CardList>
+        <CardList isDynamicPage>
             {posts.map((post) => (
                 <ProjectCard
                     key={"project-card-" + post.data.id}

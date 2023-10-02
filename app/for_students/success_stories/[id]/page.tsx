@@ -1,5 +1,5 @@
-import { ProjectDetail } from "@/components/Project/ProjectDetail";
-import { FaunadbPostOrError, GeneralPostProps, Project } from "@/types";
+import { SuccessStoryDetail } from "@/components/SuccessStory/SuccessStoryDetail";
+import { FaunadbPostOrError, SuccessStory } from "@/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -10,7 +10,7 @@ export async function generateMetadata({
 }: {
     params: { id: string };
 }): Promise<Metadata> {
-    const data = await getProjectById(params);
+    const data = await getSuccessStoryById(params);
 
     let title: string = "";
     let preview_url: string = "";
@@ -39,27 +39,27 @@ export async function generateMetadata({
     };
 }
 
-async function getProjectById(params: { id: string }) {
+async function getSuccessStoryById(params: { id: string }) {
     if (!params.id) return null;
 
-    const res = await fetch(`${process.env.API_URL}/api/project/${params.id}`, {
-        next: {
-            revalidate: 43200,
-        },
-    });
+    const res = await fetch(
+        `${process.env.API_URL}/api/success_story/${params.id}`,
+        {
+            next: { revalidate: 43200 },
+        }
+    );
 
     if (!res) {
         throw new Error("Невозможно получить пост");
     }
 
-    const data: FaunadbPostOrError<Project & GeneralPostProps> =
-        await res.json();
+    const data: FaunadbPostOrError<SuccessStory> = await res.json();
 
     return data;
 }
 
 export default async function page({ params }: { params: { id: string } }) {
-    const data = await getProjectById(params);
+    const data = await getSuccessStoryById(params);
 
     if (!data || !data.post) return notFound();
 
@@ -67,5 +67,5 @@ export default async function page({ params }: { params: { id: string } }) {
         return null;
     }
 
-    return <ProjectDetail post={data.post} />;
+    return <SuccessStoryDetail post={data.post} />;
 }

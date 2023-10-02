@@ -6,7 +6,9 @@ import { Card } from "../Card";
 const postCardSkeletonVariants = cva("", {
     variants: {
         size: {
-            big: "flex md:flex-row p-8 md:gap-8 min-h-[700px] md:min-h-[400px]",
+            very_big:
+                "flex md:flex-row p-8 md:gap-8 min-h-[700px] md:min-h-[400px]",
+            big: "flex md:flex-row p-8 md:gap-8 min-h-[500px] md:min-h-[300px]",
             little: "h-full",
         },
     },
@@ -58,7 +60,7 @@ export const PostCardSkeleton: FC<PostCardSkeletonProps> = ({
                     </>
                 ) : (
                     <div className="w-full h-full flex flex-col gap-4">
-                        <div className="w-full h-[2rem] flex justify-center">
+                        <div className="w-full flex justify-center">
                             <div className="w-full h-[2rem] rounded animate-pulse bg-secondary-light dark:bg-secondary-dark"></div>
                         </div>
                         <div className="w-full h-full flex justify-center">

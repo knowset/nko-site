@@ -12,7 +12,9 @@ const postListSkeletonVariants = cva("", {
         },
         cardVariants: {
             little: "",
-            big: "flex md:flex-row p-8 gap-8 min-h-[700px] md:min-h-[400px]",
+            very_big:
+                "flex md:flex-row p-8 gap-8 min-h-[700px] md:min-h-[400px]",
+            big: "flex md:flex-row p-8 md:gap-8 min-h-[500px] md:min-h-[300px]",
         },
     },
     defaultVariants: {

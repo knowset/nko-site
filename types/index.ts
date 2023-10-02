@@ -51,6 +51,15 @@ export type Case = {
     google_file_id: string;
 };
 
+export type SuccessStory = {
+    title: string;
+    grant_recipient: string;
+    scope_of_support: string;
+    grantor: string;
+    description: string;
+    images_ids: string[];
+};
+
 export type FaunadbPost<T> = {
     ref: any;
     ts: any;

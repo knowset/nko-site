@@ -3,6 +3,7 @@ import { H2 } from "@/components/Text/H2";
 import { CaseList } from "@/components/Case/CaseList";
 import { FaunadbPostsOrError, Case } from "@/types";
 import { Metadata } from "next";
+import Loading from "./loading";
 
 export const dynamic = "force-dynamic";
 
@@ -27,7 +28,9 @@ export const metadata: Metadata = {
 };
 
 async function getCases() {
-    const res = await fetch(`${process.env.API_URL}/api/case`);
+    const res = await fetch(`${process.env.API_URL}/api/case`, {
+        next: { revalidate: 43200 },
+    });
 
     if (!res.ok) {
         throw new Error("Невозможно получить посты");
@@ -44,7 +47,6 @@ export default async function Page() {
     if (!data) return null;
 
     if (!data.posts) return null;
-
     return (
         <PageLayout pageName="Кейсы некоммерческих организаций - партнеров">
             <div className="flex flex-col gap-4">

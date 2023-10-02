@@ -10,7 +10,7 @@ import { v4 as uuid } from "uuid";
 
 const q = faunadb.query;
 const client = new faunadb.Client({
-    secret: "fnAFLkDLPdAAUTb14qMa2TZuIwnxPe9UGGaA97md",
+    secret: process.env.FAUNADB_API_KEY as string,
 });
 
 interface FaunadbUserResponse {
@@ -127,6 +127,7 @@ export const createUser = async (userData: {
 export const getAllPosts = async <T>(
     postType: string
 ): Promise<FaunadbPostsOrError<T>> => {
+    console.log("HERE");
     try {
         const res: FaunadbPosts<T> = await client.query(
             q.Reverse(

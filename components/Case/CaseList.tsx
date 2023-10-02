@@ -15,7 +15,7 @@ export const CaseList: FC<CaseListProps> = ({ posts }) => {
     const isAdmin = session?.user.role == "admin";
 
     return (
-        <CardList size="big">
+        <CardList size="big" isDynamicPage>
             {posts.map((post) => (
                 <CaseCard
                     key={"training-card-" + post.data.id}

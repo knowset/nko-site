@@ -15,7 +15,7 @@ export const TrainingList: FC<TrainingListProps> = ({ posts }) => {
     const isAdmin = session?.user.role == "admin";
 
     return (
-        <CardList size="big">
+        <CardList size="big" isDynamicPage>
             {posts.map((post) => (
                 <TrainingCard
                     key={"training-card-" + post.data.id}

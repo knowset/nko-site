@@ -1,25 +1,24 @@
 import { PageLayout } from "@/components/Layouts/PageLayout";
+import { SuccessStoryList } from "@/components/SuccessStory/SuccessStoryList";
 import { H2 } from "@/components/Text/H2";
-import { TrainingList } from "@/components/Training/TrainingList";
-import { FaunadbPostsOrError, Training } from "@/types";
+import { FaunadbPostsOrError, SuccessStory } from "@/types";
 import { Metadata } from "next";
-import Loading from "./loading";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
-    title: "Тренинги",
+    title: "Истории успеха",
     openGraph: {
         url: "https://initsiativa.vercel.app/project",
         type: "website",
-        title: "Тренинги",
+        title: "Истории успеха",
         images: [
             "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
         ],
     },
     twitter: {
-        title: "Тренинги",
+        title: "Истории успеха",
         card: "summary_large_image",
         images: [
             "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
@@ -27,8 +26,8 @@ export const metadata: Metadata = {
     },
 };
 
-async function getTrainings() {
-    const res = await fetch(`${process.env.API_URL}/api/training`, {
+async function getSuccessStoreis() {
+    const res = await fetch(`${process.env.API_URL}/api/success_story`, {
         next: { revalidate: 43200 },
     });
 
@@ -36,32 +35,32 @@ async function getTrainings() {
         throw new Error("Невозможно получить посты");
     }
 
-    const data: FaunadbPostsOrError<Training> = await res.json();
+    const data: FaunadbPostsOrError<SuccessStory> = await res.json();
 
     return data;
 }
 
 export default async function Page() {
-    const data = await getTrainings();
+    const data = await getSuccessStoreis();
 
     if (!data) return null;
 
     if (!data.posts) return null;
 
     return (
-        <PageLayout pageName="Тренинги">
+        <PageLayout pageName="Истории успеха">
             <div>
                 <H2 size="big">
-                    Ресурсный центр «Инициатива» оказывает услуги по организации
-                    обучающих программ по социальному проектированию для
-                    студентов и членов НКО; практические занятия: акселераторы
-                    для молодежи, тренинги по социальному проектированию, а
-                    также индивидуальные консультации по доработке проектов для
-                    участников молодежных грантовых конкурсов.
+                    Ресурсный центр оказывает методическую, организационную и
+                    информационную поддержку по написанию грантовых заявок,
+                    реализации социальных проектов, подготовке и сдаче
+                    аналитической и финансовой отчетности. В настоящий момент
+                    ряд проектов успешно реализованы, 15 проектов находятся в
+                    реализации.
                 </H2>
                 <hr className="mt-12 border-border-light dark:border-border-dark" />
             </div>
-            <TrainingList posts={data.posts} />
+            <SuccessStoryList posts={data.posts} />
         </PageLayout>
     );
 }

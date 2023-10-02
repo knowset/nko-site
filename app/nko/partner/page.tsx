@@ -26,7 +26,9 @@ export const metadata: Metadata = {
 };
 
 async function getPartners() {
-    const res = await fetch(`${process.env.API_URL}/api/partner`);
+    const res = await fetch(`${process.env.API_URL}/api/partner`, {
+        next: { revalidate: 43200 },
+    });
 
     if (!res.ok) {
         throw new Error("Невозможно получить посты");

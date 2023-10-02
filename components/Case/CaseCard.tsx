@@ -1,14 +1,11 @@
 "use client";
 
 import { FC } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DeleteButton } from "../CRUD/DeleteButton";
 import { EditButton } from "../CRUD/EditButton";
 import { FaunadbPost, Case } from "@/types";
-import Image from "next/image";
 import { Card } from "../Card";
-import { BsArrowRight } from "react-icons/bs";
 import { H2 } from "../Text/H2";
 import { LinkToFile } from "../LinkToFile";
 
@@ -28,7 +25,7 @@ export const CaseCard: FC<CaseCardProps> = ({ post, isAdmin = false }) => {
                         text={post.data.title}
                         href={post.data.google_file_id}
                         fileFormat=".pdf"
-                        className="text-main text-xl font-bold leading-6 flex gap-2"
+                        className="text-main text-xl font-bold leading-6 inline-block"
                     />
                     <H2>Заказчик: {post.data.customer}</H2>
                     <H2>Описание: {post.data.description}</H2>

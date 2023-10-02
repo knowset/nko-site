@@ -42,7 +42,9 @@ export async function generateMetadata({
 async function getParnersById(params: { id: string }) {
     if (!params.id) return null;
 
-    const res = await fetch(`${process.env.API_URL}/api/partner/${params.id}`);
+    const res = await fetch(`${process.env.API_URL}/api/partner/${params.id}`, {
+        next: { revalidate: 43200 },
+    });
 
     if (!res) {
         throw new Error("Невозможно получить пост");
