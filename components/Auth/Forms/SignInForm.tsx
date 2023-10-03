@@ -42,7 +42,7 @@ export const SignInForm = () => {
 
             if (res?.error) {
                 const _res = JSON.parse(res.error) as UserResponse;
-                console.log(_res);
+
                 if (_res.errors) {
                     setErrors(_res.errors);
                 }

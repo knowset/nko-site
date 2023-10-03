@@ -60,7 +60,7 @@ const SignUpForm = () => {
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        console.log(name, value);
+
         setFormValues({ ...formValues, [name]: value });
     };
 

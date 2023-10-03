@@ -127,7 +127,7 @@ export const createUser = async (userData: {
 export const getAllPosts = async <T>(
     postType: string
 ): Promise<FaunadbPostsOrError<T>> => {
-    console.log("HERE");
+
     try {
         const res: FaunadbPosts<T> = await client.query(
             q.Reverse(
@@ -243,7 +243,6 @@ export const updatePostById = async <T>(
 ) => {
     try {
         const id = data.ref["@ref"].id;
-        console.log(data);
 
         const resData: FaunadbPosts<T> = await client.query(
             q.Update(q.Ref(q.Collection(postType), id), {

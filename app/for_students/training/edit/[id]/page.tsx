@@ -8,7 +8,7 @@ async function getTrainingById(params: { id: string }) {
     if (!params.id) return null;
 
     const res = await fetch(`${process.env.API_URL}/api/training/${params.id}`);
-    console.log(res);
+
     if (!res) {
         throw new Error("Невозможно получить пост");
     }

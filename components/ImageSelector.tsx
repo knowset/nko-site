@@ -48,7 +48,7 @@ export const ImageSelector: FC<ImageSelectorProps> = ({
                 }
             });
         }
-        console.log(copy);
+
         setImages(copy);
     };
 
