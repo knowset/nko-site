@@ -3,15 +3,14 @@ import { H2 } from "@/components/Text/H2";
 import { CaseList } from "@/components/Case/CaseList";
 import { FaunadbPostsOrError, Case } from "@/types";
 import { Metadata } from "next";
-import { cache } from "react";
 
-export const revalidate = 43200;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
     title: "Кейсы",
     openGraph: {
-        url: "https://initsiativa.vercel.app/project",
+        url: "https://initsiativa.vercel.app",
         type: "website",
         title: "Кейсы",
         images: [
@@ -27,8 +26,10 @@ export const metadata: Metadata = {
     },
 };
 
-const getCases = cache(async () => {
-    const res = await fetch(`${process.env.API_URL}/api/case`);
+const getCases = async () => {
+    const res = await fetch(`${process.env.API_URL}/api/case`, {
+        next: { revalidate: 43200 },
+    });
 
     if (!res.ok) {
         throw new Error("Невозможно получить посты");
@@ -37,7 +38,7 @@ const getCases = cache(async () => {
     const data: FaunadbPostsOrError<Case> = await res.json();
 
     return data;
-});
+};
 
 export default async function Page() {
     const data = await getCases();

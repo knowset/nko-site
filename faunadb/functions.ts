@@ -138,6 +138,8 @@ export const getAllPosts = async <T>(
             )
         );
 
+        console.log("HERE");
+
         if (!res) {
             throw new Error(
                 JSON.stringify({

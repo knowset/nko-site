@@ -2,15 +2,14 @@ import { PageLayout } from "@/components/Layouts/PageLayout";
 import { EventForStudentsList } from "@/components/EventForStudents/EFSList";
 import { FaunadbPostsOrError, EventForStudents } from "@/types";
 import { Metadata } from "next";
-import { cache } from "react";
 
-export const revalidate = 43200;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
     title: "Студентам",
     openGraph: {
-        url: "https://initsiativa.vercel.app/project",
+        url: "https://initsiativa.vercel.app",
         type: "website",
         title: "Студентам",
         images: [
@@ -26,8 +25,10 @@ export const metadata: Metadata = {
     },
 };
 
-const getEventsForStudents = cache(async () => {
-    const res = await fetch(`${process.env.API_URL}/api/event_for_students`);
+const getEventsForStudents = async () => {
+    const res = await fetch(`${process.env.API_URL}/api/event_for_students`, {
+        next: { revalidate: 43200 },
+    });
 
     if (!res.ok) {
         throw new Error("Невозможно получить посты");
@@ -36,7 +37,7 @@ const getEventsForStudents = cache(async () => {
     const data: FaunadbPostsOrError<EventForStudents> = await res.json();
 
     return data;
-});
+};
 
 export default async function Page() {
     const data = await getEventsForStudents();

@@ -5,10 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DeleteButton } from "../CRUD/DeleteButton";
 import { EditButton } from "../CRUD/EditButton";
-import { FaunadbPost, EventForStudents, GeneralPostProps } from "@/types";
-import Image from "next/image";
+import { FaunadbPost, EventForStudents } from "@/types";
 import { Card } from "../Card";
-import { BsArrowRight } from "react-icons/bs";
 import { H2 } from "../Text/H2";
 
 export type EventForStudentsCardProps = {

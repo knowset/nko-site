@@ -2,15 +2,14 @@ import { PageLayout } from "@/components/Layouts/PageLayout";
 import { ProjectList } from "@/components/Project/ProjectList";
 import { FaunadbPostsOrError, GeneralPostProps, Project } from "@/types";
 import { Metadata } from "next";
-import { cache } from "react";
 
-export const revalidate = 43200;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
     title: "Проекты",
     openGraph: {
-        url: "https://initsiativa.vercel.app/project",
+        url: "https://initsiativa.vercel.app",
         type: "website",
         title: "Проекты",
         images: [
@@ -26,8 +25,10 @@ export const metadata: Metadata = {
     },
 };
 
-const getProjects = cache(async () => {
-    const res = await fetch(`${process.env.API_URL}/api/project`);
+const getProjects = async () => {
+    const res = await fetch(`${process.env.API_URL}/api/project`, {
+        next: { revalidate: 43200 },
+    });
 
     if (!res.ok) {
         throw new Error("Невозможно получить посты");
@@ -37,7 +38,7 @@ const getProjects = cache(async () => {
         await res.json();
 
     return data;
-});
+};
 
 export default async function Page() {
     const data = await getProjects();
@@ -45,6 +46,7 @@ export default async function Page() {
     if (!data) return null;
 
     if (!data.posts) return null;
+
     return (
         <PageLayout pageName={["Центр", "Проекты"]}>
             <ProjectList posts={data.posts} />

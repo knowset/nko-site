@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
     title: "Чек-листы",
     openGraph: {
-        url: "https://initsiativa.vercel.app/checklists",
+        url: "https://initsiativa.vercel.app",
         type: "website",
         title: "Чек-листы",
         images: [

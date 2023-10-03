@@ -2,15 +2,14 @@ import { PageLayout } from "@/components/Layouts/PageLayout";
 import { PartnerList } from "@/components/Partner/PartnerList";
 import { FaunadbPostsOrError, Partner } from "@/types";
 import { Metadata } from "next";
-import { cache } from "react";
 
-export const revalidate = 43200;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
     title: "Партнеры",
     openGraph: {
-        url: "https://initsiativa.vercel.app/project",
+        url: "https://initsiativa.vercel.app",
         type: "website",
         title: "Партнеры",
         images: [
@@ -26,8 +25,10 @@ export const metadata: Metadata = {
     },
 };
 
-const getPartners = cache(async () => {
-    const res = await fetch(`${process.env.API_URL}/api/partner`);
+const getPartners = async () => {
+    const res = await fetch(`${process.env.API_URL}/api/partner`, {
+        next: { revalidate: 43200 },
+    });
 
     if (!res.ok) {
         throw new Error("Невозможно получить посты");
@@ -36,7 +37,7 @@ const getPartners = cache(async () => {
     const data: FaunadbPostsOrError<Partner> = await res.json();
 
     return data;
-});
+};
 
 export default async function Page() {
     const data = await getPartners();

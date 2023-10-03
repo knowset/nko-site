@@ -3,15 +3,14 @@ import { SuccessStoryList } from "@/components/SuccessStory/SuccessStoryList";
 import { H2 } from "@/components/Text/H2";
 import { FaunadbPostsOrError, SuccessStory } from "@/types";
 import { Metadata } from "next";
-import { cache } from "react";
 
-export const revalidate = 43200;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
     title: "Истории успеха",
     openGraph: {
-        url: "https://initsiativa.vercel.app/project",
+        url: "https://initsiativa.vercel.app",
         type: "website",
         title: "Истории успеха",
         images: [
@@ -27,8 +26,10 @@ export const metadata: Metadata = {
     },
 };
 
-const getSuccessStories = cache(async () => {
-    const res = await fetch(`${process.env.API_URL}/api/success_story`);
+const getSuccessStories = async () => {
+    const res = await fetch(`${process.env.API_URL}/api/success_story`, {
+        next: { revalidate: 43200 },
+    });
 
     if (!res.ok) {
         throw new Error("Невозможно получить посты");
@@ -37,7 +38,7 @@ const getSuccessStories = cache(async () => {
     const data: FaunadbPostsOrError<SuccessStory> = await res.json();
 
     return data;
-});
+};
 
 export default async function Page() {
     const data = await getSuccessStories();

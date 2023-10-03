@@ -21,5 +21,5 @@ export const PostCardSkeleton: FC<PostCardSkeletonProps> = ({
             return <SMCardSkeleton withImage={withImage} />;
     }
 
-    return null;
+    return <div>1</div>;
 };

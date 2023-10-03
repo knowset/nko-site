@@ -8,7 +8,7 @@ async function getCaseById(params: { id: string }) {
     if (!params.id) return null;
 
     const res = await fetch(`${process.env.API_URL}/api/case/${params.id}`);
-    console.log(res);
+    
     if (!res) {
         throw new Error("Невозможно получить пост");
     }
