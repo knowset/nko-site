@@ -1,5 +1,5 @@
 import { updatePostById } from "@/faunadb/functions";
-import { FaunadbPost, GeneralPostProps, Partner } from "@/types";
+import { FaunadbPost, Partner } from "@/types";
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 

@@ -2,11 +2,6 @@ import { createUser } from "@/faunadb/functions";
 import argon2 from "argon2";
 import { NextResponse } from "next/server";
 
-interface RequestBody {
-    email: string;
-    password: string;
-}
-
 export async function POST(request: Request) {
     try {
         const { email, password } = (await request.json()) as {

@@ -1,5 +1,5 @@
 import { EditSuccessStoryForm } from "@/components/CRUD/Forms/Edit/EditSuccessStoryForm";
-import { FaunadbPostOrError, GeneralPostProps, SuccessStory } from "@/types";
+import { FaunadbPostOrError, SuccessStory } from "@/types";
 import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";

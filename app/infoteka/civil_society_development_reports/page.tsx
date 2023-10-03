@@ -1,6 +1,5 @@
 import { PageLayout } from "@/components/Layouts/PageLayout";
 import { LinkToFile } from "@/components/LinkToFile";
-import { H1 } from "@/components/Text/H1";
 import { H2 } from "@/components/Text/H2";
 import { civil_society_development_reports } from "@/constants";
 import { Metadata } from "next";

@@ -1,23 +1,41 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { FaunadbPost } from "@/types";
+import { cva, VariantProps } from "class-variance-authority";
 import { useRouter } from "next/navigation";
 import { FC, useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
 
-interface DeleteButtonProps {
+const deleteButtonVariants = cva(
+    "bg-red-500 hover:bg-red-700 flex justify-center items-center text-white text-xl rounded  transition-all duration-200",
+    {
+        variants: {
+            size: {
+                big: "w-16 h-16",
+                medium: "w-12 h-12",
+                little: "w-8 h-8",
+            },
+        },
+        defaultVariants: {
+            size: "little",
+        },
+    }
+);
+
+type DeleteButtonProps = {
     post: FaunadbPost<any>;
     redirectPath: string;
     apiPath: string;
     isPostDetail?: boolean;
-}
-// FIXME: add apiPath
+} & VariantProps<typeof deleteButtonVariants>;
+
 export const DeleteButton: FC<DeleteButtonProps> = ({
     post,
     redirectPath,
     apiPath,
-    isPostDetail = false,
+    size,
 }) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
@@ -34,9 +52,7 @@ export const DeleteButton: FC<DeleteButtonProps> = ({
     return (
         <div>
             <button
-                className={`bg-red-500 hover:bg-red-700 ${
-                    isPostDetail ? "h-16 w-16" : "h-8 w-8"
-                } flex justify-center items-center text-white text-xl rounded  transition-all duration-200`}
+                className={cn(deleteButtonVariants({ size }))}
                 onClick={handleClick}
             >
                 {!isLoading ? (

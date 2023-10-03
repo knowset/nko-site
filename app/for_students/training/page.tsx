@@ -3,9 +3,9 @@ import { H2 } from "@/components/Text/H2";
 import { TrainingList } from "@/components/Training/TrainingList";
 import { FaunadbPostsOrError, Training } from "@/types";
 import { Metadata } from "next";
-import Loading from "./loading";
+import { cache } from "react";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 43200;
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
@@ -27,10 +27,8 @@ export const metadata: Metadata = {
     },
 };
 
-async function getTrainings() {
-    const res = await fetch(`${process.env.API_URL}/api/training`, {
-        next: { revalidate: 43200 },
-    });
+const getTrainings = cache(async () => {
+    const res = await fetch(`${process.env.API_URL}/api/training`);
 
     if (!res.ok) {
         throw new Error("Невозможно получить посты");
@@ -39,7 +37,7 @@ async function getTrainings() {
     const data: FaunadbPostsOrError<Training> = await res.json();
 
     return data;
-}
+});
 
 export default async function Page() {
     const data = await getTrainings();
@@ -47,7 +45,6 @@ export default async function Page() {
     if (!data) return null;
 
     if (!data.posts) return null;
-
     return (
         <PageLayout pageName={["Студентам", "Тренинги"]}>
             <div>

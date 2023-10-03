@@ -2,8 +2,9 @@ import { PartnerDetail } from "@/components/Partner/PartnerDetail";
 import { FaunadbPostOrError, Partner } from "@/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 43200;
 
 export async function generateMetadata({
     params,
@@ -39,12 +40,10 @@ export async function generateMetadata({
     };
 }
 
-async function getParnersById(params: { id: string }) {
+const getParnersById = cache(async (params: { id: string }) => {
     if (!params.id) return null;
 
-    const res = await fetch(`${process.env.API_URL}/api/partner/${params.id}`, {
-        next: { revalidate: 43200 },
-    });
+    const res = await fetch(`${process.env.API_URL}/api/partner/${params.id}`);
 
     if (!res) {
         throw new Error("Невозможно получить пост");
@@ -53,7 +52,7 @@ async function getParnersById(params: { id: string }) {
     const data: FaunadbPostOrError<Partner> = await res.json();
 
     return data;
-}
+});
 
 export default async function page({ params }: { params: { id: string } }) {
     const data = await getParnersById(params);

@@ -1,6 +1,6 @@
 "use client";
 
-import { FaunadbPost, GeneralPostProps, Case } from "@/types";
+import { FaunadbPost, Case } from "@/types";
 import { useSession } from "next-auth/react";
 import { FC } from "react";
 import { CardList } from "../CardList";

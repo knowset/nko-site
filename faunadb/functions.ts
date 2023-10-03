@@ -81,7 +81,7 @@ export const createUser = async (userData: {
         const resData: { data: any[] } = await client.query(
             q.Map(
                 q.Filter(
-                    q.Paginate(q.Match(q.Index("all_items"))),
+                    q.Paginate(q.Match(q.Index("user_by_id"))),
                     q.Lambda((ref) =>
                         q.ContainsStr(
                             q.Select(["data", "email"], q.Get(ref)),

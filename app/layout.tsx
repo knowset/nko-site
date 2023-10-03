@@ -4,7 +4,7 @@ import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { Footer } from "@/components/Footer";
 import Favicon from "@/public/favicon.ico";
-import { Inter, Roboto } from "next/font/google";
+import { Inter } from "next/font/google";
 
 export const metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),

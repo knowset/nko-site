@@ -60,6 +60,13 @@ export type SuccessStory = {
     images_ids: string[];
 };
 
+export type EventForStudents = {
+    title: string;
+    description: string;
+    site: string;
+    end_of_the_implementation_period: string;
+};
+
 export type FaunadbPost<T> = {
     ref: any;
     ts: any;

@@ -3,8 +3,9 @@ import { SuccessStoryList } from "@/components/SuccessStory/SuccessStoryList";
 import { H2 } from "@/components/Text/H2";
 import { FaunadbPostsOrError, SuccessStory } from "@/types";
 import { Metadata } from "next";
+import { cache } from "react";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 43200;
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
@@ -26,10 +27,8 @@ export const metadata: Metadata = {
     },
 };
 
-async function getSuccessStoreis() {
-    const res = await fetch(`${process.env.API_URL}/api/success_story`, {
-        next: { revalidate: 43200 },
-    });
+const getSuccessStories = cache(async () => {
+    const res = await fetch(`${process.env.API_URL}/api/success_story`);
 
     if (!res.ok) {
         throw new Error("Невозможно получить посты");
@@ -38,10 +37,10 @@ async function getSuccessStoreis() {
     const data: FaunadbPostsOrError<SuccessStory> = await res.json();
 
     return data;
-}
+});
 
 export default async function Page() {
-    const data = await getSuccessStoreis();
+    const data = await getSuccessStories();
 
     if (!data) return null;
 

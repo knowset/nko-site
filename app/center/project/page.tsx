@@ -2,8 +2,9 @@ import { PageLayout } from "@/components/Layouts/PageLayout";
 import { ProjectList } from "@/components/Project/ProjectList";
 import { FaunadbPostsOrError, GeneralPostProps, Project } from "@/types";
 import { Metadata } from "next";
+import { cache } from "react";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 43200;
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
@@ -25,10 +26,8 @@ export const metadata: Metadata = {
     },
 };
 
-async function getProjects() {
-    const res = await fetch(`${process.env.API_URL}/api/project`, {
-        next: { revalidate: 43200 },
-    });
+const getProjects = cache(async () => {
+    const res = await fetch(`${process.env.API_URL}/api/project`);
 
     if (!res.ok) {
         throw new Error("Невозможно получить посты");
@@ -38,7 +37,7 @@ async function getProjects() {
         await res.json();
 
     return data;
-}
+});
 
 export default async function Page() {
     const data = await getProjects();

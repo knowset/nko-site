@@ -5,11 +5,10 @@ export async function middleware(req: NextRequest) {
     const token = await getToken({ req });
 
     if (!token) {
-        return NextResponse.redirect(new URL("/login", req.nextUrl));
+        return NextResponse.redirect(new URL("/", req.nextUrl));
     }
 }
 
-// FIXME: добавить /nko (/partner)
 export const config = {
     matcher: [
         "/center/project/new",
@@ -22,6 +21,8 @@ export const config = {
         "/for_students/cases/edit",
         "/for_students/success_stories/new",
         "/for_students/success_stories/edit",
+        "/calendar/for_students/new",
+        "/calendar/for_students/edit",
         "/auth/register",
     ],
 };

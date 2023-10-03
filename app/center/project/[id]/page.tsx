@@ -2,8 +2,9 @@ import { ProjectDetail } from "@/components/Project/ProjectDetail";
 import { FaunadbPostOrError, GeneralPostProps, Project } from "@/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 43200;
 
 export async function generateMetadata({
     params,
@@ -39,7 +40,7 @@ export async function generateMetadata({
     };
 }
 
-async function getProjectById(params: { id: string }) {
+const getProjectById = cache(async (params: { id: string }) => {
     if (!params.id) return null;
 
     const res = await fetch(`${process.env.API_URL}/api/project/${params.id}`, {
@@ -56,7 +57,7 @@ async function getProjectById(params: { id: string }) {
         await res.json();
 
     return data;
-}
+});
 
 export default async function page({ params }: { params: { id: string } }) {
     const data = await getProjectById(params);

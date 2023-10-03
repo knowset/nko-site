@@ -1,5 +1,4 @@
 import { PageLayout } from "@/components/Layouts/PageLayout";
-import { H1 } from "@/components/Text/H1";
 import { infographics } from "@/constants";
 import { Metadata } from "next";
 import Image from "next/image";

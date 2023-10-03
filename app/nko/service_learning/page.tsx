@@ -1,12 +1,10 @@
 import { Card } from "@/components/Card";
 import { CardList } from "@/components/CardList";
 import { PageLayout } from "@/components/Layouts/PageLayout";
-import { H1 } from "@/components/Text/H1";
 import { H2 } from "@/components/Text/H2";
 import { service_learning_page_items } from "@/constants";
 import { Metadata } from "next";
 import Image from "next/image";
-import OGImage from "./opengraph-image";
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
@@ -15,14 +13,22 @@ export const metadata: Metadata = {
         "«ОБУЧЕНИЕ СЛУЖЕНИЕМ» — это уникальная программа, которая объединяет теоретическое обучение и практическую общественную деятельность в единый образовательный процесс.",
     openGraph: {
         url: "https://initsiativa.vercel.app/service_learning",
-        description: " ",
+        description:
+            "«ОБУЧЕНИЕ СЛУЖЕНИЕМ» — это уникальная программа, которая объединяет теоретическое обучение и практическую общественную деятельность в единый образовательный процесс.",
         type: "website",
         title: "Обучение служением",
+        images: [
+            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
+        ],
     },
     twitter: {
         title: "Обучение служением",
-        description: " ",
+        description:
+            "«ОБУЧЕНИЕ СЛУЖЕНИЕМ» — это уникальная программа, которая объединяет теоретическое обучение и практическую общественную деятельность в единый образовательный процесс.",
         card: "summary_large_image",
+        images: [
+            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
+        ],
     },
 };
 

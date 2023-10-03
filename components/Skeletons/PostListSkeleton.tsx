@@ -10,12 +10,6 @@ const postListSkeletonVariants = cva("", {
             medium: "",
             big: "",
         },
-        cardVariants: {
-            little: "",
-            very_big:
-                "flex md:flex-row p-8 gap-8 min-h-[700px] md:min-h-[400px]",
-            big: "flex md:flex-row p-8 md:gap-8 min-h-[500px] md:min-h-[300px]",
-        },
     },
     defaultVariants: {
         listVariants: "little",
@@ -24,11 +18,12 @@ const postListSkeletonVariants = cva("", {
 
 type PostListSkeletonProps = {
     withImage?: boolean;
+    cardSize?: string;
 } & VariantProps<typeof postListSkeletonVariants>;
 
 export const PostListSkeleton: FC<PostListSkeletonProps> = ({
     listVariants = "little",
-    cardVariants = "little",
+    cardSize = "xl",
     withImage = true,
 }) => {
     return (
@@ -45,8 +40,8 @@ export const PostListSkeleton: FC<PostListSkeletonProps> = ({
                 ].map((item) => (
                     <PostCardSkeleton
                         withImage={withImage}
-                        size={cardVariants}
-                        key={"project-card-skeleton-" + item}
+                        size={cardSize}
+                        key={"post-card-skeleton-" + item}
                     />
                 ))}
             </CardList>

@@ -28,13 +28,13 @@ export const SuccessStoryDetail: FC<SuccessStoryDetailProps> = ({ post }) => {
                     <EditButton
                         id={post.data.id}
                         path="/nko/partner"
-                        isPostDetail
+                        size="big"
                     />
                     <DeleteButton
                         post={post}
                         redirectPath="/nko/partner"
                         apiPath="/partner"
-                        isPostDetail
+                        size="big"
                     />
                 </div>
             ) : null}

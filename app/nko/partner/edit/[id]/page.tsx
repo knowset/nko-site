@@ -1,5 +1,5 @@
 import { EditPartnerForm } from "@/components/CRUD/Forms/Edit/EditPartnerForm";
-import { FaunadbPostOrError, GeneralPostProps, Partner } from "@/types";
+import { FaunadbPostOrError, Partner } from "@/types";
 import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";

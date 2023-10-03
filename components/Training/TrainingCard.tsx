@@ -5,10 +5,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DeleteButton } from "../CRUD/DeleteButton";
 import { EditButton } from "../CRUD/EditButton";
-import { FaunadbPost, Training, GeneralPostProps } from "@/types";
+import { FaunadbPost, Training } from "@/types";
 import Image from "next/image";
 import { Card } from "../Card";
-import { BsArrowRight } from "react-icons/bs";
 import { H2 } from "../Text/H2";
 
 export type TrainingCardProps = {
@@ -27,7 +26,7 @@ export const TrainingCard: FC<TrainingCardProps> = ({
     }&sz=w${2000}-h${2000}`;
 
     return (
-        <Card className=" flex md:flex-row p-8 gap-8 min-h-[700px] md:min-h-[400px]">
+        <Card className="flex md:flex-row p-8 gap-8" height="md">
             <Card.Image>
                 <div className="h-full flex felx-col justify-start items-start">
                     {post.data.images_ids.length > 0 ? (
@@ -49,34 +48,35 @@ export const TrainingCard: FC<TrainingCardProps> = ({
                     )}
                 </div>
             </Card.Image>
-            <Card.Content className="flex flex-col justify-between w-full">
-                <div className="flex flex-col w-full gap-4 text-left">
-                    <h1 className="text-main text-xl font-bold leading-6">
-                        {post.data.title}
-                    </h1>
-                    <H2>{post.data.description}</H2>
-                    <H2>Продолжительность: {post.data.duration}</H2>
-                </div>
-                <div className="flex justify-between pt-2">
+            <Card.Content className="flex flex-col justify-between w-full gap-4 text-left">
+                <h1 className="text-main text-xl font-bold leading-6">
+                    {post.data.title}
+                </h1>
+                <H2>{post.data.description}</H2>
+                <H2>Продолжительность: {post.data.duration}</H2>
+                <div className="flex justify-between items-center gap-2">
                     <Link
                         href={post.data.link_to_google_form}
-                        className="flex items-center justify-center mt-4 h-12 px-6 w-full rounded font-semibold text-sm text-white bg-main hover:bg-main-hover"
+                        className="flex items-center justify-center h-12 px-6 w-full rounded font-semibold text-center text-white bg-main hover:bg-main-hover"
                     >
-                        <H2>Записаться на тренинг</H2>
+                        Записаться на тренинг
                     </Link>
-                </div>
-                {isAdmin ? (
-                    <div className="w-full flex justify-end">
+                    {isAdmin ? (
                         <div className="flex gap-2">
-                            <EditButton id={post.data.id} path={path} />
+                            <EditButton
+                                id={post.data.id}
+                                path={path}
+                                size="medium"
+                            />
                             <DeleteButton
                                 post={post}
                                 redirectPath={path}
                                 apiPath="training"
+                                size="medium"
                             />
                         </div>
-                    </div>
-                ) : null}
+                    ) : null}
+                </div>
             </Card.Content>
         </Card>
     );

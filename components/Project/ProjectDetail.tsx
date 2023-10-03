@@ -1,7 +1,5 @@
 "use client";
 
-import { format } from "date-fns";
-import { ru } from "date-fns/locale";
 import { ImageTabs } from "../ImageTabs";
 import { FaunadbPost, GeneralPostProps, Project } from "@/types";
 import { EditButton } from "../CRUD/EditButton";
@@ -29,13 +27,13 @@ export const ProjectDetail: FC<ProjectDetailProps> = ({ post }) => {
                     <EditButton
                         id={post.data.id}
                         path="/center/project"
-                        isPostDetail
+                        size="big"
                     />
                     <DeleteButton
                         post={post}
                         redirectPath="/center/project/"
                         apiPath="/project"
-                        isPostDetail
+                        size="big"
                     />
                 </div>
             ) : null}

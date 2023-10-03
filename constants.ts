@@ -42,7 +42,7 @@ export const navlinks: {
     {
         title: "Календарь",
         links: [
-            //     { title: "Студентам", href: "/calendar/for_students" },
+            { title: "Студентам", href: "/calendar/for_students" },
             { title: "НКО", href: "/calendar/nko" },
         ],
     },

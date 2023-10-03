@@ -2,8 +2,9 @@ import { SuccessStoryDetail } from "@/components/SuccessStory/SuccessStoryDetail
 import { FaunadbPostOrError, SuccessStory } from "@/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 43200;
 
 export async function generateMetadata({
     params,
@@ -39,14 +40,11 @@ export async function generateMetadata({
     };
 }
 
-async function getSuccessStoryById(params: { id: string }) {
+const getSuccessStoryById = cache(async (params: { id: string }) => {
     if (!params.id) return null;
 
     const res = await fetch(
-        `${process.env.API_URL}/api/success_story/${params.id}`,
-        {
-            next: { revalidate: 43200 },
-        }
+        `${process.env.API_URL}/api/success_story/${params.id}`
     );
 
     if (!res) {
@@ -56,7 +54,7 @@ async function getSuccessStoryById(params: { id: string }) {
     const data: FaunadbPostOrError<SuccessStory> = await res.json();
 
     return data;
-}
+});
 
 export default async function page({ params }: { params: { id: string } }) {
     const data = await getSuccessStoryById(params);
