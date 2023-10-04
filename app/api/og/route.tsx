@@ -17,6 +17,8 @@ export async function GET(req: NextRequest): Promise<Response | ImageResponse> {
             ? searchParams.get("title")
             : "";
 
+        const splitedTitle = !!title ? title.split("/") : [""];
+
         return new ImageResponse(
             (
                 <div
@@ -28,7 +30,7 @@ export async function GET(req: NextRequest): Promise<Response | ImageResponse> {
                         background: isLight ? "white" : "#161618",
                         width: "100%",
                         height: "100%",
-                        gap: 100,
+                        gap: 50,
                     }}
                 >
                     <img
@@ -39,20 +41,45 @@ export async function GET(req: NextRequest): Promise<Response | ImageResponse> {
                             height: 450,
                         }}
                     />
+                    <span
+                        style={{
+                            backgroundColor: isLight
+                                ? "#c2c2c4"
+                                : "rgba(82,82,89,0.68)",
+                            height: 450,
+                            width: 1,
+                        }}
+                    ></span>
                     <div
                         style={{
                             width: 450,
                             height: 450,
                             display: "flex",
-                            justifyContent: "flex-start",
-                            alignItems: "center",
-                            padding: 25,
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            alignItems: "flex-start",
                             color: "rgb(0,158,224)",
                             fontSize: 48,
-                            fontWeight: 600,
+                            fontFamily: "sans-serif",
+                            fontWeight: "bolder",
                         }}
                     >
-                        {title?.split("/").join(" / ")}
+                        {splitedTitle.map((item, index) => (
+                            <div style={{ display: "flex", gap: 16 }}>
+                                <div>{item}</div>
+                                {index !== splitedTitle.length - 1 ? (
+                                    <span
+                                        style={{
+                                            color: isLight
+                                                ? "#c2c2c4"
+                                                : "rgba(82,82,89,0.68)",
+                                        }}
+                                    >
+                                        /
+                                    </span>
+                                ) : null}
+                            </div>
+                        ))}
                     </div>
                 </div>
             ),
