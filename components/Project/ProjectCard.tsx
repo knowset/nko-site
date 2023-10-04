@@ -9,6 +9,7 @@ import { FaunadbPost, Project } from "@/types";
 import Image from "next/image";
 import { Card } from "../Card";
 import { BsArrowRight } from "react-icons/bs";
+import { shortenTitle } from "@/lib/shortenTitle";
 
 export type ProjectCardProps = {
     post: FaunadbPost<Project>;
@@ -24,6 +25,8 @@ export const ProjectCard: FC<ProjectCardProps> = ({
     const preview_url = `https://drive.google.com/thumbnail?id=${
         post.data.images_ids[0]
     }&sz=w${2000}-h${2000}`;
+
+    const shortTitle: string = shortenTitle(post.data.title);
 
     return (
         <Card className="h-full">
@@ -53,9 +56,9 @@ export const ProjectCard: FC<ProjectCardProps> = ({
             <Card.Content className="flex flex-col justify-between h-[10rem] w-full">
                 <div className="flex flex-col px-4 py-2 h-[7rem] w-full">
                     <div className="text-center">
-                        <h1 className="text-main text-xl font-bold leading-6">
+                        <h1 className="text-main text-lg font-bold leading-6">
                             <Link href={`${path}/${post.data.id}`}>
-                                {post.data.title}
+                                {shortTitle}
                             </Link>
                         </h1>
                         <p className="text-base">{post.data.sub_title}</p>

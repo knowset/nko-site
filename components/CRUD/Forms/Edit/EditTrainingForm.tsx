@@ -141,13 +141,6 @@ export const EditTrainingForm: FC<EditTrainingFormProps> = ({ post }) => {
                 required
                 inputType="textarea"
             />
-            <Input
-                title="Ссылка на гугл форму"
-                value={formValues.link_to_google_form}
-                onChange={handleChange}
-                name="link_to_google_form"
-                type="text"
-            />
             <label className="font-semibold text-base">Картинки</label>
             <ImageSelector
                 images={images}

@@ -5,6 +5,8 @@ import { H2 } from "@/components/Text/H2";
 import { documentation_page_items } from "@/constants";
 import { Metadata } from "next";
 
+const title = "Центр/Документы";
+
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
     title: "Документы",
@@ -16,24 +18,20 @@ export const metadata: Metadata = {
         title: "Документы",
         description:
             "Автономная некоммерческая организация «Ресурсный центр поддержки социально ориентированных некоммерческих организаций «Инициатива» Вологодского государственного университета»",
-        images: [
-            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
-        ],
+        images: [`/api/og?title=${title}`],
     },
     twitter: {
         title: "Документы",
         card: "summary_large_image",
         description:
             "Автономная некоммерческая организация «Ресурсный центр поддержки социально ориентированных некоммерческих организаций «Инициатива» Вологодского государственного университета»",
-        images: [
-            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
-        ],
+        images: [`/api/og?title=${title}`],
     },
 };
 
 export default async function Page() {
     return (
-        <PageLayout pageName={["Центр", "Документы"]}>
+        <PageLayout pageName={[...title.split("/")]}>
             <div className="flex flex-col gap-4">
                 <H1>ПОЛНОЕ НАИМЕНОВАНИЕ ЦЕНТРА</H1>
                 <H2>

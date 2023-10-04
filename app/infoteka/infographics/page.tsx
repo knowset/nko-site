@@ -3,6 +3,8 @@ import { infographics } from "@/constants";
 import { Metadata } from "next";
 import Image from "next/image";
 
+const title = "Инфотека/Инфографика";
+
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
     title: "Инфографика",
@@ -10,22 +12,18 @@ export const metadata: Metadata = {
         url: "https://initsiativa.vercel.app",
         type: "website",
         title: "Инфографика",
-        images: [
-            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
-        ],
+        images: [`/api/og?title=${title}`],
     },
     twitter: {
         title: "Инфографика",
         card: "summary_large_image",
-        images: [
-            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
-        ],
+        images: [`/api/og?title=${title}`],
     },
 };
 
 export default function Page() {
     return (
-        <PageLayout pageName={["Инфотека", "Инфографика"]}>
+        <PageLayout pageName={[...title.split("/")]}>
             {infographics.map((item) => (
                 <div
                     key={"infographics-item-" + item.fileName}

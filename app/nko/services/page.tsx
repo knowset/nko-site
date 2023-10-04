@@ -6,6 +6,8 @@ import { nko_services_page_items } from "@/constants";
 import { Metadata } from "next";
 import Image from "next/image";
 
+const title = "НКО/Услуги";
+
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
     title: "НКО. Услуги",
@@ -17,24 +19,20 @@ export const metadata: Metadata = {
         title: "НКО. Услуги",
         description:
             "Автономная некоммерческая организация «Ресурсный центр поддержки социально ориентированных некоммерческих организаций «Инициатива» Вологодского государственного университета» зарегистрирована 10 января 2020 года.",
-        images: [
-            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
-        ],
+        images: [`/api/og?title=${title}`],
     },
     twitter: {
         title: "НКО. Услуги",
         card: "summary_large_image",
         description:
             "Автономная некоммерческая организация «Ресурсный центр поддержки социально ориентированных некоммерческих организаций «Инициатива» Вологодского государственного университета» зарегистрирована 10 января 2020 года.",
-        images: [
-            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
-        ],
+        images: [`/api/og?title=${title}`],
     },
 };
 
 export default async function Page() {
     return (
-        <PageLayout pageName={["НКО", "Услуги"]}>
+        <PageLayout pageName={[...title.split("/")]}>
             <CardList size="medium">
                 {nko_services_page_items.map((item) => (
                     <Card className="p-8 md:p-8 2xl:p-8 gap-4">

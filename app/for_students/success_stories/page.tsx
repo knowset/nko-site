@@ -6,6 +6,8 @@ import { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 
+const title = "Студентам/Истории успеха";
+
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
     title: "Истории успеха",
@@ -13,16 +15,12 @@ export const metadata: Metadata = {
         url: "https://initsiativa.vercel.app",
         type: "website",
         title: "Истории успеха",
-        images: [
-            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
-        ],
+        images: [`/api/og?title=${title}`],
     },
     twitter: {
         title: "Истории успеха",
         card: "summary_large_image",
-        images: [
-            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
-        ],
+        images: [`/api/og?title=${title}`],
     },
 };
 
@@ -48,7 +46,7 @@ export default async function Page() {
     if (!data.posts) return null;
 
     return (
-        <PageLayout pageName={["Студентам", "Истории успеха"]}>
+        <PageLayout pageName={[...title.split("/")]}>
             <div>
                 <H2 size="big">
                     Ресурсный центр оказывает методическую, организационную и

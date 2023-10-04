@@ -40,7 +40,6 @@ export type Training = {
     title: string;
     description: string;
     duration: string;
-    link_to_google_form: string;
     images_ids: string[];
 };
 

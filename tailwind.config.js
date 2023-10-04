@@ -23,17 +23,7 @@ module.exports = {
             "2xl": "1536px",
             "3xl": "1920px",
         },
-        // colors: {
-        //     "primary-light": "#ffffff",
-        //     "secondary-light": "#eeeef0",
-        //     "primary-dark": "#161618",
-        //     "secondary-dark": "#1e1e20",
-        //     "border-light": "#c2c2c4",
-        //     "border-dark": "rgba(82,82,89,0.68)",
-        //     main: "rgb(0,158,224)",
-        // },
-        // NOTE: Взять цвета темной темы отсюда
-        // https://lucide.dev/guide/packages/lucide-react
+
         extend: {
             colors: {
                 "primary-light": "#ffffff",

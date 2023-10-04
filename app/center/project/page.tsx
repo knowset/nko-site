@@ -3,6 +3,8 @@ import { ProjectList } from "@/components/Project/ProjectList";
 import { FaunadbPostsOrError, GeneralPostProps, Project } from "@/types";
 import { Metadata } from "next";
 
+const title = "Центр/Проекты";
+
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
@@ -12,16 +14,12 @@ export const metadata: Metadata = {
         url: "https://initsiativa.vercel.app",
         type: "website",
         title: "Проекты",
-        images: [
-            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
-        ],
+        images: [`/api/og?title=${title}`],
     },
     twitter: {
         title: "Проекты",
         card: "summary_large_image",
-        images: [
-            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
-        ],
+        images: [`/api/og?title=${title}`],
     },
 };
 
@@ -48,7 +46,7 @@ export default async function Page() {
     if (!data.posts) return null;
 
     return (
-        <PageLayout pageName={["Центр", "Проекты"]}>
+        <PageLayout pageName={[...title.split("/")]}>
             <ProjectList posts={data.posts} />
         </PageLayout>
     );

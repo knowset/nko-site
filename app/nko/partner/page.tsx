@@ -5,6 +5,8 @@ import { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 
+const title = "НКО/Партнеры";
+
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
     title: "Партнеры",
@@ -12,16 +14,12 @@ export const metadata: Metadata = {
         url: "https://initsiativa.vercel.app",
         type: "website",
         title: "Партнеры",
-        images: [
-            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
-        ],
+        images: [`/api/og?title=${title}`],
     },
     twitter: {
         title: "Партнеры",
         card: "summary_large_image",
-        images: [
-            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
-        ],
+        images: [`/api/og?title=${title}`],
     },
 };
 
@@ -47,7 +45,7 @@ export default async function Page() {
     if (!data.posts) return null;
 
     return (
-        <PageLayout pageName={["НКО", "Партнеры"]}>
+        <PageLayout pageName={[...title.split("/")]}>
             <PartnerList posts={data.posts} />
         </PageLayout>
     );

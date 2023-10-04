@@ -4,6 +4,9 @@ import { LinkToFile } from "@/components/LinkToFile";
 import { H2 } from "@/components/Text/H2";
 import Link from "next/link";
 import { Metadata } from "next";
+import { LinkToForm } from "@/components/LinkToForm";
+
+const title = "Календарь/НКО";
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
@@ -12,22 +15,18 @@ export const metadata: Metadata = {
         url: "https://initsiativa.vercel.app",
         type: "website",
         title: "Календарь. НКО",
-        images: [
-            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
-        ],
+        images: [`/api/og?title=${title}`],
     },
     twitter: {
         title: "Календарь. НКО",
         card: "summary_large_image",
-        images: [
-            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
-        ],
+        images: [`/api/og?title=${title}`],
     },
 };
 
 export default function Page() {
     return (
-        <PageLayout pageName={["Календарь", "НКО"]}>
+        <PageLayout pageName={[...title.split("/")]}>
             <Card className="flex md:flex-row p-8 items-start" height="sm">
                 <Card.Content className="flex flex-col justify-between w-full gap-4 text-left">
                     <Link
@@ -47,6 +46,9 @@ export default function Page() {
                         href="1o7ayVJSPtXKflpWo-Y6V83k45uM0if9C"
                         fileFormat=".pdf"
                     />
+                    <LinkToForm>
+                        Связаться с нами для участия в конкурсе
+                    </LinkToForm>
                 </Card.Content>
             </Card>
         </PageLayout>

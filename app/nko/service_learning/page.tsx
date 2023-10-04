@@ -6,6 +6,8 @@ import { service_learning_page_items } from "@/constants";
 import { Metadata } from "next";
 import Image from "next/image";
 
+const title = "НКО/Обучение служением";
+
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
     title: "Обучение служением",
@@ -17,24 +19,20 @@ export const metadata: Metadata = {
             "«ОБУЧЕНИЕ СЛУЖЕНИЕМ» — это уникальная программа, которая объединяет теоретическое обучение и практическую общественную деятельность в единый образовательный процесс.",
         type: "website",
         title: "Обучение служением",
-        images: [
-            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
-        ],
+        images: [`/api/og?title=${title}`],
     },
     twitter: {
         title: "Обучение служением",
         description:
             "«ОБУЧЕНИЕ СЛУЖЕНИЕМ» — это уникальная программа, которая объединяет теоретическое обучение и практическую общественную деятельность в единый образовательный процесс.",
         card: "summary_large_image",
-        images: [
-            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
-        ],
+        images: [`/api/og?title=${title}`],
     },
 };
 
 export default function Page() {
     return (
-        <PageLayout pageName={["НКО", "Обучение служением"]}>
+        <PageLayout pageName={[...title.split("/")]}>
             <div className="flex flex-col gap-8">
                 <H2>
                     «

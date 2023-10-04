@@ -19,7 +19,6 @@ export const CreateTrainingForm: FC<{}> = () => {
         title: "",
         description: "",
         duration: "",
-        link_to_google_form: "",
         images_ids: [],
     });
     const [error, setError] = useState("");
@@ -126,13 +125,6 @@ export const CreateTrainingForm: FC<{}> = () => {
                 type="text"
                 required
                 inputType="textarea"
-            />
-            <Input
-                title="Ссылка на гугл форму"
-                value={formValues.link_to_google_form}
-                onChange={handleChange}
-                name="link_to_google_form"
-                type="text"
             />
             <label className="font-semibold text-base">Картинки</label>
             <ImageSelector

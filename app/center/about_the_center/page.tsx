@@ -7,6 +7,8 @@ import { about_the_center_page_items } from "@/constants";
 import { Metadata } from "next";
 import Image from "next/image";
 
+const title = "Центр/О центре";
+
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
     title: "О центре",
@@ -18,24 +20,20 @@ export const metadata: Metadata = {
         title: "О центре",
         description:
             "Автономная некоммерческая организация «Ресурсный центр поддержки социально ориентированных некоммерческих организаций «Инициатива» Вологодского государственного университета» зарегистрирована 10 января 2020 года.",
-        images: [
-            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
-        ],
+        images: [`/api/og?title=${title}`],
     },
     twitter: {
         title: "О центре",
         card: "summary_large_image",
         description:
             "Автономная некоммерческая организация «Ресурсный центр поддержки социально ориентированных некоммерческих организаций «Инициатива» Вологодского государственного университета» зарегистрирована 10 января 2020 года.",
-        images: [
-            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
-        ],
+        images: [`/api/og?title=${title}`],
     },
 };
 
 export default async function Page() {
     return (
-        <PageLayout pageName={["Центр", "О центре"]}>
+        <PageLayout pageName={[...title.split("/")]}>
             <div className="flex flex-col gap-4">
                 <H2>
                     Автономная некоммерческая организация «Ресурсный центр

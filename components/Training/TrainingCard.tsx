@@ -9,6 +9,7 @@ import { FaunadbPost, Training } from "@/types";
 import Image from "next/image";
 import { Card } from "../Card";
 import { H2 } from "../Text/H2";
+import { LinkToForm } from "../LinkToForm";
 
 export type TrainingCardProps = {
     post: FaunadbPost<Training>;
@@ -55,12 +56,7 @@ export const TrainingCard: FC<TrainingCardProps> = ({
                 <H2>{post.data.description}</H2>
                 <H2>Продолжительность: {post.data.duration}</H2>
                 <div className="flex justify-between items-center gap-2">
-                    <Link
-                        href={post.data.link_to_google_form}
-                        className="flex items-center justify-center h-12 px-6 w-full rounded font-semibold text-center text-white bg-main hover:bg-main-hover"
-                    >
-                        Записаться на тренинг
-                    </Link>
+                    <LinkToForm>Записаться на тренинг</LinkToForm>
                     {isAdmin ? (
                         <div className="flex gap-2">
                             <EditButton

@@ -6,6 +6,8 @@ import { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 
+const title = "Студентам/Кейсы некоммерческих организаций - партнеров";
+
 export const metadata: Metadata = {
     metadataBase: new URL("https://initsiativa.vercel.app"),
     title: "Кейсы",
@@ -13,16 +15,12 @@ export const metadata: Metadata = {
         url: "https://initsiativa.vercel.app",
         type: "website",
         title: "Кейсы",
-        images: [
-            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
-        ],
+        images: [`/api/og?title=${title}`],
     },
     twitter: {
         title: "Кейсы",
         card: "summary_large_image",
-        images: [
-            "https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600",
-        ],
+        images: [`/api/og?title=${title}`],
     },
 };
 
@@ -48,12 +46,7 @@ export default async function Page() {
     if (!data.posts) return null;
 
     return (
-        <PageLayout
-            pageName={[
-                "Студентам",
-                "Кейсы некоммерческих организаций - партнеров",
-            ]}
-        >
+        <PageLayout pageName={[...title.split("/")]}>
             <div className="flex flex-col gap-4">
                 <H2 size="big">
                     - формат вовлечения студентов в работу некоммерческих

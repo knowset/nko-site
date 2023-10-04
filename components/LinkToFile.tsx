@@ -18,7 +18,7 @@ export const LinkToFile: FC<LinkToFileProps> = ({
         <H2 className={className}>
             {text}
             <a
-                className="text-main hover:text-main-hover"
+                className="text-main hover:text-main-hover ml-1"
                 href={"https://drive.google.com/uc?export=view&id=" + href}
             >
                 (скачать {fileFormat})
