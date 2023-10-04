@@ -1,13 +1,7 @@
 import type { NextRequest } from "next/server";
 import { ImageResponse } from "next/server";
-import type { ReactElement } from "react";
-import logoImage from "./logo.png";
 
 export const runtime = "edge";
-
-const interSemiBold = fetch(
-    new URL("./Inter-SemiBold.ttf", import.meta.url)
-).then((res) => res.arrayBuffer());
 
 const logo = fetch(new URL("./logo.png", import.meta.url)).then((res) =>
     res.arrayBuffer()
@@ -55,6 +49,7 @@ export async function GET(req: NextRequest): Promise<Response | ImageResponse> {
                             padding: 25,
                             color: "rgb(0,158,224)",
                             fontSize: 48,
+                            fontWeight: 600,
                         }}
                     >
                         {title?.split("/").join(" / ")}
@@ -64,14 +59,6 @@ export async function GET(req: NextRequest): Promise<Response | ImageResponse> {
             {
                 width: 1200,
                 height: 630,
-                fonts: [
-                    {
-                        name: "Inter",
-                        data: await interSemiBold,
-                        style: "normal",
-                        weight: 400,
-                    },
-                ],
             }
         );
     } catch (e) {
