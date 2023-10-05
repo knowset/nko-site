@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { FC, ReactNode } from "react";
 
@@ -6,13 +8,10 @@ type LinkToFormProps = {
 };
 
 export const LinkToForm: FC<LinkToFormProps> = ({ children }) => {
-    const formUrl =
-        typeof process.env.GOOGLE_FORM_URL === "string"
-            ? process.env.GOOGLE_FORM_URL
-            : "/";
     return (
         <Link
-            href={formUrl}
+            target="_blank"
+            href={"https://forms.gle/z6J1PNpcd1gDe8EW6"}
             className="flex items-center justify-center min-h-[3rem] px-6 py-3 w-full rounded font-semibold text-center text-white bg-main hover:bg-main-hover"
         >
             {children}

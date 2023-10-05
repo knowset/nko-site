@@ -1,7 +1,6 @@
 "use client";
 
 import { FC } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DeleteButton } from "../CRUD/DeleteButton";
 import { EditButton } from "../CRUD/EditButton";
