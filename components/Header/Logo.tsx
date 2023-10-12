@@ -2,6 +2,7 @@ import { FC } from "react";
 import Image from "next/image";
 import { GlobalLayout } from "../Layouts/GlobalLayout";
 import Link from "next/link";
+import logo from "@/public/logo.png";
 
 export const Logo: FC<{}> = () => {
     return (
@@ -18,10 +19,10 @@ export const Logo: FC<{}> = () => {
                     <div className="w-full flex justify-center">
                         <Image
                             className="rounded-full"
-                            src="https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600"
+                            src={logo.src}
                             alt="logo"
                             placeholder="blur"
-                            blurDataURL="https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600"
+                            blurDataURL={logo.blurDataURL}
                             width={64}
                             height={64}
                             priority
@@ -31,8 +32,11 @@ export const Logo: FC<{}> = () => {
                         <span className="mx-1 text-lg text-end">
                             г. Вологда, Ленина, 15
                             <br />
-                            <Link href="https://vk.com/nko_vogu" className="underline">
-                            vk.com/nko_vogu
+                            <Link
+                                href="https://vk.com/nko_vogu"
+                                className="underline"
+                            >
+                                vk.com/nko_vogu
                             </Link>
                         </span>
                     </div>
@@ -41,10 +45,10 @@ export const Logo: FC<{}> = () => {
                     <div className="flex justify-center">
                         <Image
                             className="rounded-full"
-                            src="https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600"
+                            src={logo.src}
                             alt="logo"
                             placeholder="blur"
-                            blurDataURL="https://lh3.googleusercontent.com/drive-viewer/AITFw-wQdxHUjICxBaZqShpzDaNDfmrkDviimp5G2kGqU6QBLcmQdKtwOg6SD35aG5D_P8SqhuQ8BfgDTTgXBUI80w551O7V-g=s1600"
+                            blurDataURL={logo.blurDataURL}
                             width={64}
                             height={64}
                             priority

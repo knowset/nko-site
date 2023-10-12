@@ -3,6 +3,7 @@ import { H2 } from "@/components/Text/H2";
 import { CaseList } from "@/components/Case/CaseList";
 import { FaunadbPostsOrError, Case } from "@/types";
 import { Metadata } from "next";
+import { LinkToForm } from "@/components/LinkToForm";
 
 export const dynamic = "force-dynamic";
 
@@ -59,9 +60,7 @@ export default async function Page() {
                 </H2>
                 <H2>
                     Если у вас есть вопросы по работе с кейсами - свяжитесь с{" "}
-                    <a href="/" className="text-main">
-                        нами
-                    </a>
+                    <LinkToForm variant="asInlineText">нами</LinkToForm> 
                     .
                 </H2>
                 <hr className="mt-8 border-border-light dark:border-border-dark" />
