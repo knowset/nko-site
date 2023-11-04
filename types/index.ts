@@ -27,7 +27,12 @@ export type Project = {
 export type Partner = {
     title: string;
     abbreviation: string;
+
+    // FIXME: combine these 2 values 
+    //        into one object
     director_of_the_organization: string;
+    job_title?: string;
+
     main_activity: string;
     site: string;
     social_media: string;

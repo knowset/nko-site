@@ -64,12 +64,16 @@ export const documentation_page_items: {
                 href: "1T4z9Ob6EhqXGKMxa2Ae1UNPpmttSjHVc",
             },
             {
-                title: "Свидетельство о внесении записи в Единый государственный реестр (ОГРН)",
-                href: "_",
-            },
-            {
                 title: "Свидетельство о государственной регистрации некоммерческой организации",
                 href: "13uRKE6_Z3NZkF3YNOhnt5PDLYKsNWTkn",
+            },
+            {
+                title: "Лист записи Единого государственного реестра юридических лиц",
+                href: "1Uvu92kP7LlZmCS8cJG9E4kWtHmKBMjhp",
+            },
+            {
+                title: "Политика в отношении обработки персональных данных",
+                href: "1FX5NTE-zXGZS03-PYg2exH9e_XxE2LoY",
             },
         ],
     },
@@ -163,6 +167,14 @@ export const infographics: {
     {
         pictureGoogleId: "11othIhhtFzeWX1o2SQXBdGrqiqUvxMq8",
         fileName: "Цель социального проекта",
+    },
+    {
+        pictureGoogleId: "1t2IHKozl0c6eKjLwWVAIMj09vI-4rhla",
+        fileName: "Задачи проекта",
+    },
+    {
+        pictureGoogleId: "1LE18Yr1gK1TG3x4w241Vsv6wVaBorFfk",
+        fileName: "Мероприятия проекта",
     },
 ];
 

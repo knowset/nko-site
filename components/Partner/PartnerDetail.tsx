@@ -57,7 +57,10 @@ export const PartnerDetail: FC<PartnerDetailProps> = ({ post }) => {
                     >
                         <p>
                             <span className="font-bold">
-                                Директор организации:{" "}
+                                {!!post.data.job_title
+                                    ? post.data.job_title
+                                    : "Директор организации"}
+                                :{" "}
                             </span>
                             {post.data.director_of_the_organization}
                         </p>
